@@ -28,15 +28,10 @@ import java.awt.SystemColor;
 
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.ComponentOrientation;
-import javax.swing.border.MatteBorder;
 import javax.swing.JMenuItem;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
-import javax.swing.JComboBox;
 
 public class Main {
 
@@ -580,6 +575,7 @@ public class Main {
 		);
 		final JTextArea msgbox = new JTextArea();
 		msgbox.setColumns(1);
+		msgbox.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		msgbox.setRows(10);
 		msgbox.setEditable(false);
 		Canvas MainCanvas = new Canvas();
@@ -762,10 +758,31 @@ public class Main {
 					.addContainerGap())
 		);
 		
-		Canvas BarGraphCanvas = new Canvas();
-		BarGraphCanvas.setBackground(Color.WHITE);
-		BarGraphCanvas.setSize(800,200);
-		AddPanel.add(BarGraphCanvas);
+		JLabel lblbar1 = new JLabel("1");
+		AddPanel.add(lblbar1);
+		
+		Canvas BarGraph1 = new Canvas();
+		BarGraph1.setBackground(Color.WHITE);
+		BarGraph1.setSize(200,200);
+		AddPanel.add(BarGraph1);
+		JLabel lblbar2 = new JLabel("2");
+		AddPanel.add(lblbar2);
+		Canvas BarGraph2 = new Canvas();
+		BarGraph2.setBackground(Color.WHITE);
+		BarGraph2.setSize(200,200);
+		AddPanel.add(BarGraph2);
+		JLabel lblbar3 = new JLabel("3");
+		AddPanel.add(lblbar3);
+		Canvas BarGraph3 = new Canvas();
+		BarGraph3.setBackground(Color.WHITE);
+		BarGraph3.setSize(200,200);
+		AddPanel.add(BarGraph3);
+		JLabel lblbar4 = new JLabel("4");
+		AddPanel.add(lblbar4);
+		Canvas BarGraph4 = new Canvas();
+		BarGraph4.setBackground(Color.WHITE);
+		BarGraph4.setSize(200,200);
+		AddPanel.add(BarGraph4);
 		Addinfo.setLayout(gl_Addinfo);	
 		frmIsPrototype.getContentPane().setLayout(groupLayout);
 		start.addMouseListener(new MouseAdapter() {
