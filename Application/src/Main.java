@@ -33,6 +33,10 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import java.awt.ComponentOrientation;
 import javax.swing.border.MatteBorder;
+import javax.swing.JMenuItem;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
+import javax.swing.JComboBox;
 
 public class Main {
 
@@ -82,41 +86,50 @@ public class Main {
 		mnFile.setFont(new Font("Serif", Font.BOLD, 12));
 		mnFile.setBackground(new Color(153, 204, 255));
 		menuBar.add(mnFile);
-		JButton btnExit = new JButton("Exit");
-		btnExit.setFont(new Font("Serif", Font.BOLD, 12));
-		btnExit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			System.exit(0);
+		
+		final JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.setBackground(new Color(240, 240, 240));
+		mntmExit.setFont(new Font("Serif", Font.BOLD, 12));
+		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
+		mntmExit.addMouseListener(new MouseAdapter() {
+		
+			public void mouseReleased(MouseEvent e) {
+				System.exit(0);
 			}
+			
 		});
-		mnFile.add(btnExit);
+		
+		JMenuItem start = new JMenuItem("Start");
+		
+		start.setFont(new Font("Serif", Font.BOLD, 12));
+		mnFile.add(start);
+		mnFile.add(mntmExit);
 		
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setFont(new Font("Serif", Font.BOLD, 12));
 		menuBar.add(mnHelp);
 		
-		JButton btnAbout = new JButton("About");
-		btnAbout.addMouseListener(new MouseAdapter() {
+		JMenuItem Manual = new JMenuItem("Manual");
+		Manual.setFont(new Font("Serif", Font.BOLD, 12));
+		Manual.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {				
-				JOptionPane.showMessageDialog(frmIsPrototype," This software was made by \n Ioannis Cleary(1104205c), Matthew Bown(1002723b), \n Gavin Davidson(1102607d), Luka Prelic(1107827p), \n Georgios Moleskis(1103614m) and Mario Moro Hernandez(1106740m) \n");
-
-			}
-		});
-		btnAbout.setFont(new Font("Serif", Font.BOLD, 12));
-		mnHelp.add(btnAbout);
-		
-		JButton btnManual = new JButton("Manual");
-		btnManual.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseReleased(MouseEvent e) {
 				JOptionPane.showMessageDialog(frmIsPrototype," \n To run this software you need to follow these steps \n\n 1. Select a country/countries by clicking on the Countries button from the Legend: Drawing Area. \n 2. Select values for the X and Y axis by clicking the Axis button from the Legend: Drawing Area. \n\n (A Scatter plot should have been created by now on the Drawing Area and corresonding values should be displayed on the right.) \n \n 3. You can select additional information other than the default by clicking the Options button from the Legend: Additional Information.\n\n (This Legend will now display your selections and bar graphs should be generated on the left) \n\n 4. There are 2 clear buttons the one on the bottom of the screen clears only the Additinal Information, the other one clears everything. \n \n");
 
 			}
 		});
-		btnManual.setFont(new Font("Serif", Font.BOLD, 12));
-		mnHelp.add(btnManual);
+		mnHelp.add(Manual);
+		
+		JMenuItem About = new JMenuItem("About");
+		About.setFont(new Font("Serif", Font.BOLD, 12));
+		About.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				JOptionPane.showMessageDialog(frmIsPrototype," This software was made by \n Ioannis Cleary(1104205c), Matthew Bown(1002723b), \n Gavin Davidson(1102607d), Luka Prelic(1107827p), \n Georgios Moleskis(1103614m) and Mario Moro Hernandez(1106740m) \n");
+
+			}
+		});
+		mnHelp.add(About);
 		
 		Panel LegendDA = new Panel();
 		LegendDA.setBackground(new Color(192, 192, 192));
@@ -565,7 +578,10 @@ public class Main {
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addGap(8))
 		);
-		
+		final JTextArea msgbox = new JTextArea();
+		msgbox.setColumns(1);
+		msgbox.setRows(10);
+		msgbox.setEditable(false);
 		Canvas MainCanvas = new Canvas();
 		panel_1.add(MainCanvas);
 		MainCanvas.setSize(400,360);
@@ -611,15 +627,22 @@ public class Main {
 		
 		JLabel lblLegendAdditional = new JLabel("Legend : Additional Information");
 		lblLegendAdditional.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		
+		JLabel lblMessages = new JLabel("Messages:");
+		lblMessages.setFont(new Font("Serif", Font.BOLD, 14));
 		GroupLayout gl_LegendAdd = new GroupLayout(LegendAdd);
 		gl_LegendAdd.setHorizontalGroup(
-			gl_LegendAdd.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_LegendAdd.createSequentialGroup()
+			gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_LegendAdd.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
-						.addComponent(AddList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-						.addComponent(lblLegendAdditional, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-						.addComponent(AddOptPanel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 218, Short.MAX_VALUE))
+					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.LEADING)
+						.addComponent(AddList, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+						.addComponent(lblLegendAdditional, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+						.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 267, Short.MAX_VALUE)
+						.addComponent(msgbox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+						.addComponent(lblMessages))
 					.addContainerGap())
 		);
 		gl_LegendAdd.setVerticalGroup(
@@ -630,8 +653,12 @@ public class Main {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-					.addComponent(AddList, GroupLayout.PREFERRED_SIZE, 568, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addComponent(AddList, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
+					.addGap(61)
+					.addComponent(lblMessages)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(msgbox, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+					.addGap(44))
 		);
 		
 		JLabel ListTitleAdd = new JLabel("List :");
@@ -741,6 +768,18 @@ public class Main {
 		AddPanel.add(BarGraphCanvas);
 		Addinfo.setLayout(gl_Addinfo);	
 		frmIsPrototype.getContentPane().setLayout(groupLayout);
+		start.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				msgbox.append("System started \n");
+			}
+		});
+		mntmExit.addMouseListener(new MouseAdapter() {
+			
+			public void mouseClicked(MouseEvent e) {
+				msgbox.append("System exited \n");
+			}
+		});
 	}
 }
 
