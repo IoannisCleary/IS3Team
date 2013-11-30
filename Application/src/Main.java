@@ -43,9 +43,12 @@ import javax.swing.JScrollPane;
 public class Main {
 	private int Max_Select=4;
 	private int Num_Select_Country=0;
+	private int Num_Select_X=0;
+	private int Num_Select_Y=0;
 	private ArrayList<String> selectedC=new ArrayList<String>();
+	private ArrayList<String> selectedAxis=new ArrayList<String>();
 	private JFrame frmIsPrototype;
-	private JLabel country1,country2,country3,country4;
+	private JLabel country1,country2,country3,country4,xselect,yselect;
 	private String[] countryNames={
 			"Afghanistan"
 			,"Albania"
@@ -265,10 +268,10 @@ public class Main {
 		});
 	}
 	private void removelabel(String b){
-		if(selectedC.get(0).compareTo(b)==0){country1.setText("no selection");}
-		else if(selectedC.get(1).compareTo(b)==0){country2.setText("no selection");}
-		else if(selectedC.get(2).compareTo(b)==0){country3.setText("no selection");}
-		else if(selectedC.get(3).compareTo(b)==0){country4.setText("no selection");}
+		if(country1.getText().compareTo(b)==0){country1.setText("no selection");}
+		else if(country2.getText().compareTo(b)==0){country2.setText("no selection");}
+		else if(country3.getText().compareTo(b)==0){country3.setText("no selection");}
+		else if(country4.getText().compareTo(b)==0){country4.setText("no selection");}
 	}
 
 	/**
@@ -367,7 +370,7 @@ public class Main {
 		JLabel lblX = new JLabel("X : ");
 		lblX.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		JLabel xselect = new JLabel("no selection");
+		xselect = new JLabel("no selection");
 		lblX.setLabelFor(xselect);
 		xselect.setFont(new Font("Serif", Font.BOLD, 12));
 		GroupLayout gl_xAxisShow = new GroupLayout(xAxisShow);
@@ -398,7 +401,7 @@ public class Main {
 		JLabel lblY = new JLabel("Y : ");
 		lblY.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		JLabel yselect = new JLabel("no selection");
+		yselect = new JLabel("no selection");
 		yselect.setVerticalAlignment(SwingConstants.TOP);
 		yselect.setFont(new Font("Serif", Font.BOLD, 12));
 		yselect.setBackground(SystemColor.controlHighlight);
@@ -732,6 +735,49 @@ public class Main {
 		CountryButton.setFont(new Font("Serif", Font.BOLD, 11));
 		
 		JButton AxisButton = new JButton("Axis");
+		AxisButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				msgbox.append("X Selected : ");
+				msgbox.append("\n");
+				ScrollPane popupCountry=new ScrollPane();
+				JOptionPane dialCounty= new JOptionPane();
+				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JPanel tick=new JPanel();
+				tick.setBounds(61, 11, 81, 140);
+			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
+				final JCheckBox cBox[] = new JCheckBox[countryNames.length];
+				for(int i=0;i<cBox.length;i++){
+				cBox[i]=new JCheckBox(countryNames[i]);
+				if(selectedC.contains(countryNames[i])){cBox[i].setSelected(true);}
+				final int a=i;
+				cBox[i].addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						if(selectedC.contains(cBox[a].getText())){removelabel(cBox[a].getText());selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
+						else{
+						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than four countries");}
+						else{selectedC.add(cBox[a].getText());
+							msgbox.append("\n");
+						if(country1.getText().compareTo("no selection")==0){country1.setText(cBox[a].getText());}
+						else if(country2.getText().compareTo("no selection")==0){country2.setText(cBox[a].getText());}
+						else if(country3.getText().compareTo("no selection")==0){country3.setText(cBox[a].getText());}
+						else if(country4.getText().compareTo("no selection")==0){country4.setText(cBox[a].getText());}
+						msgbox.append(cBox[a].getText()+"  ");
+						Num_Select_Country++;}}
+						
+					}});
+				tick.add(cBox[i]);}
+				popupCountry.add(tick);
+				popupCountry.setBounds(100,100,400,400);
+				popupCountry.setVisible(true);
+			//	dialCounty.add(popupCountry);
+				dialCounty.setBounds(100,100,400,400);
+				JOptionPane.showConfirmDialog(null, popupCountry,"Countries", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE);
+				
+			}
+		});
 		AxisButton.setFont(new Font("Serif", Font.BOLD, 11));
 		
 		JButton MainClear = new JButton("Clear all");
