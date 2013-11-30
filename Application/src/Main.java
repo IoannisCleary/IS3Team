@@ -16,7 +16,9 @@ import java.awt.Label;
 import java.awt.Font;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.ScrollPane;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -29,14 +31,224 @@ import java.awt.SystemColor;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.SoftBevelBorder;
+
 import java.awt.ComponentOrientation;
+import java.util.ArrayList;
+
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
+import javax.swing.JCheckBox;
+import javax.swing.JScrollPane;
 
 public class Main {
-
+	private int Max_Select=4;
+	private int Num_Select_Country=0;
+	private ArrayList<String> selectedC=new ArrayList<String>();
 	private JFrame frmIsPrototype;
+	private JLabel country1,country2,country3,country4;
+	private String[] countryNames={
+			"Afghanistan"
+			,"Albania"
+			,"Algeria"
+			,"Andorra"
+			,"Angola"
+			,"Antigua and Barbuda"
+			,"Argentina"
+			,"Armenia"
+			,"Australia"
+			,"Austria"
+			,"Azerbaijan"
+			,"Bahamas"
+			,"Bahrain"
+			,"Bangladesh"
+			,"Barbados"
+			,"Belarus"
+			,"Belgium"
+			,"Belize"
+			,"Benin"
+			,"Bermuda"
+			,"Bhutan"
+			,"Bolivia"
+			,"Bosnia and Herzegovina"
+			,"Botswana"
+			,"Brazil"
+			,"Brunei Darussalam"
+			,"Bulgaria"
+			,"Burkina Faso"
+			,"Burundi"
+			,"Cambodia"
+			,"Cameroon"
+			,"Canada"
+			,"Cape Verde"
+			,"Central African Republic"
+			,"Chad"
+			,"Chile"
+			,"China"
+			,"Colombia"
+			,"Comoros"
+			,"Congo (Dem. Rep.)"
+			,"Congo (Rep.)"
+			,"Cook Islands"
+			,"Costa Rica"
+			,"Cote d'Ivoire"
+			,"Croatia"
+			,"Cuba"
+			,"Cyprus"
+			,"Czech Republic"
+			,"Denmark"
+			,"Djibouti"
+			,"Dominica"
+			,"Dominican Republic"
+			,"Ecuador"
+			,"Egypt"
+			,"El Salvador"
+			,"Equatorial Guinea"
+			,"Eritrea"
+			,"Estonia"
+			,"Ethiopia"
+			,"Fiji"
+			,"Finland"
+			,"France"
+			,"Gabon"
+			,"Gambia"
+			,"Georgia"
+			,"Germany"
+			,"Ghana"
+			,"Greece"
+			,"Grenada"
+			,"Guatemala"
+			,"Guinea"
+			,"Guinea-Bissau"
+			,"Guyana"
+			,"Haiti"
+			,"Honduras"
+			,"Hong Kong (China)"
+			,"Hungary"
+			,"Iceland"
+			,"India"
+			,"Indonesia"
+			,"Iran (Islamic Republic of)"
+			,"Iraq"
+			,"Ireland"
+			,"Israel"
+			,"Italy"
+			,"Jamaica"
+			,"Japan"
+			,"Jordan"
+			,"Kazakhstan"
+			,"Kenya"
+			,"Kiribati"
+			,"Korea (Dem. Rep.)"
+			,"Korea (Rep.)"
+			,"Kuwait"
+			,"Kyrgyzstan"
+			,"Lao People's Democratic Republic"
+			,"Latvia"
+			,"Lebanon"
+			,"Lesotho"
+			,"Liberia"
+			,"Libyan Arab Jamahiriya"
+			,"Lithuania"
+			,"Luxembourg"
+			,"Macedonia"
+			,"Madagascar"
+			,"Malawi"
+			,"Malaysia"
+			,"Maldives"
+			,"Mali"
+			,"Malta"
+			,"Marshall Islands"
+			,"Mauritania"
+			,"Mauritius"
+			,"Mexico"
+			,"Micronesia (Federated States of)"
+			,"Moldova"
+			,"Monaco"
+			,"Mongolia"
+			,"Montenegro"
+			,"Morocco"
+			,"Mozambique"
+			,"Myanmar"
+			,"Namibia"
+			,"Nauru"
+			,"Nepal"
+			,"Netherlands"
+			,"Netherlands Antilles"
+			,"New Zealand"
+			,"Nicaragua"
+			,"Niger"
+			,"Nigeria"
+			,"Norway"
+			,"Oman"
+			,"Pakistan"
+			,"Palau"
+			,"Panama"
+			,"Papua New Guinea"
+			,"Paraguay"
+			,"Peru"
+			,"Philippines"
+			,"Poland"
+			,"Portugal"
+			,"Puerto Rico"
+			,"Qatar"
+			,"Romania"
+			,"Russia"
+			,"Rwanda"
+			,"Saint Kitts and Nevis"
+			,"Saint Lucia"
+			,"Saint Vincent and the Grenadines"
+			,"Samoa"
+			,"San Marino"
+			,"Sao Tome and Principe"
+			,"Saudi Arabia"
+			,"Senegal"
+			,"Serbia"
+			,"Seychelles"
+			,"Sierra Leone"
+			,"Singapore"
+			,"Slovakia"
+			,"Slovenia"
+			,"Solomon Islands"
+			,"Somalia"
+			,"South Africa"
+			,"Spain"
+			,"Sri Lanka"
+			,"Sudan"
+			,"Suriname"
+			,"Swaziland"
+			,"Sweden"
+			,"Switzerland"
+			,"Syria"
+			,"Taiwan"
+			,"Tajikistan"
+			,"Tanzania"
+			,"Thailand"
+			,"Timor-Leste"
+			,"Togo"
+			,"Tonga"
+			,"Trinidad and Tobago"
+			,"Tunisia"
+			,"Turkey"
+			,"Turkmenistan"
+			,"Tuvalu"
+			,"Uganda"
+			,"Ukraine"
+			,"United Arab Emirates"
+			,"United Kingdom"
+			,"United States of America"
+			,"Uruguay"
+			,"Uzbekistan"
+			,"Vanuatu"
+			,"Venezuela"
+			,"Vietnam"
+			,"Virgin Islands"
+			,"West Bank and Gaza"
+			,"Yemen"
+			,"Zambia"
+			,"Zimbabwe"
+	};
 
+	private final JTextArea msgbox = new JTextArea();
 	/**
 	 * Launch the application.
 	 */
@@ -51,6 +263,12 @@ public class Main {
 				}
 			}
 		});
+	}
+	private void removelabel(String b){
+		if(selectedC.get(0).compareTo(b)==0){country1.setText("no selection");}
+		else if(selectedC.get(1).compareTo(b)==0){country2.setText("no selection");}
+		else if(selectedC.get(2).compareTo(b)==0){country3.setText("no selection");}
+		else if(selectedC.get(3).compareTo(b)==0){country4.setText("no selection");}
 	}
 
 	/**
@@ -99,6 +317,7 @@ public class Main {
 		start.setFont(new Font("Serif", Font.BOLD, 12));
 		mnFile.add(start);
 		mnFile.add(mntmExit);
+		
 		
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setFont(new Font("Serif", Font.BOLD, 12));
@@ -360,17 +579,16 @@ public class Main {
 		panel.setBackground(UIManager.getColor("MenuItem.background"));
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setForeground(SystemColor.text);
-		
-		JLabel country1 = new JLabel("no selection");
+		country1 = new JLabel("no selection");
 		country1.setFont(new Font("Serif", Font.ITALIC, 11));
 		
-		JLabel country2 = new JLabel("no selection");
+		country2 = new JLabel("no selection");
 		country2.setFont(new Font("Serif", Font.ITALIC, 11));
 		
-		JLabel country3 = new JLabel("no selection");
+		country3 = new JLabel("no selection");
 		country3.setFont(new Font("Serif", Font.ITALIC, 11));
 		
-		JLabel country4 = new JLabel("no selection");
+		country4 = new JLabel("no selection");
 		country4.setFont(new Font("Serif", Font.ITALIC, 11));
 		
 		JPanel panel_5 = new JPanel();
@@ -466,15 +684,66 @@ public class Main {
 		
 		Label MainSelectlbl = new Label("Select : ");
 		MainSelectlbl.setFont(new Font("Serif", Font.BOLD, 12));
-		
 		JButton CountryButton = new JButton("Countries");
+		CountryButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+
+				msgbox.append("Countries Selected : ");
+				msgbox.append("\n");
+				ScrollPane popupCountry=new ScrollPane();
+				JOptionPane dialCounty= new JOptionPane();
+				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JPanel tick=new JPanel();
+				tick.setBounds(61, 11, 81, 140);
+			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
+				final JCheckBox cBox[] = new JCheckBox[countryNames.length];
+				for(int i=0;i<cBox.length;i++){
+				cBox[i]=new JCheckBox(countryNames[i]);
+				if(selectedC.contains(countryNames[i])){cBox[i].setSelected(true);}
+				final int a=i;
+				cBox[i].addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						if(selectedC.contains(cBox[a].getText())){removelabel(cBox[a].getText());selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
+						else{
+						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than four countries");}
+						else{selectedC.add(cBox[a].getText());
+							msgbox.append("\n");
+						if(country1.getText().compareTo("no selection")==0){country1.setText(cBox[a].getText());}
+						else if(country2.getText().compareTo("no selection")==0){country2.setText(cBox[a].getText());}
+						else if(country3.getText().compareTo("no selection")==0){country3.setText(cBox[a].getText());}
+						else if(country4.getText().compareTo("no selection")==0){country4.setText(cBox[a].getText());}
+						msgbox.append(cBox[a].getText()+"  ");
+						Num_Select_Country++;}}
+						
+					}});
+				tick.add(cBox[i]);}
+				popupCountry.add(tick);
+				popupCountry.setBounds(100,100,400,400);
+				popupCountry.setVisible(true);
+			//	dialCounty.add(popupCountry);
+				dialCounty.setBounds(100,100,400,400);
+				JOptionPane.showConfirmDialog(null, popupCountry,"Countries", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE);
+				
+			}
+		});
 		CountryButton.setFont(new Font("Serif", Font.BOLD, 11));
 		
 		JButton AxisButton = new JButton("Axis");
 		AxisButton.setFont(new Font("Serif", Font.BOLD, 11));
 		
-		JButton MainClearButton = new JButton("Clear all");
-		MainClearButton.setFont(new Font("Serif", Font.BOLD, 11));
+		JButton MainClear = new JButton("Clear all");
+		MainClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				msgbox.setText("");
+				Num_Select_Country=0;
+				selectedC.clear();
+			}
+		});
+		MainClear.setFont(new Font("Serif", Font.BOLD, 11));
 		GroupLayout gl_selections = new GroupLayout(selections);
 		gl_selections.setHorizontalGroup(
 			gl_selections.createParallelGroup(Alignment.LEADING)
@@ -486,7 +755,7 @@ public class Main {
 					.addGap(5)
 					.addComponent(AxisButton)
 					.addGap(5)
-					.addComponent(MainClearButton))
+					.addComponent(MainClear))
 		);
 		gl_selections.setVerticalGroup(
 			gl_selections.createParallelGroup(Alignment.LEADING)
@@ -498,7 +767,7 @@ public class Main {
 					.addComponent(AxisButton))
 				.addGroup(gl_selections.createSequentialGroup()
 					.addGap(6)
-					.addComponent(MainClearButton))
+					.addComponent(MainClear))
 				.addGroup(gl_selections.createSequentialGroup()
 					.addGap(5)
 					.addComponent(MainSelectlbl, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
@@ -522,26 +791,26 @@ public class Main {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 632, GroupLayout.PREFERRED_SIZE)
+							.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 598, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE))
 						.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGap(3)
-					.addComponent(LegendAdd, GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+					.addComponent(LegendAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(LegendAdd, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(LegendAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(LegendDA, 0, 0, Short.MAX_VALUE)
-								.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 399, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(Addinfo, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
 					.addGap(3))
 		);
 		
@@ -556,28 +825,21 @@ public class Main {
 		gl_DrawingArea.setHorizontalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_DrawingArea.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addGap(29)
-							.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 577, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)))
+						.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 577, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_DrawingArea.setVerticalGroup(
-			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_DrawingArea.createSequentialGroup()
-					.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
+			gl_DrawingArea.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_DrawingArea.createSequentialGroup()
+					.addGap(6)
+					.addComponent(lblDrawingArea)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(8))
+					.addContainerGap(27, Short.MAX_VALUE))
 		);
-		final JTextArea msgbox = new JTextArea();
-		msgbox.setColumns(1);
-		msgbox.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		msgbox.setRows(10);
-		msgbox.setEditable(false);
 		Canvas MainCanvas = new Canvas();
 		panel_1.add(MainCanvas);
 		MainCanvas.setSize(400,360);
@@ -628,16 +890,18 @@ public class Main {
 		
 		JLabel lblMessages = new JLabel("Messages:");
 		lblMessages.setFont(new Font("Serif", Font.BOLD, 14));
+		
+		JScrollPane scrollPane = new JScrollPane();
 		GroupLayout gl_LegendAdd = new GroupLayout(LegendAdd);
 		gl_LegendAdd.setHorizontalGroup(
 			gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_LegendAdd.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_LegendAdd.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.LEADING)
-						.addComponent(AddList, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-						.addComponent(lblLegendAdditional, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
-						.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 267, Short.MAX_VALUE)
-						.addComponent(msgbox, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+						.addComponent(AddList, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+						.addComponent(lblLegendAdditional, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+						.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 274, Short.MAX_VALUE)
 						.addComponent(lblMessages))
 					.addContainerGap())
 		);
@@ -648,14 +912,21 @@ public class Main {
 					.addComponent(lblLegendAdditional)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(AddList, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)
-					.addGap(61)
+					.addGap(40)
 					.addComponent(lblMessages)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(msgbox, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-					.addGap(44))
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
+					.addGap(112))
 		);
+		scrollPane.setViewportView(msgbox);
+		msgbox.setBounds(0,0,msgbox.getWidth(),msgbox.getHeight());
+		
+		msgbox.setColumns(1);
+		msgbox.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		msgbox.setRows(3);
+		msgbox.setEditable(false);
 		
 		JLabel ListTitleAdd = new JLabel("List :");
 		ListTitleAdd.setFont(new Font("Serif", Font.BOLD, 13));
@@ -753,9 +1024,9 @@ public class Main {
 				.addGroup(gl_Addinfo.createSequentialGroup()
 					.addGap(6)
 					.addComponent(lblAdditionalInformation)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(AddPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addContainerGap(76, Short.MAX_VALUE))
 		);
 		
 		JLabel lblbar1 = new JLabel("1");
@@ -763,25 +1034,25 @@ public class Main {
 		
 		Canvas BarGraph1 = new Canvas();
 		BarGraph1.setBackground(Color.WHITE);
-		BarGraph1.setSize(200,200);
+		BarGraph1.setSize(180,180);
 		AddPanel.add(BarGraph1);
 		JLabel lblbar2 = new JLabel("2");
 		AddPanel.add(lblbar2);
 		Canvas BarGraph2 = new Canvas();
 		BarGraph2.setBackground(Color.WHITE);
-		BarGraph2.setSize(200,200);
+		BarGraph2.setSize(180,180);
 		AddPanel.add(BarGraph2);
 		JLabel lblbar3 = new JLabel("3");
 		AddPanel.add(lblbar3);
 		Canvas BarGraph3 = new Canvas();
 		BarGraph3.setBackground(Color.WHITE);
-		BarGraph3.setSize(200,200);
+		BarGraph3.setSize(180,180);
 		AddPanel.add(BarGraph3);
 		JLabel lblbar4 = new JLabel("4");
 		AddPanel.add(lblbar4);
 		Canvas BarGraph4 = new Canvas();
 		BarGraph4.setBackground(Color.WHITE);
-		BarGraph4.setSize(200,200);
+		BarGraph4.setSize(180,180);
 		AddPanel.add(BarGraph4);
 		Addinfo.setLayout(gl_Addinfo);	
 		frmIsPrototype.getContentPane().setLayout(groupLayout);
@@ -797,6 +1068,7 @@ public class Main {
 				msgbox.append("System exited \n");
 			}
 		});
+		
 	}
 }
 
