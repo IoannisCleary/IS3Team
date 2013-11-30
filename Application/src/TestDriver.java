@@ -15,8 +15,10 @@ public class TestDriver {
 		 * 		2.- how to get a certain value for a certain country in a certain variable.
 		 */
 		 
-		System.out.println(test.getTriple().getVariable("isoCode"));
-		System.out.println(test.getTriple().getValue("isoCode", "Nicaragua"));
+		System.out.println("This is the variable \"isoCode\": \n" +
+				test.getTriple().getVariable("isoCode"));
+		System.out.println("This is the ISO name for Nicaragua: " + 
+				test.getTriple().getValue("isoCode", "Nicaragua"));
 	}
 
 }
