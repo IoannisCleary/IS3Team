@@ -59,8 +59,20 @@ public class Triple implements Comparable<Triple>{
 		triple.put(label,temp);
 	}
 
-
-
+	
+	
+	public boolean isEmpty(){
+		return triple.isEmpty();
+	}
+	
+	
+	
+	public int size(){
+		return triple.size();
+	}
+	
+	
+	
 	/**
 	 * Inserts a new tuple &ltcountry, value&gt for a specified variable.
 	 * 
@@ -116,10 +128,8 @@ public class Triple implements Comparable<Triple>{
 
 
 	/**
-	 * <b>==== BROKEN ====</b><br>
-	 * Iterator returns an iterator on the Triple object. This method creates an ArrayList
-	 * of Triple objects, sort the list upon the variable label and returns an iterator of
-	 * this ArrayList.
+	 * Iterator returns an iterator on the Triple object. It iterates over the labels of the
+	 * triple.
 	 * @return an Iterator&ltTriple&gt object.
 	 */
 	public Iterator<String> iterator(){
