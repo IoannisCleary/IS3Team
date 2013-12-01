@@ -19,7 +19,8 @@ public class Model {
 	
 	private Triple data;
 	private String[] variables;
-	
+	private ArrayList children;
+	private static ArrayList<String>  countries;
 	
 	
 	/**
@@ -28,10 +29,14 @@ public class Model {
 	 */
 	public Model(String fileName){
 		data = new Triple();
+		children = new ArrayList();
+		countries = new ArrayList<String>();
 		process(fileName);
 	}
 	
-	
+	void addChild(ViewController vc) {
+                children.add(vc);
+                }
 	
 	/**
 	 * Auxiliary method to open the file specified as a parameter in the process method.
@@ -61,7 +66,9 @@ public class Model {
 	private static void parseLine(String line, Triple triple, String[] variables){
 		String[] tokens = line.split(",");
 		for (int i = 0; i < variables.length; i++){
-			String country = tokens[1];					
+			String country = tokens[1];
+			if (!countries.contain(country))
+				countries.add(country);
 			for (int j = 0; j < tokens.length; j++){
 				if (triple == null){
 					triple = new Triple(variables[j],country,tokens[i]);
@@ -107,7 +114,10 @@ public class Model {
 		return data;
 	}
 	
-	
+	public ArrayList<String>getCountries(){       
+            return countries;
+            
+        }
 	
 	/**
 	 * It returns an array list of arrays of the form [country, xValue, yValue, xLabel, yLabel]
