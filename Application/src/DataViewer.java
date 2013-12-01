@@ -1,6 +1,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -9,8 +11,8 @@ import javax.swing.event.*;
 
 class DataViewer extends JFrame {
 
-    private ScatterplotPanel scatterplot;  //Main Scatterplot
-    private AdditionalPlots addPlots; //Additional Info (below scatterplot)
+    private ScatterPlot scatterplot;  //Main Scatterplot
+    private ArrayList<ScatterPlot> addPlots; //Additional Info (below scatterplot) as an array of ScatterPlot
     private SelectPanel sp;			  //On the left the panel which helps select the data (properties countries)
     private Model model;
 
@@ -19,20 +21,34 @@ class DataViewer extends JFrame {
         System.out.println(model.getTriple());
         addWindowListener(new WindowCloser());
         
-       
-        addPlots = new AdditionalPlots(model);
-        model.addChild(addPlots);
-        scatterplot = new ScatterplotPanel(model);
-        model.addChild(scatterplot);
+        
+        //will wrap this in for loop
+        addPlots.add(new ScatterPlot("gold medals", "gold medals","Some shitty test graph" , x, y, null, 500, 500));
+        //this is big one
+        scatterplot = new ScatterPlot("gold medals", "gold medals","Some shitty test graph" , x, y, null, 500, 500);
+
+        
+        // addPlots = new AdditionalPlots(model);
+       // scatterplot = new ScatterplotPanel(model);
+       /* model.addChild(scatterplot);
+
+        for(ScatterPlot sPlot : addPlots){
+            model.addChild(sPlot);
+
+        }
         sp = new SelectPanel(model);
         model.addChild(sp);
-        
+        */
         // prep component layout
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 		
         contentPane.add("East", sp);
-        contentPane.add("South", addPlots);
+        JFrame scatterplotPanel = new JFrame();
+        scatterplotPanel.setLayout(new GridLayout(4,1));
+        for(ScatterPlot plot : addPlots){
+        contentPane.add("South", plot);
+        }
         contentPane.add("Center", scatterplot);
 
         final int DEFAULT_FRAME_WIDTH = 900;
