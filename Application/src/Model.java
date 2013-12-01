@@ -129,9 +129,9 @@ public class Model {
 			String country = it.next(); 
 			datum[0] = country;//country
 			datum[1] = triple.getValue(xVar, country);//xval
-			datum[2] = triple.getValue(yVar, country);
-			datum[3] = xVar;
-			datum[4] = yVar;
+			datum[2] = triple.getValue(yVar, country);//yval
+			datum[3] = xVar;//xlabel
+			datum[4] = yVar;//ylabel
 			toReturn.add(datum);
 		}
 		
