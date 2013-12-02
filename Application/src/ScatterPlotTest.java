@@ -39,10 +39,10 @@ public class ScatterPlotTest extends ChartPanel {
     private static XYDataset createDataset(ArrayList<Double> xVar, ArrayList<Double> yVar) {
         XYSeriesCollection result = new XYSeriesCollection();
         XYSeries series = new XYSeries("Japan");
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
             double x = xVar.get(i)*30;
             double y = yVar.get(i)*40;
-            series.add(40.0, 30.0);
+            series.add(x, y);
         }
         
         result.addSeries(series);
@@ -80,7 +80,7 @@ public class ScatterPlotTest extends ChartPanel {
 	 XYPlot plot = new XYPlot();
 
 	 /* SETUP SCATTER */
-
+/*
 	 // Create the scatter data, renderer, and axis
 	 XYItemRenderer renderer1 = new XYLineAndShapeRenderer(false, true);   // Shapes only
 	 ValueAxis domain1 = new NumberAxis("Domain1");
@@ -127,11 +127,12 @@ public class ScatterPlotTest extends ChartPanel {
 	 plot.setDataset(2, dataset3);
 	 plot.setRenderer(2, renderer3);
 	
+	
 	 plot.mapDatasetToDomainAxis(0, 0);
-	 plot.mapDatasetToRangeAxis(0, 0);
+	 plot.mapDatasetToRangeAxis(0, 0);*/
 	 // Create the chart with the plot and a legend */
-	 JFreeChart chart = new JFreeChart("Multi Dataset Chart", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-	// JFreeChart chart = ChartFactory.createScatterPlot(title, xVariable, yVariable, dataset, PlotOrientation.VERTICAL , false, true, true);
+	// JFreeChart chart = new JFreeChart("Multi Dataset Chart", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+	 JFreeChart chart = ChartFactory.createScatterPlot(title, xVariable, yVariable, dataset, PlotOrientation.VERTICAL , false, true, true);
 	 chart.setTextAntiAlias(true);
         //ChartFrame plot = new ChartFrame("test",chart);
         return chart;

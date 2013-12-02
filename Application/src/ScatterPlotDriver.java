@@ -34,7 +34,7 @@ public class ScatterPlotDriver {
 		 	JFrame test = new JFrame();
 	        ScatterPlot demo = new ScatterPlot("silver medals", "gold medals","Some shitty test graph" , x, y,countries, 500, 500);
 
-	        //ScatterPlotTest demo = new ScatterPlotTest("gold medals", "gold medals","Some shitty test graph" , x, y, 500, 500);
+	       // ScatterPlotTest demo = new ScatterPlotTest("gold medals", "gold medals","Some shitty test graph" , x, y, 500, 500);
 		    test.setLayout(new BorderLayout());    
 	        test.add(demo, BorderLayout.CENTER);
 	        test.repaint();

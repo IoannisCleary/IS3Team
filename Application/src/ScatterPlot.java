@@ -1,14 +1,17 @@
+import java.awt.Shape;
 import java.util.ArrayList;
 
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.XYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.util.ShapeUtilities;
 import org.jfree.chart.JFreeChart;
 
 
@@ -30,7 +33,24 @@ public class ScatterPlot extends ChartPanel {
 			String country = countries.get(i);
 			double x =  xVal.get(i);
 			double y = yVal.get(i);
-			System.out.println(country + "\t" +xVariable +": " + x +"\t" +yVariable + ": " + y);
+			int j = 20;
+			j = j-country.length();
+			String space = "";
+			for(int k =0; k< j;k++){
+				space+= " ";
+			}
+			int xSpaceCount = 10;
+			String xSpace = "";
+			int xTemp = (int)x;
+			while(xTemp >0){
+				xTemp /= 10;
+				xSpaceCount--;
+			}
+			for(int k = 0; k < xSpaceCount; k++){
+				xSpace+=" ";
+			}
+
+			System.out.printf("%s%s%s: %2.2f%s%s: %2.2f\n",country,space,xVariable,x,xSpace,yVariable,y);
 			dataset.add(createDataset(country, x, y ));
 		}
 	      // based on the dataset we create the chart
@@ -44,6 +64,7 @@ public class ScatterPlot extends ChartPanel {
     private  XYDataset createDataset(String country, double xVar, double yVar) {
         XYSeriesCollection result = new XYSeriesCollection();
         XYSeries series = new XYSeries(country);
+        series.setDescription(country);
         series.add(xVar,yVar);
         result.addSeries(series);
         return result;
@@ -71,6 +92,27 @@ public class ScatterPlot extends ChartPanel {
 
 	 for(int i = 0; i < dataset.size(); i++){
 		 XYItemRenderer renderer = new XYLineAndShapeRenderer(false, true);
+		 Shape circle = ShapeUtilities.createDiamond((float) 5.5);
+		 
+		 XYToolTipGenerator tt1 = new XYToolTipGenerator() {
+	         public String generateToolTip(XYDataset dataset, int series, int item) {
+	            StringBuffer sb = new StringBuffer();
+	            Number x = dataset.getX(0, 0);
+	            Number y = dataset.getY(0, 0);
+	            XYSeriesCollection temp = (XYSeriesCollection) dataset;
+	            String s = temp.getSeries(0).getDescription();
+	            
+	            sb.append("<html><p style='color:blue;'>"+s+"</p><br />");
+	            sb.append(String.format("X: %.2f <br />", x.doubleValue()));
+	            sb.append(String.format("Y: %.2f</html>", y.doubleValue()));
+	            return sb.toString();
+	         }
+	      };
+		 
+		 
+		 
+		 renderer.setBaseToolTipGenerator(tt1);;
+		 renderer.setSeriesShape(0,circle);
 		 plot.setDataset(i, dataset.get(i));
 		 plot.setRenderer(i, renderer);
 
