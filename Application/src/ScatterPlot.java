@@ -127,7 +127,7 @@ public class ScatterPlot extends ChartPanel {
 	 // Create the scatter data, renderer, and axis
 	
 	 // Create the chart with the plot and a legend
-	 JFreeChart chart = new JFreeChart("Multi Dataset Chart", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+	 JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
 	// JFreeChart chart = ChartFactory.createScatterPlot(title, xVariable, yVariable, dataset, PlotOrientation.VERTICAL , false, true, true);
         
            chart.setTextAntiAlias(true);
