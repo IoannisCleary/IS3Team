@@ -19,7 +19,6 @@ public class Model {
 	
 	private Triple data;
 	private String[] variables;
-	private ArrayList children;
 	private static ArrayList<String>  countries;
 	
 	
@@ -29,14 +28,11 @@ public class Model {
 	 */
 	public Model(String fileName){
 		data = new Triple();
-		children = new ArrayList();
 		countries = new ArrayList<String>();
 		process(fileName);
 	}
 	
-	void addChild(ViewController vc) {
-                children.add(vc);
-                }
+
 	
 	/**
 	 * Auxiliary method to open the file specified as a parameter in the process method.
@@ -118,6 +114,11 @@ public class Model {
             return countries;
             
         }
+	
+	public String[] getVariables(){
+            return variables;
+        }
+	
 	
 	/**
 	 * It returns an array list of arrays of the form [country, xValue, yValue, xLabel, yLabel]
