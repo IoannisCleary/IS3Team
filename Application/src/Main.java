@@ -86,11 +86,11 @@ public class Main {
 		
 		JFileChooser chooser = new JFileChooser(); 
             	chooser.showOpenDialog(chooser);
-            	m = new Model(chooser.getSelectedFile().getAbsolutePath()); 
+                m = new Model(chooser.getSelectedFile().getAbsolutePath()); 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main window = new Main();
+					Main window = new Main(); // Main Window
 					window.frmIsPrototype.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -98,13 +98,13 @@ public class Main {
 			}
 		});
 	}
-	private void removelabel(String b){
-		if(country1.getText().compareTo(b)==0){country1.setText("no selection");}
-		else if(country2.getText().compareTo(b)==0){country2.setText("no selection");}
+	private void removelabel(String b){  // removing labels in the Legend of Drawing Area
+		if(country1.getText().compareTo(b)==0){country1.setText("no selection");}                  
+		else if(country2.getText().compareTo(b)==0){country2.setText("no selection");}					
 		else if(country3.getText().compareTo(b)==0){country3.setText("no selection");}
 		else if(country4.getText().compareTo(b)==0){country4.setText("no selection");}
 	}
-	private void removelabel(String b,String axis){
+	private void removelabel(String b,String axis){ // removing labels in the Legend of Drawing Area
 		if(axis.compareTo("x")==0)xselect.setText("no selection");
 		else yselect.setText("no selection");
 	}
@@ -112,7 +112,7 @@ public class Main {
 	 * Create the application.
 	 */
 	public Main() {
-		 countryNames = m.getCountries();
+		 countryNames = m.getCountries(); // Get Countries from file
 		initialize();
 	}
 
@@ -120,25 +120,24 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmIsPrototype = new JFrame();
+		frmIsPrototype = new JFrame(); // Main frame
 		frmIsPrototype.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmIsPrototype.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		frmIsPrototype.setResizable(false);
 		frmIsPrototype.setBackground(UIManager.getColor("Button.shadow"));
 		frmIsPrototype.getContentPane().setBackground(new Color(169, 169, 169));
 		frmIsPrototype.setTitle("IS3 Prototype");
 		frmIsPrototype.setBounds(100, 100,1336, 692);
 		
-		JMenuBar menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar(); // menu bar
 		menuBar.setBackground(UIManager.getColor("MenuBar.borderColor"));
 		frmIsPrototype.setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("File");
+		JMenu mnFile = new JMenu("File");  // File option on the menu bar
 		mnFile.setFont(new Font("Serif", Font.BOLD, 12));
 		mnFile.setBackground(new Color(153, 204, 255));
-		menuBar.add(mnFile);
+		menuBar.add(mnFile); // adding to menu bar
 		
-		final JMenuItem mntmExit = new JMenuItem("Exit");
+		final JMenuItem mntmExit = new JMenuItem("Exit"); // creating exit button and adding it to the File menu option
 		mntmExit.setBackground(new Color(240, 240, 240));
 		mntmExit.setFont(new Font("Serif", Font.BOLD, 12));
 		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
@@ -150,18 +149,18 @@ public class Main {
 			
 		});
 		
-		JMenuItem start = new JMenuItem("Start");
+		JMenuItem start = new JMenuItem("Start");// creating start button and adding it to the File menu option
 		
 		start.setFont(new Font("Serif", Font.BOLD, 12));
-		mnFile.add(start);
-		mnFile.add(mntmExit);
+		mnFile.add(start); // actual addition to the menu
+		mnFile.add(mntmExit); // actual addition to the menu
 		
 		
-		JMenu mnHelp = new JMenu("Help");
+		JMenu mnHelp = new JMenu("Help"); // Help option on the menu bar
 		mnHelp.setFont(new Font("Serif", Font.BOLD, 12));
 		menuBar.add(mnHelp);
 		
-		JMenuItem Manual = new JMenuItem("Manual");
+		JMenuItem Manual = new JMenuItem("Manual"); // creating Manual button and adding it to the Help menu option
 		Manual.setFont(new Font("Serif", Font.BOLD, 12));
 		Manual.addMouseListener(new MouseAdapter() {
 			@Override
@@ -170,9 +169,9 @@ public class Main {
 
 			}
 		});
-		mnHelp.add(Manual);
+		mnHelp.add(Manual);// actual addition to the menu
 		
-		JMenuItem About = new JMenuItem("About");
+		JMenuItem About = new JMenuItem("About");  // creating About button and adding it to the Help menu option
 		About.setFont(new Font("Serif", Font.BOLD, 12));
 		About.addMouseListener(new MouseAdapter() {
 			@Override
@@ -181,31 +180,31 @@ public class Main {
 
 			}
 		});
-		mnHelp.add(About);
+		mnHelp.add(About); // actual addition to the menu
 		
-		Panel LegendDA = new Panel();
+		Panel LegendDA = new Panel(); // Creating Legend : Drawing Area
 		LegendDA.setBackground(new Color(192, 192, 192));
 		
-		JPanel selections = new JPanel();
+		JPanel selections = new JPanel(); // Creating panel in Legend : Drawing Area where all the buttons are
 		selections.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		selections.setBackground(new Color(211, 211, 211));
 		
-		JPanel countryshow = new JPanel();
+		JPanel countryshow = new JPanel(); // creating panel with labels that show the selected countries 
 		countryshow.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		countryshow.setBackground(new Color(204, 204, 204));
 		
-		JPanel xAxisShow = new JPanel();
+		JPanel xAxisShow = new JPanel();// creating panel with labels that show the selected x Axis value 
 		xAxisShow.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		xAxisShow.setBackground(new Color(211, 211, 211));
 		
-		JLabel lblX = new JLabel("X : ");
+		JLabel lblX = new JLabel("X : "); // Label that shows X :
 		lblX.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		xselect = new JLabel("no selection");
+		xselect = new JLabel("no selection");  // Label that will be regularly updated with the X axis value
 		lblX.setLabelFor(xselect);
 		xselect.setFont(new Font("Serif", Font.BOLD, 12));
-		GroupLayout gl_xAxisShow = new GroupLayout(xAxisShow);
-		gl_xAxisShow.setHorizontalGroup(
+		GroupLayout gl_xAxisShow = new GroupLayout(xAxisShow);          // adding the components and creating layout
+		gl_xAxisShow.setHorizontalGroup( 
 			gl_xAxisShow.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_xAxisShow.createSequentialGroup()
 					.addContainerGap()
@@ -225,18 +224,18 @@ public class Main {
 		);
 		xAxisShow.setLayout(gl_xAxisShow);
 		
-		JPanel yAxisShow = new JPanel();
+		JPanel yAxisShow = new JPanel(); // creating panel with labels that show the selected x Axis value 
 		yAxisShow.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		yAxisShow.setBackground(new Color(211, 211, 211));
 		
-		JLabel lblY = new JLabel("Y : ");
+		JLabel lblY = new JLabel("Y : ");  // Label that shows Y :
 		lblY.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		yselect = new JLabel("no selection");
+		yselect = new JLabel("no selection"); // Label that will be regularly updated with the Y axis value
 		yselect.setVerticalAlignment(SwingConstants.TOP);
 		yselect.setFont(new Font("Serif", Font.BOLD, 12));
 		yselect.setBackground(SystemColor.controlHighlight);
-		GroupLayout gl_yAxisShow = new GroupLayout(yAxisShow);
+		GroupLayout gl_yAxisShow = new GroupLayout(yAxisShow);   // adding the components and creating layout
 		gl_yAxisShow.setHorizontalGroup(
 			gl_yAxisShow.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_yAxisShow.createSequentialGroup()
@@ -257,11 +256,11 @@ public class Main {
 		);
 		yAxisShow.setLayout(gl_yAxisShow);
 		
-		JLabel lblLegendDrawng = new JLabel("Legend : Drawing Area");
+		JLabel lblLegendDrawng = new JLabel("Legend : Drawing Area"); // Legend title
 		lblLegendDrawng.setFont(new Font("Serif", Font.BOLD, 13));
 		lblLegendDrawng.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		submit = new JButton("Submit");
+		submit = new JButton("Submit");  // Submit button
 		submit.setForeground(Color.BLACK);
 		submit.setFont(new Font("Serif", Font.BOLD, 16));
 		submit.addMouseListener(new MouseAdapter() {
@@ -282,16 +281,20 @@ public class Main {
                                yVal.add(Double.parseDouble(dataArray.get(i)[2]));
                            }
                        }
-                     ScatterPlot sc = new ScatterPlot(xLabel, yLabel,"multi data graph" , 
+                     ScatterPlot sc = new ScatterPlot(xselect.getText(),yselect.getText(),"multi data graph" , 
                      xVal, yVal,matchedC, 500, 500);
                      msgbox.append("processed");
                      sc.setVisible(true);
-                     scatterPanel.add(sc);
+                     JOptionPane.showConfirmDialog(null, sc,"Countries", JOptionPane.OK_CANCEL_OPTION,
+                             JOptionPane.PLAIN_MESSAGE);
+                     sc.setSize(550, 600);
+                     sc.repaint();
+                   //  scatterPanel.add(sc);
                      frmIsPrototype.repaint();
        }
 			}
 		});
-		GroupLayout gl_LegendDA = new GroupLayout(LegendDA);
+		GroupLayout gl_LegendDA = new GroupLayout(LegendDA); // adding layout and components
 		gl_LegendDA.setHorizontalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_LegendDA.createSequentialGroup()
@@ -332,14 +335,14 @@ public class Main {
 					.addGap(7))
 		);
 		
-		JLabel lblCountries = new JLabel("Countries");
+		JLabel lblCountries = new JLabel("Countries"); // label for countries
 		lblCountries.setFont(new Font("Serif", Font.BOLD, 12));
 		lblCountries.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(UIManager.getColor("MenuItem.background"));
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		panel.setForeground(SystemColor.text);
+		JPanel CountrySelectionDisplay = new JPanel(); // display of selected countries
+		CountrySelectionDisplay.setBackground(UIManager.getColor("MenuItem.background"));
+		CountrySelectionDisplay.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		CountrySelectionDisplay.setForeground(SystemColor.text);
 		country1 = new JLabel("no selection");
 		country1.setFont(new Font("Serif", Font.ITALIC, 11));
 		
@@ -351,7 +354,7 @@ public class Main {
 		
 		country4 = new JLabel("no selection");
 		country4.setFont(new Font("Serif", Font.ITALIC, 11));
-		
+		// coloured boxes start
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_5.setBackground(Color.RED);
@@ -367,68 +370,69 @@ public class Main {
 		JPanel panel_8 = new JPanel();
 		panel_8.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_8.setBackground(Color.GREEN);
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		// end
+		GroupLayout gl_CountrySelectionDisplay = new GroupLayout(CountrySelectionDisplay); //adding components - layout
+		gl_CountrySelectionDisplay.setHorizontalGroup(
+			gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
 						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addComponent(country2, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
 							.addContainerGap())
-						.addGroup(gl_panel.createSequentialGroup()
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addGap(2)
 							.addComponent(country4, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
 							.addGap(8))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
+							.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
 								.addComponent(country1, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
 								.addComponent(country3, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
 							.addContainerGap())))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
+		gl_CountrySelectionDisplay.setVerticalGroup(
+			gl_CountrySelectionDisplay.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
+					.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addGap(29)
 							.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addGap(20)
 							.addComponent(country1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
 					.addGap(10)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
 						.addComponent(country2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
+					.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(23))
-						.addGroup(gl_panel.createSequentialGroup()
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addComponent(country3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_CountrySelectionDisplay.createParallelGroup(Alignment.LEADING)
 						.addComponent(country4, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel.createSequentialGroup()
+						.addGroup(gl_CountrySelectionDisplay.createSequentialGroup()
 							.addGap(9)
 							.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(176, Short.MAX_VALUE))
 		);
-		panel.setLayout(gl_panel);
+		CountrySelectionDisplay.setLayout(gl_CountrySelectionDisplay);
 		GroupLayout gl_countryshow = new GroupLayout(countryshow);
 		gl_countryshow.setHorizontalGroup(
 			gl_countryshow.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_countryshow.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_countryshow.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+						.addComponent(CountrySelectionDisplay, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
 						.addComponent(lblCountries, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -438,11 +442,12 @@ public class Main {
 					.addContainerGap()
 					.addComponent(lblCountries)
 					.addGap(18)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE)
+					.addComponent(CountrySelectionDisplay, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(24, Short.MAX_VALUE))
 		);
 		countryshow.setLayout(gl_countryshow);
-		JButton CountryButton = new JButton("Countries");
+		
+		JButton CountryButton = new JButton("Countries"); // Countries selection button, window with check boxes is created and shown
 		CountryButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -490,7 +495,7 @@ public class Main {
 		});
 		CountryButton.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		JButton xAxisButton = new JButton("X Axis");
+		JButton xAxisButton = new JButton("X Axis"); // X Axis selection button, window with check boxes is created and shown
 		xAxisButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -535,7 +540,7 @@ public class Main {
 		});
 		xAxisButton.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		JButton MainClear = new JButton("Clear all");
+		JButton MainClear = new JButton("Clear all"); // Clear all selection button, clears all selections and resets labels
 		MainClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -561,7 +566,7 @@ public class Main {
 		**/
 		
 		
-		JButton YAxisbtn = new JButton("Y Axis");
+		JButton YAxisbtn = new JButton("Y Axis"); // Y Axis selection button, window with check boxes is created and shown
 		YAxisbtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -633,13 +638,13 @@ public class Main {
 		selections.setLayout(gl_selections);
 		LegendDA.setLayout(gl_LegendDA);
 		
-		Panel Addinfo = new Panel();
+		Panel Addinfo = new Panel(); // Additional Information Panel
 		Addinfo.setBackground(new Color(192, 192, 192));
 		
-		DrawingArea = new Panel();
+		DrawingArea = new Panel(); // Drawing Area Panel
 		DrawingArea.setBackground(new Color(211, 211, 211));
 
-		JPanel LegendAdd = new JPanel();
+		JPanel LegendAdd = new JPanel(); // Legend: Additional Information Panel creation
 		LegendAdd.setBackground(new Color(192, 192, 192));
 		GroupLayout groupLayout = new GroupLayout(frmIsPrototype.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -653,7 +658,7 @@ public class Main {
 							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE))
 						.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
+					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 292, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -668,15 +673,15 @@ public class Main {
 								.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(Addinfo, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		
-		JLabel lblDrawingArea = new JLabel("Drawing Area");
+		JLabel lblDrawingArea = new JLabel("Drawing Area"); // Drawing area title
 		lblDrawingArea.setFont(new Font("Serif", Font.BOLD, 12));
 		lblDrawingArea.setLabelFor(DrawingArea);
 		lblDrawingArea.setBackground(Color.GRAY);
 		
-		scatterPanel = new JPanel();
+		scatterPanel = new JPanel(); // Panel for scatter plot
 		GroupLayout gl_DrawingArea = new GroupLayout(DrawingArea);
 		gl_DrawingArea.setHorizontalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
@@ -701,15 +706,15 @@ public class Main {
 		);
 		DrawingArea.setLayout(gl_DrawingArea);
 		
-		JPanel AddOptPanel = new JPanel();
+		JPanel AddOptPanel = new JPanel(); // Panel in Legend : Additional Information where option button is
 		AddOptPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		AddOptPanel.setBackground(new Color(204, 204, 204));
 		
-		Label AddSel = new Label("Select : ");
+		Label AddSel = new Label("Select : ");  // Select label
 		AddSel.setForeground(Color.BLACK);
 		AddSel.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		JButton optionsBtn = new JButton("Options");
+		JButton optionsBtn = new JButton("Options"); // option button in Legend : Additional Information 
 		optionsBtn.setHorizontalAlignment(SwingConstants.TRAILING);
 		optionsBtn.setVerticalAlignment(SwingConstants.TOP);
 		optionsBtn.setFont(new Font("Serif", Font.BOLD, 11));
@@ -734,20 +739,20 @@ public class Main {
 		);
 		AddOptPanel.setLayout(gl_AddOptPanel);
 		
-		JPanel AddList = new JPanel();
+		JPanel AddList = new JPanel();  // Panel in Legend : Additional Information where labels/selections are displayed
 		AddList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		AddList.setBackground(new Color(204, 204, 204));
 		
-		JLabel lblLegendAdditional = new JLabel("Legend : Additional Information");
+		JLabel lblLegendAdditional = new JLabel("Legend : Additional Information"); // Legend title
 		lblLegendAdditional.setFont(new Font("Serif", Font.BOLD, 13));
 		lblLegendAdditional.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
 		
-		JLabel lblMessages = new JLabel("Messages:");
+		JLabel lblMessages = new JLabel("Messages:"); // Message box title
 		lblMessages.setFont(new Font("Serif", Font.BOLD, 14));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		JScrollPane scrollPane = new JScrollPane(); // scroll pane to make it scrollable
 		GroupLayout gl_LegendAdd = new GroupLayout(LegendAdd);
 		gl_LegendAdd.setHorizontalGroup(
 			gl_LegendAdd.createParallelGroup(Alignment.LEADING)
@@ -781,52 +786,52 @@ public class Main {
 					.addGap(129))
 		);
 		scrollPane.setViewportView(msgbox);
+// creating message box
 		msgbox.setBounds(0,0,msgbox.getWidth(),msgbox.getHeight());
-		
 		msgbox.setColumns(1);
 		msgbox.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		msgbox.setRows(3);
 		msgbox.setEditable(false);
 		
-		JLabel ListTitleAdd = new JLabel("List :");
+		JLabel ListTitleAdd = new JLabel("List :"); // List label
 		ListTitleAdd.setFont(new Font("Serif", Font.BOLD, 13));
 		ListTitleAdd.setVerticalAlignment(SwingConstants.BOTTOM);
 		
-		JPanel ListPanel = new JPanel();
+		JPanel ListPanel = new JPanel(); // panel were selections are shown
 		ListPanel.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton btnClear = new JButton("Clear");
+		JButton btnClear = new JButton("Clear"); // Clear button that clears only info of that panel
 		btnClear.setFont(new Font("Serif", Font.BOLD, 11));
 		GroupLayout gl_AddList = new GroupLayout(AddList);
 		gl_AddList.setHorizontalGroup(
 			gl_AddList.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddList.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_AddList.createParallelGroup(Alignment.TRAILING)
-						.addComponent(ListPanel, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-						.addComponent(ListTitleAdd, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnClear))
+					.addGroup(gl_AddList.createParallelGroup(Alignment.LEADING)
+						.addComponent(ListPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+						.addComponent(btnClear, Alignment.TRAILING)
+						.addComponent(ListTitleAdd, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_AddList.setVerticalGroup(
 			gl_AddList.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddList.createSequentialGroup()
-					.addGap(12)
+					.addGap(17)
 					.addComponent(ListTitleAdd)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addComponent(btnClear)
-					.addContainerGap(12, Short.MAX_VALUE))
+					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		
-		JLabel opt_1 = new JLabel("1.");
+		JLabel opt_1 = new JLabel("1."); // first selection
 		
-		JLabel opt_2 = new JLabel("2.");
+		JLabel opt_2 = new JLabel("2."); // second selection
 		
-		JLabel opt_3 = new JLabel("3.");
+		JLabel opt_3 = new JLabel("3."); // third selection
 		
-		JLabel opt_4 = new JLabel("4.");
+		JLabel opt_4 = new JLabel("4."); // fourth selection
 		GroupLayout gl_ListPanel = new GroupLayout(ListPanel);
 		gl_ListPanel.setHorizontalGroup(
 			gl_ListPanel.createParallelGroup(Alignment.LEADING)
@@ -856,12 +861,15 @@ public class Main {
 		AddList.setLayout(gl_AddList);
 		LegendAdd.setLayout(gl_LegendAdd);
 		
-		JLabel lblAdditionalInformation = new JLabel("Additional Information");
+		JLabel lblAdditionalInformation = new JLabel("Additional Information"); // label/title
 		lblAdditionalInformation.setFont(new Font("Serif", Font.BOLD, 12));
 		lblAdditionalInformation.setBackground(Color.GRAY);
 		
-		BarchartCluster panel_1 = new BarchartCluster();
-		panel_1.test();
+		//bar chart creation
+		BarchartCluster panel_1 = new BarchartCluster(); // panel 
+		panel_1.test(); // demo
+		
+		
 		GroupLayout gl_Addinfo = new GroupLayout(Addinfo);
 		gl_Addinfo.setHorizontalGroup(
 			gl_Addinfo.createParallelGroup(Alignment.LEADING)
@@ -882,15 +890,11 @@ public class Main {
 					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		
-		JLabel label = new JLabel("");
 		
-		JLabel label_1 = new JLabel("");
-		
-		JLabel label_2 = new JLabel("");
-		
-		JLabel label_3 = new JLabel("");
 		Addinfo.setLayout(gl_Addinfo);	
 		frmIsPrototype.getContentPane().setLayout(groupLayout);
+		
+		// menu buttons
 		start.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
