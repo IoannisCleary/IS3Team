@@ -33,24 +33,7 @@ public class ScatterPlot extends ChartPanel {
 			String country = countries.get(i);
 			double x =  xVal.get(i);
 			double y = yVal.get(i);
-			int j = 20;
-			j = j-country.length();
-			String space = "";
-			for(int k =0; k< j;k++){
-				space+= " ";
-			}
-			int xSpaceCount = 10;
-			String xSpace = "";
-			int xTemp = (int)x;
-			while(xTemp >0){
-				xTemp /= 10;
-				xSpaceCount--;
-			}
-			for(int k = 0; k < xSpaceCount; k++){
-				xSpace+=" ";
-			}
 
-			System.out.printf("%s%s%s: %2.2f%s%s: %2.2f\n",country,space,xVariable,x,xSpace,yVariable,y);
 			dataset.add(createDataset(country, x, y ));
 		}
 	      // based on the dataset we create the chart
@@ -73,16 +56,11 @@ public class ScatterPlot extends ChartPanel {
    
 
  private JFreeChart createChart(ArrayList<XYDataset> dataset, String title, String xVariable, String yVariable) {
-	// Create a single plot containing both the scatter and line
 	 XYPlot plot = new XYPlot();
-	// ArrayList<XYItemRenderer> rend = new ArrayList<XYItemRenderer>();
 	 ValueAxis domain = new NumberAxis(xVariable);
 	 ValueAxis range = new NumberAxis(yVariable);
 
-	 /* SETUP SCATTER */
-/*	 XYItemRenderer render = new XYLineAndShapeRenderer(false, true);
-	 plot.setDataset(0, dataset.get(0));
-	 plot.setRenderer(0,render); */
+
 	 plot.setDomainAxis(0,domain);
 	 plot.setRangeAxis(0,range);
 	 
@@ -120,7 +98,6 @@ public class ScatterPlot extends ChartPanel {
 		 plot.mapDatasetToRangeAxis(0, 0);
 		
 	 }
-	 //plot.
 	 
 	 
 
@@ -128,10 +105,8 @@ public class ScatterPlot extends ChartPanel {
 	
 	 // Create the chart with the plot and a legend
 	 JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-	// JFreeChart chart = ChartFactory.createScatterPlot(title, xVariable, yVariable, dataset, PlotOrientation.VERTICAL , false, true, true);
         
            chart.setTextAntiAlias(true);
-        //ChartFrame plot = new ChartFrame("test",chart);
            
         return chart;
         
