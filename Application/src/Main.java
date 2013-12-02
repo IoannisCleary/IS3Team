@@ -44,8 +44,10 @@ import javax.swing.JScrollPane;
 import java.awt.Window.Type;
 import java.awt.Rectangle;
 import javax.swing.JDesktopPane;
+import javax.swing.JFileChooser;
 
 public class Main {
+	private static Model m ;
 	private int Max_Select=4;
 	private int Num_Select_Country=0;
 	private int Num_Select_X=0;
@@ -55,14 +57,33 @@ public class Main {
 	private ArrayList<String> selectedXAxis=new ArrayList<String>();
 	private JFrame frmIsPrototype;
 	private JLabel country1,country2,country3,country4,xselect,yselect;
-	private String[] axisOpt={"option 1","option 2","option 3","option 4"};
+	private String[] axisOpt=m.getVariables();
+	private ArrayList<String> countryNames;
+	private ScatterPlot sc;
 
+	/*
+         *  Variables used for updating the scatterplot 
+         */
+        String xLabel;
+        String yLabel;
+        ArrayList<String[]> dataArray;
+        ArrayList<Double> xVal;
+        ArrayList<Double> yVal;
+        ArrayList<String> matchedC;
 
 	private final JTextArea msgbox = new JTextArea();
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		/*
+		* Code to choose the csv file
+		**/
+		
+		JFileChooser chooser = new JFileChooser(); 
+            	chooser.showOpenDialog(chooser);
+            	m = new Model(chooser.getSelectedFile().getAbsolutePath()); 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -490,6 +511,39 @@ public class Main {
 			}
 		});
 		MainClear.setFont(new Font("Serif", Font.BOLD, 12));
+		
+		/*
+		* Submit button updates the scatterplot with the selected data
+		**/
+		
+		JButton submit = new JButton("Submit");
+                MainClear.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseReleased(MouseEvent e) {
+                                  if (!selectedYAxis.isEmpty() && !selectedYAxis.isEmpty() && !selectedC.isEmpty()){
+                                      xLabel = selectedYAxis.get(0);
+                                      yLabel = selectedYAxis.get(0);
+                                      dataArray = m.get2VarDataArray(xLabel, yLabel, m.getTriple());
+                                      xVal = new ArrayList<Double>();
+                                      yVal = new ArrayList<Double>();
+                                      matchedC = new ArrayList<String>();
+                                      for (int j = 0; j < selectedC.size();j++ )
+                                        for (int i = 0; i< dataArray.size(); i++){
+                                            if (selectedC.get(j).equals(dataArray.get(i)[0])){
+                                                matchedC.add(selectedC.get(j));
+                                                xVal.add(Double.parseDouble(dataArray.get(i)[1]));
+                                                yVal.add(Double.parseDouble(dataArray.get(i)[2]));
+                                            }
+                                        }
+                                      ScatterPlot sc = new ScatterPlot(xLabel, yLabel,"multi data graph" , 
+                                      xVal, yVal,matchedC, 500, 500);
+                                      
+                                      sc.setVisible(true);
+                        }}
+                });
+                submit.setFont(new Font("Serif", Font.BOLD, 12));
+		
+		
 		
 		JButton YAxisbtn = new JButton("Y Axis");
 		YAxisbtn.addMouseListener(new MouseAdapter() {
