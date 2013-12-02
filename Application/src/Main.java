@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.ScrollPane;
 
 import javax.swing.BoxLayout;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -40,15 +41,21 @@ import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 
+import java.awt.Window.Type;
+import java.awt.Rectangle;
+import javax.swing.JDesktopPane;
+
 public class Main {
 	private int Max_Select=4;
 	private int Num_Select_Country=0;
 	private int Num_Select_X=0;
 	private int Num_Select_Y=0;
 	private ArrayList<String> selectedC=new ArrayList<String>();
-	private ArrayList<String> selectedAxis=new ArrayList<String>();
+	private ArrayList<String> selectedYAxis=new ArrayList<String>();
+	private ArrayList<String> selectedXAxis=new ArrayList<String>();
 	private JFrame frmIsPrototype;
 	private JLabel country1,country2,country3,country4,xselect,yselect;
+	private String[] axisOpt={"option 1","option 2","option 3","option 4"};
 	private String[] countryNames={
 			"Afghanistan"
 			,"Albania"
@@ -273,7 +280,10 @@ public class Main {
 		else if(country3.getText().compareTo(b)==0){country3.setText("no selection");}
 		else if(country4.getText().compareTo(b)==0){country4.setText("no selection");}
 	}
-
+	private void removelabel(String b,String axis){
+		if(axis.compareTo("x")==0)xselect.setText("no selection");
+		else yselect.setText("no selection");
+	}
 	/**
 	 * Create the application.
 	 */
@@ -432,19 +442,19 @@ public class Main {
 		GroupLayout gl_LegendDA = new GroupLayout(LegendDA);
 		gl_LegendDA.setHorizontalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_LegendDA.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
-						.addComponent(selections, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
-						.addGroup(gl_LegendDA.createSequentialGroup()
+					.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
+						.addComponent(selections, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+						.addComponent(lblLegendDrawng, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_LegendDA.createSequentialGroup()
 							.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
-								.addComponent(countryshow, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-								.addComponent(xAxisShow, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+								.addComponent(countryshow, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+								.addComponent(xAxisShow, GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
-								.addComponent(volumeshow, GroupLayout.PREFERRED_SIZE, 169, Short.MAX_VALUE)
-								.addComponent(yAxisShow, GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))))
+								.addComponent(volumeshow, GroupLayout.PREFERRED_SIZE, 190, Short.MAX_VALUE)
+								.addComponent(yAxisShow, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_LegendDA.setVerticalGroup(
@@ -461,8 +471,7 @@ public class Main {
 						.addComponent(volumeshow, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
 						.addComponent(countryshow, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
 					.addGap(18)
-					.addComponent(selections, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addGap(60))
+					.addComponent(selections, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JLabel lblVolume = new JLabel("Volume");
@@ -732,53 +741,50 @@ public class Main {
 				
 			}
 		});
-		CountryButton.setFont(new Font("Serif", Font.BOLD, 11));
+		CountryButton.setFont(new Font("Serif", Font.BOLD, 12));
 		
-		JButton AxisButton = new JButton("Axis");
-		AxisButton.addMouseListener(new MouseAdapter() {
+		JButton xAxisButton = new JButton("X Axis");
+		xAxisButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				msgbox.append("X Selected : ");
 				msgbox.append("\n");
-				ScrollPane popupCountry=new ScrollPane();
+				ScrollPane popupAxis=new ScrollPane();
 				JOptionPane dialCounty= new JOptionPane();
 				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
-				final JCheckBox cBox[] = new JCheckBox[countryNames.length];
+				final JCheckBox cBox[] = new JCheckBox[axisOpt.length];
 				for(int i=0;i<cBox.length;i++){
-				cBox[i]=new JCheckBox(countryNames[i]);
-				if(selectedC.contains(countryNames[i])){cBox[i].setSelected(true);}
+				cBox[i]=new JCheckBox(axisOpt[i]);
+				if(selectedXAxis.contains(axisOpt[i])){cBox[i].setSelected(true);}
+				if(!selectedYAxis.isEmpty()&& selectedYAxis.contains(cBox[i].getText())){cBox[i].setEnabled(false);}
 				final int a=i;
 				cBox[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
-						if(selectedC.contains(cBox[a].getText())){removelabel(cBox[a].getText());selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
+						if(selectedXAxis.contains(cBox[a].getText())){removelabel(cBox[a].getText(),"x");selectedXAxis.remove(cBox[a].getText()); Num_Select_X= Num_Select_X-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
 						else{
-						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than four countries");}
-						else{selectedC.add(cBox[a].getText());
+						if(Num_Select_X>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
+						else{selectedXAxis.add(cBox[a].getText());
 							msgbox.append("\n");
-						if(country1.getText().compareTo("no selection")==0){country1.setText(cBox[a].getText());}
-						else if(country2.getText().compareTo("no selection")==0){country2.setText(cBox[a].getText());}
-						else if(country3.getText().compareTo("no selection")==0){country3.setText(cBox[a].getText());}
-						else if(country4.getText().compareTo("no selection")==0){country4.setText(cBox[a].getText());}
-						msgbox.append(cBox[a].getText()+"  ");
-						Num_Select_Country++;}}
+						if(xselect.getText().compareTo("no selection")==0){xselect.setText(cBox[a].getText());}
+						Num_Select_X++;}}
 						
 					}});
 				tick.add(cBox[i]);}
-				popupCountry.add(tick);
-				popupCountry.setBounds(100,100,400,400);
-				popupCountry.setVisible(true);
+				popupAxis.add(tick);
+				popupAxis.setBounds(100,100,400,400);
+				popupAxis.setVisible(true);
 			//	dialCounty.add(popupCountry);
 				dialCounty.setBounds(100,100,400,400);
-				JOptionPane.showConfirmDialog(null, popupCountry,"Countries", JOptionPane.OK_CANCEL_OPTION,
+				JOptionPane.showConfirmDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE);
 				
 			}
 		});
-		AxisButton.setFont(new Font("Serif", Font.BOLD, 11));
+		xAxisButton.setFont(new Font("Serif", Font.BOLD, 12));
 		
 		JButton MainClear = new JButton("Clear all");
 		MainClear.addMouseListener(new MouseAdapter() {
@@ -786,37 +792,93 @@ public class Main {
 			public void mouseReleased(MouseEvent e) {
 				msgbox.setText("");
 				Num_Select_Country=0;
+				country1.setText("");
+				country2.setText("");
+				country3.setText("");
+				country4.setText("");
 				selectedC.clear();
+				selectedYAxis.clear();
+				selectedXAxis.clear();
+				xselect.setText("");
+				yselect.setText("");
+				Num_Select_X=0;
+				Num_Select_Y=0;
 			}
 		});
-		MainClear.setFont(new Font("Serif", Font.BOLD, 11));
+		MainClear.setFont(new Font("Serif", Font.BOLD, 12));
+		
+		JButton YAxisbtn = new JButton("Y Axis");
+		YAxisbtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				msgbox.append("Y Selected : ");
+				msgbox.append("\n");
+				ScrollPane popupAxis=new ScrollPane();
+				JOptionPane dialCounty= new JOptionPane();
+				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JPanel tick=new JPanel();
+				tick.setBounds(61, 11, 81, 140);
+			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
+				final JCheckBox cBox[] = new JCheckBox[axisOpt.length];
+				for(int i=0;i<cBox.length;i++){
+				cBox[i]=new JCheckBox(axisOpt[i]);
+				if(selectedYAxis.contains(axisOpt[i])){cBox[i].setSelected(true);}
+				if(!selectedXAxis.isEmpty()&& selectedXAxis.contains(cBox[i].getText())){cBox[i].setEnabled(false);}
+				final int a=i;
+				cBox[i].addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						if(selectedYAxis.contains(cBox[a].getText())){removelabel(cBox[a].getText(),"y");selectedYAxis.remove(cBox[a].getText()); Num_Select_Y= Num_Select_Y-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
+						else{
+						if(Num_Select_Y>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
+						else{selectedYAxis.add(cBox[a].getText());
+							msgbox.append("\n");
+						if(yselect.getText().compareTo("no selection")==0){yselect.setText(cBox[a].getText());}
+						Num_Select_Y++;}}
+						
+					}});
+				tick.add(cBox[i]);}
+				popupAxis.add(tick);
+				popupAxis.setBounds(100,100,400,400);
+				popupAxis.setVisible(true);
+				dialCounty.setBounds(100,100,400,400);
+				JOptionPane.showConfirmDialog(null, popupAxis,"Y Axis", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE);
+				
+			}
+		});
+	
+		YAxisbtn.setFont(new Font("Serif", Font.BOLD, 12));
 		GroupLayout gl_selections = new GroupLayout(selections);
 		gl_selections.setHorizontalGroup(
 			gl_selections.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_selections.createSequentialGroup()
 					.addGap(15)
-					.addComponent(MainSelectlbl, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(5)
+					.addComponent(MainSelectlbl, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(CountryButton)
-					.addGap(5)
-					.addComponent(AxisButton)
-					.addGap(5)
-					.addComponent(MainClear))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(xAxisButton)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(YAxisbtn)
+					.addContainerGap(71, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_selections.createSequentialGroup()
+					.addContainerGap(288, Short.MAX_VALUE)
+					.addComponent(MainClear)
+					.addContainerGap())
 		);
 		gl_selections.setVerticalGroup(
 			gl_selections.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_selections.createSequentialGroup()
 					.addGap(5)
-					.addComponent(CountryButton))
-				.addGroup(gl_selections.createSequentialGroup()
-					.addGap(6)
-					.addComponent(AxisButton))
-				.addGroup(gl_selections.createSequentialGroup()
-					.addGap(6)
-					.addComponent(MainClear))
-				.addGroup(gl_selections.createSequentialGroup()
-					.addGap(5)
-					.addComponent(MainSelectlbl, GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+					.addGroup(gl_selections.createParallelGroup(Alignment.LEADING)
+						.addComponent(MainSelectlbl, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+						.addGroup(gl_selections.createParallelGroup(Alignment.BASELINE)
+							.addComponent(CountryButton)
+							.addComponent(xAxisButton)
+							.addComponent(YAxisbtn)))
+					.addGap(2)
+					.addComponent(MainClear)
 					.addContainerGap())
 		);
 		selections.setLayout(gl_selections);
@@ -827,7 +889,12 @@ public class Main {
 		
 		Panel DrawingArea = new Panel();
 		DrawingArea.setBackground(new Color(211, 211, 211));
-		
+		JFrame scatter=new JFrame();
+		scatter.setType(Type.UTILITY);
+	//	scatter.setResizable(false);
+	//	scatter.setVisible(true);
+		scatter.setBounds(0, 0, 200,200);
+		//DrawingArea.add(sample);
 		JPanel LegendAdd = new JPanel();
 		LegendAdd.setBackground(new Color(192, 192, 192));
 		GroupLayout groupLayout = new GroupLayout(frmIsPrototype.getContentPane());
@@ -841,7 +908,7 @@ public class Main {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE))
 						.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(3)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(LegendAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addContainerGap())
 		);
@@ -852,44 +919,53 @@ public class Main {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(LegendAdd, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(LegendDA, 0, 0, Short.MAX_VALUE)
-								.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 422, GroupLayout.PREFERRED_SIZE))
+								.addComponent(DrawingArea, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
+							.addComponent(Addinfo, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)))
 					.addGap(3))
 		);
 		
 		JLabel lblDrawingArea = new JLabel("Drawing Area");
-		lblDrawingArea.setFont(new Font("Serif", Font.BOLD, 13));
+		lblDrawingArea.setFont(new Font("Serif", Font.BOLD, 12));
 		lblDrawingArea.setLabelFor(DrawingArea);
 		lblDrawingArea.setBackground(Color.GRAY);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBounds(15, 15, 300, 300);
+		desktopPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		desktopPane.setBackground(Color.WHITE);
 		GroupLayout gl_DrawingArea = new GroupLayout(DrawingArea);
 		gl_DrawingArea.setHorizontalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_DrawingArea.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 577, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addGroup(gl_DrawingArea.createSequentialGroup()
+							.addGap(10)
+							.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(gl_DrawingArea.createSequentialGroup()
+							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+							.addGap(495))))
 		);
 		gl_DrawingArea.setVerticalGroup(
-			gl_DrawingArea.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_DrawingArea.createSequentialGroup()
+			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_DrawingArea.createSequentialGroup()
 					.addGap(6)
 					.addComponent(lblDrawingArea)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(27, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+					.addContainerGap())
 		);
-		Canvas MainCanvas = new Canvas();
-		panel_1.add(MainCanvas);
-		MainCanvas.setSize(400,360);
-		MainCanvas.setBackground(Color.WHITE);
+		
+		JInternalFrame scatterplot = new JInternalFrame("ScatterPlot");
+//		scatterplot.setMaximum(true);
+		scatterplot.setMaximizable(true);
+		scatterplot.setBounds(10, 11, 548, 354);
+		desktopPane.add(scatterplot);
+		scatterplot.setVisible(true);
 		DrawingArea.setLayout(gl_DrawingArea);
 		
 		JPanel AddOptPanel = new JPanel();
@@ -1062,44 +1138,85 @@ public class Main {
 					.addGap(17)
 					.addGroup(gl_Addinfo.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblAdditionalInformation)
-						.addComponent(AddPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 986, Short.MAX_VALUE))
+						.addComponent(AddPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_Addinfo.setVerticalGroup(
 			gl_Addinfo.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_Addinfo.createSequentialGroup()
 					.addGap(6)
-					.addComponent(lblAdditionalInformation)
+					.addComponent(lblAdditionalInformation, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(76, Short.MAX_VALUE))
+					.addComponent(AddPanel, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(94, Short.MAX_VALUE))
 		);
 		
 		JLabel lblbar1 = new JLabel("1");
-		AddPanel.add(lblbar1);
-		
 		Canvas BarGraph1 = new Canvas();
 		BarGraph1.setBackground(Color.WHITE);
-		BarGraph1.setSize(180,180);
-		AddPanel.add(BarGraph1);
+		BarGraph1.setSize(200,200);
 		JLabel lblbar2 = new JLabel("2");
-		AddPanel.add(lblbar2);
 		Canvas BarGraph2 = new Canvas();
 		BarGraph2.setBackground(Color.WHITE);
-		BarGraph2.setSize(180,180);
-		AddPanel.add(BarGraph2);
+		BarGraph2.setSize(200,200);
 		JLabel lblbar3 = new JLabel("3");
-		AddPanel.add(lblbar3);
 		Canvas BarGraph3 = new Canvas();
 		BarGraph3.setBackground(Color.WHITE);
-		BarGraph3.setSize(180,180);
-		AddPanel.add(BarGraph3);
+		BarGraph3.setSize(200,200);
 		JLabel lblbar4 = new JLabel("4");
-		AddPanel.add(lblbar4);
 		Canvas BarGraph4 = new Canvas();
 		BarGraph4.setBackground(Color.WHITE);
-		BarGraph4.setSize(180,180);
-		AddPanel.add(BarGraph4);
+		BarGraph4.setSize(200,200);
+		GroupLayout gl_AddPanel = new GroupLayout(AddPanel);
+		gl_AddPanel.setHorizontalGroup(
+			gl_AddPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addGap(59)
+					.addComponent(lblbar1)
+					.addGap(5)
+					.addComponent(BarGraph1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(5)
+					.addComponent(lblbar2)
+					.addGap(5)
+					.addComponent(BarGraph2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(5)
+					.addComponent(lblbar3)
+					.addGap(5)
+					.addComponent(BarGraph3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(5)
+					.addComponent(lblbar4)
+					.addGap(5)
+					.addComponent(BarGraph4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(60))
+		);
+		gl_AddPanel.setVerticalGroup(
+			gl_AddPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addGap(98)
+					.addComponent(lblbar1))
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addGap(98)
+					.addComponent(lblbar2))
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addGap(98)
+					.addComponent(lblbar3))
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addGap(98)
+					.addComponent(lblbar4))
+				.addGroup(Alignment.TRAILING, gl_AddPanel.createSequentialGroup()
+					.addComponent(BarGraph1, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addComponent(BarGraph2, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addComponent(BarGraph3, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(gl_AddPanel.createSequentialGroup()
+					.addComponent(BarGraph4, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
+		AddPanel.setLayout(gl_AddPanel);
 		Addinfo.setLayout(gl_Addinfo);	
 		frmIsPrototype.getContentPane().setLayout(groupLayout);
 		start.addMouseListener(new MouseAdapter() {
