@@ -60,6 +60,9 @@ public class Main {
 	private String[] axisOpt=m.getVariables();
 	private ArrayList<String> countryNames;
 	private ScatterPlot sc;
+	private JButton submit;
+	private Panel DrawingArea;
+	private JPanel scatterPanel;
 
 	/*
          *  Variables used for updating the scatterplot 
@@ -109,7 +112,7 @@ public class Main {
 	 * Create the application.
 	 */
 	public Main() {
-		
+		 countryNames = m.getCountries();
 		initialize();
 	}
 
@@ -254,15 +257,47 @@ public class Main {
 		);
 		yAxisShow.setLayout(gl_yAxisShow);
 		
-		JLabel lblLegendDrawng = new JLabel("Legend : Drawng Area");
+		JLabel lblLegendDrawng = new JLabel("Legend : Drawing Area");
+		lblLegendDrawng.setFont(new Font("Serif", Font.BOLD, 13));
 		lblLegendDrawng.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		submit = new JButton("Submit");
+		submit.setForeground(Color.BLACK);
+		submit.setFont(new Font("Serif", Font.BOLD, 16));
+		submit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				 if (!selectedYAxis.isEmpty() && !selectedYAxis.isEmpty() && !selectedC.isEmpty()){
+                     xLabel = selectedYAxis.get(0);
+                     yLabel = selectedYAxis.get(0);
+                     dataArray = m.get2VarDataArray(xLabel, yLabel, m.getTriple());
+                     xVal = new ArrayList<Double>();
+                     yVal = new ArrayList<Double>();
+                     matchedC = new ArrayList<String>();
+                     for (int j = 0; j < selectedC.size();j++ )
+                       for (int i = 0; i< dataArray.size(); i++){
+                           if (selectedC.get(j).equals(dataArray.get(i)[0])){
+                               matchedC.add(selectedC.get(j));
+                               xVal.add(Double.parseDouble(dataArray.get(i)[1]));
+                               yVal.add(Double.parseDouble(dataArray.get(i)[2]));
+                           }
+                       }
+                     ScatterPlot sc = new ScatterPlot(xLabel, yLabel,"multi data graph" , 
+                     xVal, yVal,matchedC, 500, 500);
+                     msgbox.append("processed");
+                     sc.setVisible(true);
+                     scatterPanel.add(sc);
+                     frmIsPrototype.repaint();
+       }
+			}
+		});
 		GroupLayout gl_LegendDA = new GroupLayout(LegendDA);
 		gl_LegendDA.setHorizontalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_LegendDA.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+						.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
 						.addGroup(gl_LegendDA.createSequentialGroup()
 							.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
 								.addComponent(selections, 0, 0, Short.MAX_VALUE)
@@ -270,7 +305,11 @@ public class Main {
 									.addComponent(yAxisShow, 0, 0, Short.MAX_VALUE)
 									.addComponent(xAxisShow, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(countryshow, GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)))
+							.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
+								.addComponent(countryshow, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+								.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
+									.addComponent(submit, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+									.addGap(32)))))
 					.addContainerGap())
 		);
 		gl_LegendDA.setVerticalGroup(
@@ -279,16 +318,18 @@ public class Main {
 					.addContainerGap()
 					.addComponent(lblLegendDrawng)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_LegendDA.createSequentialGroup()
 							.addComponent(xAxisShow, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(yAxisShow, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(selections, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addComponent(countryshow, GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE))
-					.addGap(52))
+							.addComponent(selections, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_LegendDA.createSequentialGroup()
+							.addComponent(countryshow, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
+							.addGap(37)
+							.addComponent(submit, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
+					.addGap(7))
 		);
 		
 		JLabel lblCountries = new JLabel("Countries");
@@ -387,8 +428,8 @@ public class Main {
 				.addGroup(gl_countryshow.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_countryshow.createParallelGroup(Alignment.TRAILING)
-						.addComponent(panel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 152, Short.MAX_VALUE)
-						.addComponent(lblCountries, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+						.addComponent(lblCountries, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_countryshow.setVerticalGroup(
@@ -397,8 +438,8 @@ public class Main {
 					.addContainerGap()
 					.addComponent(lblCountries)
 					.addGap(18)
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 193, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(24, Short.MAX_VALUE))
 		);
 		countryshow.setLayout(gl_countryshow);
 		JButton CountryButton = new JButton("Countries");
@@ -408,16 +449,17 @@ public class Main {
 
 				msgbox.append("Countries Selected : ");
 				msgbox.append("\n");
+			//	msgbox.append(countryNames.toString());
 				ScrollPane popupCountry=new ScrollPane();
 				JOptionPane dialCounty= new JOptionPane();
 				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
-				final JCheckBox cBox[] = new JCheckBox[countryNames.length];
+				final JCheckBox cBox[] = new JCheckBox[countryNames.size()];
 				for(int i=0;i<cBox.length;i++){
-				cBox[i]=new JCheckBox(countryNames[i]);
-				if(selectedC.contains(countryNames[i])){cBox[i].setSelected(true);}
+				cBox[i]=new JCheckBox(countryNames.get(i));
+				if(selectedC.contains(countryNames.get(i))){cBox[i].setSelected(true);}
 				final int a=i;
 				cBox[i].addMouseListener(new MouseAdapter() {
 					@Override
@@ -474,6 +516,8 @@ public class Main {
 						if(Num_Select_X>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
 						else{selectedXAxis.add(cBox[a].getText());
 							msgbox.append("\n");
+							msgbox.append(cBox[a].getText());
+							msgbox.append("\n");
 						if(xselect.getText().compareTo("no selection")==0){xselect.setText(cBox[a].getText());}
 						Num_Select_X++;}}
 						
@@ -497,15 +541,15 @@ public class Main {
 			public void mouseReleased(MouseEvent e) {
 				msgbox.setText("");
 				Num_Select_Country=0;
-				country1.setText("");
-				country2.setText("");
-				country3.setText("");
-				country4.setText("");
+				country1.setText("no selection");
+				country2.setText("no selection");
+				country3.setText("no selection");
+				country4.setText("no selection");
 				selectedC.clear();
 				selectedYAxis.clear();
 				selectedXAxis.clear();
-				xselect.setText("");
-				yselect.setText("");
+				xselect.setText("no selection");
+				yselect.setText("no selection");
 				Num_Select_X=0;
 				Num_Select_Y=0;
 			}
@@ -515,34 +559,6 @@ public class Main {
 		/*
 		* Submit button updates the scatterplot with the selected data
 		**/
-		
-		JButton submit = new JButton("Submit");
-                MainClear.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseReleased(MouseEvent e) {
-                                  if (!selectedYAxis.isEmpty() && !selectedYAxis.isEmpty() && !selectedC.isEmpty()){
-                                      xLabel = selectedYAxis.get(0);
-                                      yLabel = selectedYAxis.get(0);
-                                      dataArray = m.get2VarDataArray(xLabel, yLabel, m.getTriple());
-                                      xVal = new ArrayList<Double>();
-                                      yVal = new ArrayList<Double>();
-                                      matchedC = new ArrayList<String>();
-                                      for (int j = 0; j < selectedC.size();j++ )
-                                        for (int i = 0; i< dataArray.size(); i++){
-                                            if (selectedC.get(j).equals(dataArray.get(i)[0])){
-                                                matchedC.add(selectedC.get(j));
-                                                xVal.add(Double.parseDouble(dataArray.get(i)[1]));
-                                                yVal.add(Double.parseDouble(dataArray.get(i)[2]));
-                                            }
-                                        }
-                                      ScatterPlot sc = new ScatterPlot(xLabel, yLabel,"multi data graph" , 
-                                      xVal, yVal,matchedC, 500, 500);
-                                      
-                                      sc.setVisible(true);
-                        }}
-                });
-                submit.setFont(new Font("Serif", Font.BOLD, 12));
-		
 		
 		
 		JButton YAxisbtn = new JButton("Y Axis");
@@ -570,7 +586,9 @@ public class Main {
 						else{
 						if(Num_Select_Y>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
 						else{selectedYAxis.add(cBox[a].getText());
-							msgbox.append("\n");
+						msgbox.append("\n");
+						msgbox.append(cBox[a].getText());
+						msgbox.append("\n");
 						if(yselect.getText().compareTo("no selection")==0){yselect.setText(cBox[a].getText());}
 						Num_Select_Y++;}}
 						
@@ -618,14 +636,9 @@ public class Main {
 		Panel Addinfo = new Panel();
 		Addinfo.setBackground(new Color(192, 192, 192));
 		
-		Panel DrawingArea = new Panel();
+		DrawingArea = new Panel();
 		DrawingArea.setBackground(new Color(211, 211, 211));
-		JFrame scatter=new JFrame();
-		scatter.setType(Type.UTILITY);
-	//	scatter.setResizable(false);
-	//	scatter.setVisible(true);
-		scatter.setBounds(0, 0, 200,200);
-		//DrawingArea.add(sample);
+
 		JPanel LegendAdd = new JPanel();
 		LegendAdd.setBackground(new Color(192, 192, 192));
 		GroupLayout groupLayout = new GroupLayout(frmIsPrototype.getContentPane());
@@ -637,25 +650,25 @@ public class Main {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 598, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE))
+							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 390, GroupLayout.PREFERRED_SIZE))
 						.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 632, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(LegendDA, 0, 0, Short.MAX_VALUE)
-								.addComponent(DrawingArea, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+								.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(Addinfo, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(89, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		
 		JLabel lblDrawingArea = new JLabel("Drawing Area");
@@ -663,10 +676,7 @@ public class Main {
 		lblDrawingArea.setLabelFor(DrawingArea);
 		lblDrawingArea.setBackground(Color.GRAY);
 		
-		JDesktopPane desktopPane = new JDesktopPane();
-		desktopPane.setBounds(15, 15, 300, 300);
-		desktopPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		desktopPane.setBackground(Color.WHITE);
+		scatterPanel = new JPanel();
 		GroupLayout gl_DrawingArea = new GroupLayout(DrawingArea);
 		gl_DrawingArea.setHorizontalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
@@ -674,11 +684,11 @@ public class Main {
 					.addContainerGap()
 					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_DrawingArea.createSequentialGroup()
+							.addComponent(scatterPanel, GroupLayout.PREFERRED_SIZE, 568, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_DrawingArea.createSequentialGroup()
 							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-							.addGap(495))
-						.addGroup(Alignment.TRAILING, gl_DrawingArea.createSequentialGroup()
-							.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
-							.addContainerGap())))
+							.addGap(495))))
 		);
 		gl_DrawingArea.setVerticalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
@@ -686,19 +696,9 @@ public class Main {
 					.addGap(6)
 					.addComponent(lblDrawingArea)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+					.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		GroupLayout gl_desktopPane = new GroupLayout(desktopPane);
-		gl_desktopPane.setHorizontalGroup(
-			gl_desktopPane.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 564, Short.MAX_VALUE)
-		);
-		gl_desktopPane.setVerticalGroup(
-			gl_desktopPane.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 361, Short.MAX_VALUE)
-		);
-		desktopPane.setLayout(gl_desktopPane);
 		DrawingArea.setLayout(gl_DrawingArea);
 		
 		JPanel AddOptPanel = new JPanel();
@@ -739,6 +739,7 @@ public class Main {
 		AddList.setBackground(new Color(204, 204, 204));
 		
 		JLabel lblLegendAdditional = new JLabel("Legend : Additional Information");
+		lblLegendAdditional.setFont(new Font("Serif", Font.BOLD, 13));
 		lblLegendAdditional.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
@@ -801,11 +802,10 @@ public class Main {
 			gl_AddList.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddList.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_AddList.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_AddList.createParallelGroup(Alignment.TRAILING)
 						.addComponent(ListPanel, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-						.addGroup(gl_AddList.createParallelGroup(Alignment.TRAILING)
-							.addComponent(ListTitleAdd, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnClear)))
+						.addComponent(ListTitleAdd, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnClear))
 					.addContainerGap())
 		);
 		gl_AddList.setVerticalGroup(
@@ -815,9 +815,9 @@ public class Main {
 					.addComponent(ListTitleAdd)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
-					.addGap(30)
+					.addGap(18)
 					.addComponent(btnClear)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		
 		JLabel opt_1 = new JLabel("1.");
@@ -860,16 +860,15 @@ public class Main {
 		lblAdditionalInformation.setFont(new Font("Serif", Font.BOLD, 12));
 		lblAdditionalInformation.setBackground(Color.GRAY);
 		
-		JPanel AddPanel = new JPanel();
-		AddPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		AddPanel.setBackground(new Color(211,211,211));
+		BarchartCluster panel_1 = new BarchartCluster();
+		panel_1.test();
 		GroupLayout gl_Addinfo = new GroupLayout(Addinfo);
 		gl_Addinfo.setHorizontalGroup(
 			gl_Addinfo.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_Addinfo.createSequentialGroup()
 					.addGap(17)
 					.addGroup(gl_Addinfo.createParallelGroup(Alignment.LEADING)
-						.addComponent(AddPanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 982, Short.MAX_VALUE)
+						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
 						.addComponent(lblAdditionalInformation))
 					.addContainerGap())
 		);
@@ -879,66 +878,17 @@ public class Main {
 					.addGap(6)
 					.addComponent(lblAdditionalInformation, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddPanel, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(37, Short.MAX_VALUE))
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		
-		JLabel lblbar1 = new JLabel("1");
-		Canvas BarGraph1 = new Canvas();
-		BarGraph1.setBackground(Color.WHITE);
-		BarGraph1.setSize(200,200);
-		JLabel lblbar2 = new JLabel("2");
-		Canvas BarGraph2 = new Canvas();
-		BarGraph2.setBackground(Color.WHITE);
-		BarGraph2.setSize(200,200);
-		JLabel lblbar3 = new JLabel("3");
-		Canvas BarGraph3 = new Canvas();
-		BarGraph3.setBackground(Color.WHITE);
-		BarGraph3.setSize(200,200);
-		JLabel lblbar4 = new JLabel("4");
-		Canvas BarGraph4 = new Canvas();
-		BarGraph4.setBackground(Color.WHITE);
-		BarGraph4.setSize(200,200);
-		GroupLayout gl_AddPanel = new GroupLayout(AddPanel);
-		gl_AddPanel.setHorizontalGroup(
-			gl_AddPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_AddPanel.createSequentialGroup()
-					.addGap(59)
-					.addComponent(lblbar1)
-					.addGap(5)
-					.addComponent(BarGraph1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(5)
-					.addComponent(lblbar2)
-					.addGap(5)
-					.addComponent(BarGraph2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(5)
-					.addComponent(lblbar3)
-					.addGap(5)
-					.addComponent(BarGraph3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(5)
-					.addComponent(lblbar4)
-					.addGap(5)
-					.addComponent(BarGraph4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(60))
-		);
-		gl_AddPanel.setVerticalGroup(
-			gl_AddPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_AddPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_AddPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblbar1)
-						.addComponent(lblbar2)
-						.addComponent(lblbar3)
-						.addComponent(lblbar4)
-						.addGroup(gl_AddPanel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(BarGraph2, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-							.addComponent(BarGraph1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 148, Short.MAX_VALUE))
-						.addGroup(gl_AddPanel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(BarGraph3, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-							.addComponent(BarGraph4, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 152, Short.MAX_VALUE)))
-					.addGap(48))
-		);
-		AddPanel.setLayout(gl_AddPanel);
+		JLabel label = new JLabel("");
+		
+		JLabel label_1 = new JLabel("");
+		
+		JLabel label_2 = new JLabel("");
+		
+		JLabel label_3 = new JLabel("");
 		Addinfo.setLayout(gl_Addinfo);	
 		frmIsPrototype.getContentPane().setLayout(groupLayout);
 		start.addMouseListener(new MouseAdapter() {
