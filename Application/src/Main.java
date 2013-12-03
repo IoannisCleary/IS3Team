@@ -86,8 +86,23 @@ public class Main {
 		**/
 		
 		JFileChooser chooser = new JFileChooser(); 
-            	chooser.showOpenDialog(chooser);
-                m = new Model(chooser.getSelectedFile().getAbsolutePath()); 
+       int ret=chooser.showOpenDialog(chooser);
+       while(ret==1){
+    	   JOptionPane.showMessageDialog(null,"No file has been selected, system will exit");
+    	 System.exit(0);
+       }
+       String filepath=chooser.getSelectedFile().getAbsolutePath();
+       String ending=filepath.substring(filepath.length()-4,filepath.length());
+//       System.out.println(ending);
+       while(ending.compareTo(".csv")!=0){
+    	   JOptionPane.showMessageDialog(null,"File is not valid, make sure it's a .csv file");
+    	   ret=chooser.showOpenDialog(chooser); 
+    	   filepath=chooser.getSelectedFile().getAbsolutePath();
+    	   ending=filepath.substring(filepath.length()-4,filepath.length());
+       }
+       
+      
+         m = new Model(filepath); 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -223,11 +238,11 @@ public class Main {
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				System.out.println(selectedXAxis.isEmpty());
-				System.out.println(selectedYAxis.isEmpty());
+			//	System.out.println(selectedXAxis.isEmpty());
+			//	System.out.println(selectedYAxis.isEmpty());
 				if (!(selectedXAxis.isEmpty() && selectedYAxis.isEmpty()) && !selectedC.isEmpty()){
 				//	if(scatterPanel.getComponentCount()>0)
-					System.out.println("here");
+				//	System.out.println("here");
 					scatterPanel.removeAll();
                    
                      
