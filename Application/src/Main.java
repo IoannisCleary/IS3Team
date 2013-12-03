@@ -85,10 +85,10 @@ public class Main {
 		* Code to choose the csv file
 		**/
 		
-		/*JFileChooser chooser = new JFileChooser(); 
+		JFileChooser chooser = new JFileChooser(); 
             	chooser.showOpenDialog(chooser);
-                m = new Model(chooser.getSelectedFile().getAbsolutePath()); */
-		m = new Model("C:\\Users\\Gavin Davidson\\Documents\\GitHub\\IS3Team\\Application\\mergedDataSet_5_pc.csv");
+                m = new Model(chooser.getSelectedFile().getAbsolutePath());
+		//m = new Model("mergedDataSet_5_pc.csv");
                 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
