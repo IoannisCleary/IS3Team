@@ -463,6 +463,7 @@ public class Main {
 						msgbox.append(cBox[a].getText()+"  ");
 						Num_Select_Country++;}}
 						if(selectedC.contains(cBox[a].getText()))cBox[a].setSelected(true);
+						else{cBox[a].setSelected(false);}
 					}});
 				tick.add(cBox[i]);}
 				popupCountry.add(tick);
