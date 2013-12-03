@@ -54,10 +54,10 @@ public class BarchartCluster extends JPanel{
 		 * Ioannis
 		 * Here is where to mess around with the fonts for the barcharts. I don't know if this is the right font for you 
 		 */
-        final Font extraLargeFont = new Font("sans serif", Font.BOLD, 15);
-        final Font largeFont = new Font("sans serif", Font.PLAIN, 14);
-        final Font regularFont = new Font("sans serif", Font.PLAIN, 12);
-        final Font smallFont = new Font("sans serif", Font.PLAIN, 10);
+        final Font extraLargeFont = new Font("sansserif", Font.BOLD, 15);
+        final Font largeFont = new Font("sansserif", Font.PLAIN, 14);
+        final Font regularFont = new Font("sansserif", Font.PLAIN, 12);
+        final Font smallFont = new Font("sansserif", Font.PLAIN, 10);
 
         chartTheme.setExtraLargeFont(extraLargeFont);
         chartTheme.setLargeFont(largeFont);

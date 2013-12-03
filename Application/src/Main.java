@@ -153,13 +153,13 @@ public class Main {
 		frmIsPrototype.setJMenuBar(menuBar);
 		
 		JMenu mnFile = new JMenu("File");  // File option on the menu bar
-		mnFile.setFont(new Font("Serif", Font.BOLD, 12));
+		mnFile.setFont(new Font("SansSerif", Font.BOLD, 12));
 		mnFile.setBackground(new Color(153, 204, 255));
 		menuBar.add(mnFile); // adding to menu bar
 		
 		final JMenuItem mntmExit = new JMenuItem("Exit"); // creating exit button and adding it to the File menu option
 		mntmExit.setBackground(new Color(240, 240, 240));
-		mntmExit.setFont(new Font("Serif", Font.BOLD, 12));
+		mntmExit.setFont(new Font("SansSerif", Font.BOLD, 12));
 		mntmExit.setHorizontalAlignment(SwingConstants.LEFT);
 		mntmExit.addMouseListener(new MouseAdapter() {
 		
@@ -172,11 +172,11 @@ public class Main {
 		
 		
 		JMenu mnHelp = new JMenu("Help"); // Help option on the menu bar
-		mnHelp.setFont(new Font("Serif", Font.BOLD, 12));
+		mnHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
 		menuBar.add(mnHelp);
 		
 		JMenuItem Manual = new JMenuItem("Manual"); // creating Manual button and adding it to the Help menu option
-		Manual.setFont(new Font("Serif", Font.BOLD, 12));
+		Manual.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Manual.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -187,7 +187,7 @@ public class Main {
 		mnHelp.add(Manual);// actual addition to the menu
 		
 		JMenuItem About = new JMenuItem("About");  // creating About button and adding it to the Help menu option
-		About.setFont(new Font("Serif", Font.BOLD, 12));
+		About.setFont(new Font("SansSerif", Font.BOLD, 12));
 		About.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -243,7 +243,7 @@ public class Main {
 		);
 		
 		JLabel lblDrawingArea = new JLabel("Scatter Plot "); // Drawing area title
-		lblDrawingArea.setFont(new Font("Serif", Font.BOLD, 12));
+		lblDrawingArea.setFont(new Font("SansSerif", Font.BOLD, 13));
 		lblDrawingArea.setLabelFor(DrawingArea);
 		lblDrawingArea.setBackground(Color.GRAY);
 		
@@ -292,12 +292,12 @@ public class Main {
 			yAxisShow.setLayout(gl_yAxisShow);
 			
 			JLabel lblLegendDrawng = new JLabel("Legend : Scatter Plot"); // Legend title
-			lblLegendDrawng.setFont(new Font("Serif", Font.BOLD, 13));
+			lblLegendDrawng.setFont(new Font("SansSerif", Font.BOLD, 14));
 			lblLegendDrawng.setHorizontalAlignment(SwingConstants.CENTER);
 			
 		submit = new JButton("Generate");  // Submit button
 		submit.setForeground(Color.BLACK);
-		submit.setFont(new Font("Serif", Font.BOLD, 16));
+		submit.setFont(new Font("SansSerif", Font.BOLD, 14));
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -399,7 +399,7 @@ public class Main {
 				barchartPanel.repaint();
 			}
 		});
-		MainClear.setFont(new Font("Serif", Font.BOLD, 16));
+		MainClear.setFont(new Font("SansSerif", Font.BOLD, 14));
 		GroupLayout gl_LegendDA = new GroupLayout(LegendDA);
 		gl_LegendDA.setHorizontalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.TRAILING)
@@ -481,7 +481,7 @@ public class Main {
 				
 			}
 		});
-		CountryButton.setFont(new Font("Serif", Font.BOLD, 14));
+		CountryButton.setFont(new Font("SansSerif", Font.BOLD, 13));
 		
 		JButton xAxisButton = new JButton("X Axis"); // X Axis selection button, window with check boxes is created and shown
 		xAxisButton.addMouseListener(new MouseAdapter() {
@@ -530,7 +530,7 @@ public class Main {
 				
 			}
 		});
-		xAxisButton.setFont(new Font("Serif", Font.BOLD, 14));
+		xAxisButton.setFont(new Font("SansSerif", Font.BOLD, 13));
 		
 		
 		JButton YAxisbtn = new JButton("Y Axis"); // Y Axis selection button, window with check boxes is created and shown
@@ -578,7 +578,7 @@ public class Main {
 			}
 		});
 		
-			YAxisbtn.setFont(new Font("Serif", Font.BOLD, 14));
+			YAxisbtn.setFont(new Font("SansSerif", Font.BOLD, 13));
 			GroupLayout gl_selections = new GroupLayout(selections);
 			gl_selections.setHorizontalGroup(
 				gl_selections.createParallelGroup(Alignment.TRAILING)
@@ -640,7 +640,7 @@ public class Main {
 		
 		Label AddSel = new Label("Select : ");  // Select label
 		AddSel.setForeground(Color.BLACK);
-		AddSel.setFont(new Font("Serif", Font.BOLD, 12));
+		AddSel.setFont(new Font("SansSerif", Font.BOLD, 12));
 		
 		JButton optionsBtn = new JButton("Options"); // option button in Legend : Additional Information 
 		optionsBtn.addMouseListener(new MouseAdapter() {
@@ -697,7 +697,7 @@ public class Main {
 		});
 		optionsBtn.setHorizontalAlignment(SwingConstants.TRAILING);
 		optionsBtn.setVerticalAlignment(SwingConstants.TOP);
-		optionsBtn.setFont(new Font("Serif", Font.BOLD, 11));
+		optionsBtn.setFont(new Font("SansSerif", Font.BOLD, 11));
 		GroupLayout gl_AddOptPanel = new GroupLayout(AddOptPanel);
 		gl_AddOptPanel.setHorizontalGroup(
 			gl_AddOptPanel.createParallelGroup(Alignment.LEADING)
@@ -724,17 +724,17 @@ public class Main {
 		AddList.setBackground(new Color(245, 245, 245));
 		
 		JLabel lblLegendAdditional = new JLabel("Legend : Additional Information"); // Legend title
-		lblLegendAdditional.setFont(new Font("Serif", Font.BOLD, 13));
+		lblLegendAdditional.setFont(new Font("SansSerif", Font.BOLD, 12));
 		lblLegendAdditional.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		
 		
 		JLabel lblMessages = new JLabel("Messages:"); // Message box title
-		lblMessages.setFont(new Font("Serif", Font.BOLD, 14));
+		lblMessages.setFont(new Font("SansSerif", Font.BOLD, 13));
 		
 		JScrollPane scrollPane = new JScrollPane(); // scroll pane to make it scrollable
 		
-		JButton AdditionalSubmit = new JButton("Submit");
+		JButton AdditionalSubmit = new JButton("Generate");
 		AdditionalSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -762,19 +762,19 @@ public class Main {
 			}
 		});
 		AdditionalSubmit.setForeground(Color.BLACK);
-		AdditionalSubmit.setFont(new Font("Serif", Font.BOLD, 12));
+		AdditionalSubmit.setFont(new Font("SansSerif", Font.BOLD, 13));
 		GroupLayout gl_LegendAdd = new GroupLayout(LegendAdd);
 		gl_LegendAdd.setHorizontalGroup(
-			gl_LegendAdd.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_LegendAdd.createSequentialGroup()
+			gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_LegendAdd.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
 						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
 						.addComponent(AddList, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 259, Short.MAX_VALUE)
 						.addComponent(AddOptPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
 						.addComponent(lblLegendAdditional, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-						.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblMessages, Alignment.LEADING))
+						.addComponent(lblMessages, Alignment.LEADING)
+						.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_LegendAdd.setVerticalGroup(
@@ -787,7 +787,7 @@ public class Main {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddList, GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+					.addComponent(AddList, GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblMessages)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -804,7 +804,7 @@ public class Main {
 		msgbox.setEditable(false);
 		
 		JLabel ListTitleAdd = new JLabel("List of Selected Options :"); // List label
-		ListTitleAdd.setFont(new Font("Serif", Font.BOLD, 13));
+		ListTitleAdd.setFont(new Font("SansSerif", Font.BOLD, 12));
 		ListTitleAdd.setVerticalAlignment(SwingConstants.BOTTOM);
 		
 		JPanel ListPanel = new JPanel(); // panel were selections are shown
@@ -825,7 +825,7 @@ public class Main {
 			//	barchartPanel.repaint();
 			}
 		});
-		btnClear.setFont(new Font("Serif", Font.BOLD, 11));
+		btnClear.setFont(new Font("SansSerif", Font.BOLD, 12));
 		GroupLayout gl_AddList = new GroupLayout(AddList);
 		gl_AddList.setHorizontalGroup(
 			gl_AddList.createParallelGroup(Alignment.LEADING)
@@ -858,12 +858,16 @@ public class Main {
 		JLabel opt_4 = new JLabel("4."); // fourth selection
 		
 		op1 = new JLabel("no selection");
+		op1.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		
 		op2 = new JLabel("no selection");
+		op2.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		
 		op3 = new JLabel("no selection");
+		op3.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		
 		op4 = new JLabel("no selection");
+		op4.setFont(new Font("SansSerif", Font.PLAIN, 11));
 		
 		GroupLayout gl_ListPanel = new GroupLayout(ListPanel);
 		gl_ListPanel.setHorizontalGroup(
@@ -909,7 +913,7 @@ public class Main {
 		LegendAdd.setLayout(gl_LegendAdd);
 		
 		JLabel lblAdditionalInformation = new JLabel("Additional Information"); // label/title
-		lblAdditionalInformation.setFont(new Font("Serif", Font.BOLD, 12));
+		lblAdditionalInformation.setFont(new Font("SansSerif", Font.BOLD, 13));
 		lblAdditionalInformation.setBackground(Color.GRAY);
 		
 		
