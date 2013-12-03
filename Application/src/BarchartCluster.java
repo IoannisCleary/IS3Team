@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.LinkedList;
 
@@ -8,6 +9,7 @@ import javax.swing.border.Border;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.plot.CategoryPlot;
@@ -25,6 +27,7 @@ public class BarchartCluster extends JPanel{
 	DefaultCategoryDataset[] datasets;
 	String[] labels;
 	LinkedList<String> countries;
+	final StandardChartTheme chartTheme;
 	
 	
 	/*
@@ -43,6 +46,22 @@ public class BarchartCluster extends JPanel{
 			defaultPanel.setSize(super.getWidth()/4, super.getHeight());
 			super.add(defaultPanel, i);
 		}
+		
+		chartTheme = (StandardChartTheme)org.jfree.chart.StandardChartTheme.createJFreeTheme();
+		
+		/*
+		 * Ioannis
+		 * Here is where to mess around with the fonts for the barcharts. I don't know if this is the right font for you 
+		 */
+        final Font extraLargeFont = new Font("serif", Font.BOLD, 14);
+        final Font largeFont = new Font("serif", Font.PLAIN, 12);
+        final Font regularFont = new Font("serif", Font.PLAIN, 10);
+        final Font smallFont = new Font("serif", Font.PLAIN, 8);
+
+        chartTheme.setExtraLargeFont(extraLargeFont);
+        chartTheme.setLargeFont(largeFont);
+        chartTheme.setRegularFont(regularFont);
+        chartTheme.setSmallFont(smallFont);
 	}
 	
 	/*
@@ -54,13 +73,19 @@ public class BarchartCluster extends JPanel{
 			}
 			catch (ArrayIndexOutOfBoundsException e){
 				
-			}
+			}/*
 			ChartPanel chartPanel = new ChartPanel(ChartFactory.createBarChart(label,
 						  "Countries", label, data, PlotOrientation.VERTICAL,
-						   false, true, false));
+						   false, true, false));*/
+			JFreeChart chart = ChartFactory.createBarChart(label,
+					  "Countries", label, data, PlotOrientation.VERTICAL,
+					   false, true, false);
+			
+			chartTheme.apply(chart);
+			ChartPanel chartPanel = new ChartPanel(chart);
 			datasets[index] = data;
 			labels[index] = label;
-			chartPanel.setBorder(padding);
+			//chartPanel.setBorder(padding);
 			/*
 	        CategoryPlot plot = (CategoryPlot)chart.getPlot();
 	        CategoryAxis xAxis = (CategoryAxis)plot.getDomainAxis();
