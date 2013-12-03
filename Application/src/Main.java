@@ -87,16 +87,17 @@ public class Main {
 		
 		JFileChooser chooser = new JFileChooser(); 
        int ret=chooser.showOpenDialog(chooser);
-       while(ret==1){
+       if (ret==1){
     	   JOptionPane.showMessageDialog(null,"No file has been selected, system will exit");
-    	 System.exit(0);
-       }
+       System.exit(0);}
+       
        String filepath=chooser.getSelectedFile().getAbsolutePath();
        String ending=filepath.substring(filepath.length()-4,filepath.length());
 //       System.out.println(ending);
        while(ending.compareTo(".csv")!=0){
     	   JOptionPane.showMessageDialog(null,"File is not valid, make sure it's a .csv file");
     	   ret=chooser.showOpenDialog(chooser); 
+    	   if(ret==1){  JOptionPane.showMessageDialog(null,"No file has been selected, system will exit"); System.exit(0);}
     	   filepath=chooser.getSelectedFile().getAbsolutePath();
     	   ending=filepath.substring(filepath.length()-4,filepath.length());
        }
