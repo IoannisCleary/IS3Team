@@ -637,36 +637,30 @@ public class Main {
 		});
 	
 		YAxisbtn.setFont(new Font("Serif", Font.BOLD, 12));
-		
-		JButton Update = new JButton("Submit");
-		Update.setFont(new Font("Serif", Font.BOLD, 12));
 		GroupLayout gl_selections = new GroupLayout(selections);
 		gl_selections.setHorizontalGroup(
-			gl_selections.createParallelGroup(Alignment.LEADING)
+			gl_selections.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_selections.createSequentialGroup()
-					.addGap(23)
-					.addGroup(gl_selections.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(CountryButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(xAxisButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(YAxisbtn, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(MainClear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(Update, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addGap(37)
+					.addGroup(gl_selections.createParallelGroup(Alignment.TRAILING)
+						.addComponent(MainClear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+						.addComponent(YAxisbtn, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+						.addComponent(xAxisButton, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+						.addComponent(CountryButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(38))
 		);
 		gl_selections.setVerticalGroup(
 			gl_selections.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_selections.createSequentialGroup()
-					.addContainerGap()
+					.addGap(23)
 					.addComponent(CountryButton, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
-					.addComponent(xAxisButton, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(YAxisbtn, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(Update, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(15, Short.MAX_VALUE))
+					.addComponent(xAxisButton, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(YAxisbtn, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		selections.setLayout(gl_selections);
 		LegendDA.setLayout(gl_LegendDA);
