@@ -63,6 +63,7 @@ public class Main {
 	private JButton submit;
 	private Panel DrawingArea;
 	private JPanel scatterPanel;
+	private BarchartCluster barchartCluster;
 
 	/*
          *  Variables used for updating the scatterplot 
@@ -84,9 +85,11 @@ public class Main {
 		* Code to choose the csv file
 		**/
 		
-		JFileChooser chooser = new JFileChooser(); 
+		/*JFileChooser chooser = new JFileChooser(); 
             	chooser.showOpenDialog(chooser);
-                m = new Model(chooser.getSelectedFile().getAbsolutePath()); 
+                m = new Model(chooser.getSelectedFile().getAbsolutePath()); */
+		m = new Model("C:\\Users\\Gavin Davidson\\Documents\\GitHub\\IS3Team\\Application\\mergedDataSet_5_pc.csv");
+                
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -469,7 +472,15 @@ public class Main {
 				cBox[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
-						if(selectedC.contains(cBox[a].getText())){removelabel(cBox[a].getText());selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
+						if(selectedC.contains(cBox[a].getText())){removelabel(cBox[a].getText());selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");
+									
+						/*
+						 * When a country is deselected, it is removed from the barchart cluster.
+						 */
+						for (int i = 0; i < 4; i++){
+										barchartCluster.removeFromDataset(i, cBox[a].getText().substring(0, 4));
+									}
+									}
 						else{
 						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than four countries");}
 						else{selectedC.add(cBox[a].getText());
@@ -479,6 +490,14 @@ public class Main {
 						else if(country3.getText().compareTo("no selection")==0){country3.setText(cBox[a].getText());}
 						else if(country4.getText().compareTo("no selection")==0){country4.setText(cBox[a].getText());}
 						msgbox.append(cBox[a].getText()+"  ");
+						
+						/*
+						 * Add selected country to barchart cluster at the bottom of the UI.
+						 */
+						for (int i = 0; i < 4; i++){
+							barchartCluster.addToDataset(i, (int)(Math.random()*10), cBox[a].getText().substring(0, 4));
+						}
+						
 						Num_Select_Country++;}}
 						
 					}});
@@ -866,8 +885,10 @@ public class Main {
 		lblAdditionalInformation.setBackground(Color.GRAY);
 		
 		//bar chart creation
-		BarchartCluster panel_1 = new BarchartCluster(); // panel 
-		panel_1.test(); // demo
+		barchartCluster = new BarchartCluster(); // panel 
+		//barchartCluster.test(); // demo
+		barchartCluster.countryAddTest();
+		
 		
 		
 		GroupLayout gl_Addinfo = new GroupLayout(Addinfo);
@@ -876,7 +897,7 @@ public class Main {
 				.addGroup(gl_Addinfo.createSequentialGroup()
 					.addGap(17)
 					.addGroup(gl_Addinfo.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
+						.addComponent(barchartCluster, GroupLayout.DEFAULT_SIZE, 971, Short.MAX_VALUE)
 						.addComponent(lblAdditionalInformation))
 					.addContainerGap())
 		);
@@ -886,7 +907,7 @@ public class Main {
 					.addGap(6)
 					.addComponent(lblAdditionalInformation, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+					.addComponent(barchartCluster, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		

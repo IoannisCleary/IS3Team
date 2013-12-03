@@ -7,6 +7,9 @@ import javax.swing.border.Border;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -18,6 +21,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class BarchartCluster extends JPanel{
 
 	Border padding;
+	DefaultCategoryDataset[] datasets;
+	String[] labels;
+	
 	
 	/*
 	 * Constructor for cluster panel. For loop is used to make placeholders for graphs so that they
@@ -27,6 +33,8 @@ public class BarchartCluster extends JPanel{
 		super.setLayout(new GridLayout(1,4));
 		padding = BorderFactory.createEmptyBorder(0,10,0,10);
 		JPanel defaultPanel;
+		datasets = new DefaultCategoryDataset[4];
+		labels = new String[4];
 		for (int i = 0; i < 4; i++){
 			defaultPanel = new JPanel();
 			defaultPanel.setSize(super.getWidth()/4, super.getHeight());
@@ -47,7 +55,17 @@ public class BarchartCluster extends JPanel{
 			ChartPanel chartPanel = new ChartPanel(ChartFactory.createBarChart(label,
 						  "Countries", label, data, PlotOrientation.VERTICAL,
 						   false, true, false));
+			datasets[index] = data;
+			labels[index] = label;
 			chartPanel.setBorder(padding);
+			/*
+	        CategoryPlot plot = (CategoryPlot)chart.getPlot();
+	        CategoryAxis xAxis = (CategoryAxis)plot.getDomainAxis();
+	        xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); */
+			CategoryPlot plot = (CategoryPlot)chartPanel.getChart().getPlot();
+			CategoryAxis xAxis = (CategoryAxis)plot.getDomainAxis();
+			xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
+			
 			super.add(chartPanel, index);
 			super.updateUI();
 	}
@@ -60,7 +78,23 @@ public class BarchartCluster extends JPanel{
 		defaultPanel.setSize(super.getWidth()/4, super.getHeight());
 		super.remove(index);
 		super.add(defaultPanel, index);
+		datasets[index] = null;
+		labels[index] = null;
 		super.updateUI();
+	}
+	
+	/*
+	 * Method to add a country to a graph. Will be called when a new country is selected in the UI
+	 */
+	public void addToDataset(int index, int value, String country){
+		datasets[index].setValue(value,labels[index], country);
+	}
+	
+	/*
+	 * Method to remove a country from a graph. Will be called when a country is deselected
+	 */
+	public void removeFromDataset(int index, String country){
+		datasets[index].removeColumn(country);
 	}
 	
 	/*
@@ -99,6 +133,30 @@ public class BarchartCluster extends JPanel{
 		this.addChart(1, "Sex Appeal", dataset2);
 		this.addChart(2, "Height", dataset3);
 		this.addChart(3, "Hand Span", dataset4);
+		
+	}
+	
+	/*
+	 * Test method to initialise the graphs so they can accept countries being added.
+	 */
+	public void countryAddTest(){
+		DefaultCategoryDataset dataset1 = new DefaultCategoryDataset();
+		DefaultCategoryDataset dataset2 = new DefaultCategoryDataset();
+		DefaultCategoryDataset dataset3 = new DefaultCategoryDataset();
+		DefaultCategoryDataset dataset4 = new DefaultCategoryDataset();
+		datasets[0] = dataset1;
+		datasets[1] = dataset2;
+		datasets[2] = dataset3;
+		datasets[3] = dataset4;
+		labels[0] = "One";
+		labels[1] = "Two";
+		labels[2] = "Three";
+		labels[3] = "Four";
+		
+		addChart(0, labels[0], dataset1);
+		addChart(1, labels[1], dataset2);
+		addChart(2, labels[2], dataset3);
+		addChart(3, labels[3], dataset4);
 		
 	}
 	
