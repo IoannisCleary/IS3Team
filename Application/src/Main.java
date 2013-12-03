@@ -47,6 +47,7 @@ import java.awt.Rectangle;
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
 import javax.swing.JComboBox;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class Main {
 	private static Model m ;
@@ -246,6 +247,10 @@ public class Main {
 		lblLegendDrawng.setFont(new Font("Serif", Font.BOLD, 13));
 		lblLegendDrawng.setHorizontalAlignment(SwingConstants.CENTER);
 		
+                //bar chart creation
+		barchartPanel = new BarchartCluster(); // panel 
+		barchartPanel.setBackground(new Color(245, 245, 245));
+                
 		submit = new JButton("Submit");  // Submit button
 		submit.setForeground(Color.BLACK);
 		submit.setFont(new Font("Serif", Font.BOLD, 16));
@@ -327,7 +332,7 @@ public class Main {
                      scatterPanel.add(sc);
                      scatterPanel.repaint();
                    
-                     barchartPanel.test(); // demo
+                    
             //         frmIsPrototype.repaint();
        }}
 			
@@ -724,6 +729,27 @@ public class Main {
 		AdditionalSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+                            if (!selectedC.isEmpty() && !selectedOpts.isEmpty()){
+                            for (int i = 0; i<selectedOpts.size();i++){
+                                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                                for (int j = 0; j<selectedC.size();j++ ){
+                                    if (m.getTriple().getValue(selectedOpts.get(i), selectedC.get(j))!=null){
+                                        double d = Double.parseDouble(m.getTriple().getValue(selectedOpts.get(i), selectedC.get(j)));
+                                        dataset.setValue(d, selectedOpts.get(i), selectedC.get(j));
+                                        
+                                        }
+                                    barchartPanel.addChart(i, selectedOpts.get(i), dataset);
+                                    }
+                                       
+                                        
+                               }
+                            }
+                            else
+                                msgbox.append("No selected Countries or Options");
+                            
+                           
+                            
+                            
 			}
 		});
 		AdditionalSubmit.setForeground(Color.BLACK);
@@ -785,6 +811,7 @@ public class Main {
 		btnClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+                                
 				selectedOpts.clear();
 				op1.setText("no selection");
 				op2.setText("no selection");
@@ -881,9 +908,7 @@ public class Main {
 		lblAdditionalInformation.setFont(new Font("Serif", Font.BOLD, 12));
 		lblAdditionalInformation.setBackground(Color.GRAY);
 		
-		//bar chart creation
-		barchartPanel = new BarchartCluster(); // panel 
-		barchartPanel.setBackground(new Color(245, 245, 245));
+		
 		
 		
 		GroupLayout gl_Addinfo = new GroupLayout(Addinfo);
