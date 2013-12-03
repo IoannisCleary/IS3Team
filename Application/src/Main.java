@@ -136,7 +136,7 @@ public class Main {
 	 */
 	private void initialize() {
 		String[] tempOpt=m.getVariables();
-		axisOpt=new String[tempOpt.length-4];
+		axisOpt=new String[tempOpt.length-58];
 		for(int i=0;i<axisOpt.length;i++){
 			axisOpt[i]=tempOpt[i+4];
 		}
