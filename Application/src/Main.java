@@ -462,7 +462,7 @@ public class Main {
 							msgbox.append("\n");
 						msgbox.append(cBox[a].getText()+"  ");
 						Num_Select_Country++;}}
-						
+						if(selectedC.contains(cBox[a].getText()))cBox[a].setSelected(true);
 					}});
 				tick.add(cBox[i]);}
 				popupCountry.add(tick);
@@ -507,8 +507,7 @@ public class Main {
 							msgbox.append("\n");
 							msgbox.append(cBox[a].getText());
 							msgbox.append("\n");
-					
-						Num_Select_X++;}}
+							Num_Select_X++;}}
 						
 					}}});
 				tick.add(cBox[i]);}
