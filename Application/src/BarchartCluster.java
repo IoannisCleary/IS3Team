@@ -1,4 +1,5 @@
 import java.awt.GridLayout;
+import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ public class BarchartCluster extends JPanel{
 	Border padding;
 	DefaultCategoryDataset[] datasets;
 	String[] labels;
+	LinkedList<String> countries;
 	
 	
 	/*
@@ -35,6 +37,7 @@ public class BarchartCluster extends JPanel{
 		JPanel defaultPanel;
 		datasets = new DefaultCategoryDataset[4];
 		labels = new String[4];
+		countries = new LinkedList<String>();
 		for (int i = 0; i < 4; i++){
 			defaultPanel = new JPanel();
 			defaultPanel.setSize(super.getWidth()/4, super.getHeight());
@@ -87,14 +90,16 @@ public class BarchartCluster extends JPanel{
 	 * Method to add a country to a graph. Will be called when a new country is selected in the UI
 	 */
 	public void addToDataset(int index, int value, String country){
-		datasets[index].setValue(value,labels[index], country);
+		countries.add(country);
+		datasets[index].setValue(value,labels[index], country.substring(0,4));
 	}
 	
 	/*
 	 * Method to remove a country from a graph. Will be called when a country is deselected
 	 */
 	public void removeFromDataset(int index, String country){
-		datasets[index].removeColumn(country);
+		countries.remove(country);
+		datasets[index].removeColumn(country.substring(0,4));
 	}
 	
 	/*

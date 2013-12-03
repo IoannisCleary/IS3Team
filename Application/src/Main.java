@@ -85,10 +85,10 @@ public class Main {
 		* Code to choose the csv file
 		**/
 		
-		JFileChooser chooser = new JFileChooser(); 
+		/*JFileChooser chooser = new JFileChooser(); 
             	chooser.showOpenDialog(chooser);
-                m = new Model(chooser.getSelectedFile().getAbsolutePath());
-		//m = new Model("mergedDataSet_5_pc.csv");
+                m = new Model(chooser.getSelectedFile().getAbsolutePath()); */
+		m = new Model("mergedDataSet_5_pc.csv");
                 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -478,7 +478,7 @@ public class Main {
 						 * When a country is deselected, it is removed from the barchart cluster.
 						 */
 						for (int i = 0; i < 4; i++){
-										barchartCluster.removeFromDataset(i, cBox[a].getText().substring(0, 4));
+										barchartCluster.removeFromDataset(i, cBox[a].getText());
 									}
 									}
 						else{
@@ -495,7 +495,7 @@ public class Main {
 						 * Add selected country to barchart cluster at the bottom of the UI.
 						 */
 						for (int i = 0; i < 4; i++){
-							barchartCluster.addToDataset(i, (int)(Math.random()*10), cBox[a].getText().substring(0, 4));
+							barchartCluster.addToDataset(i, (int)(Math.random()*10), cBox[a].getText());
 						}
 						
 						Num_Select_Country++;}}
@@ -569,6 +569,14 @@ public class Main {
 				country2.setText("no selection");
 				country3.setText("no selection");
 				country4.setText("no selection");
+				/*
+				 * Code to remove all countries from the barchart cluster
+				 */
+				for (String country: selectedC){
+					for (int i = 0; i < 4; i++){
+						barchartCluster.removeFromDataset(i, country);
+					}
+				}
 				selectedC.clear();
 				selectedYAxis.clear();
 				selectedXAxis.clear();
