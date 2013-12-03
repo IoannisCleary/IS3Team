@@ -817,8 +817,10 @@ public class Main {
 				op2.setText("no selection");
 				op3.setText("no selection");
 				op4.setText("no selection");
-				barchartPanel.removeAll();
-				barchartPanel.repaint();
+				Num_Select_Opts = 0;
+				//barchartPanel.removeAll();
+				//barchartPanel.repaint();
+				barchartPanel.removeAllCharts();
 			}
 		});
 		btnClear.setFont(new Font("Serif", Font.BOLD, 11));

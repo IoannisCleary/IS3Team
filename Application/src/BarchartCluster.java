@@ -86,6 +86,11 @@ public class BarchartCluster extends JPanel{
 		super.updateUI();
 	}
 	
+	public void removeAllCharts(){
+		for (int i = 0; i < 4; i++){
+			removeChart(i);
+		}
+	}
 	/*
 	 * Method to add a country to a graph. Will be called when a new country is selected in the UI
 	 */
