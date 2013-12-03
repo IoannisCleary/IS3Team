@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.LinkedList;
@@ -53,10 +54,10 @@ public class BarchartCluster extends JPanel{
 		 * Ioannis
 		 * Here is where to mess around with the fonts for the barcharts. I don't know if this is the right font for you 
 		 */
-        final Font extraLargeFont = new Font("serif", Font.BOLD, 14);
-        final Font largeFont = new Font("serif", Font.PLAIN, 12);
-        final Font regularFont = new Font("serif", Font.PLAIN, 10);
-        final Font smallFont = new Font("serif", Font.PLAIN, 8);
+        final Font extraLargeFont = new Font("sans serif", Font.BOLD, 15);
+        final Font largeFont = new Font("sans serif", Font.PLAIN, 14);
+        final Font regularFont = new Font("sans serif", Font.PLAIN, 12);
+        final Font smallFont = new Font("sans serif", Font.PLAIN, 10);
 
         chartTheme.setExtraLargeFont(extraLargeFont);
         chartTheme.setLargeFont(largeFont);
@@ -93,7 +94,7 @@ public class BarchartCluster extends JPanel{
 			CategoryPlot plot = (CategoryPlot)chartPanel.getChart().getPlot();
 			CategoryAxis xAxis = (CategoryAxis)plot.getDomainAxis();
 			xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
-			
+			chartPanel.setBackground(new Color(240,240,240));
 			super.add(chartPanel, index);
 			super.updateUI();
 	}
