@@ -237,7 +237,7 @@ public class Main {
 					.addContainerGap())
 		);
 		
-		JLabel lblDrawingArea = new JLabel("Drawing Area"); // Drawing area title
+		JLabel lblDrawingArea = new JLabel("Scatter Plot "); // Drawing area title
 		lblDrawingArea.setFont(new Font("Serif", Font.BOLD, 12));
 		lblDrawingArea.setLabelFor(DrawingArea);
 		lblDrawingArea.setBackground(Color.GRAY);
@@ -286,11 +286,11 @@ public class Main {
 			);
 			yAxisShow.setLayout(gl_yAxisShow);
 			
-			JLabel lblLegendDrawng = new JLabel("Legend : Drawing Area"); // Legend title
+			JLabel lblLegendDrawng = new JLabel("Legend : Scatter Plot"); // Legend title
 			lblLegendDrawng.setFont(new Font("Serif", Font.BOLD, 13));
 			lblLegendDrawng.setHorizontalAlignment(SwingConstants.CENTER);
 			
-		submit = new JButton("Submit");  // Submit button
+		submit = new JButton("Generate");  // Submit button
 		submit.setForeground(Color.BLACK);
 		submit.setFont(new Font("Serif", Font.BOLD, 16));
 		submit.addMouseListener(new MouseAdapter() {
@@ -377,7 +377,7 @@ public class Main {
 			
 		});
 		
-		JButton MainClear = new JButton("Clear all"); // Clear all selection button, clears all selections and resets labels
+		JButton MainClear = new JButton("Start Over"); // Clear all selection button, clears all selections and resets labels
 		MainClear.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -432,6 +432,8 @@ public class Main {
 		);
 		
 		JButton CountryButton = new JButton("Countries"); // Countries selection button, window with check boxes is created and shown
+		CountryButton.setForeground(Color.BLACK);
+
 		CountryButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -497,6 +499,7 @@ public class Main {
 				cBox[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
+						if(cBox[a].isEnabled()){
 						if(selectedXAxis.contains(cBox[a].getText())){selectedXAxis.remove(cBox[a].getText()); Num_Select_X= Num_Select_X-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
 						else{
 						if(Num_Select_X>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
@@ -507,7 +510,7 @@ public class Main {
 					
 						Num_Select_X++;}}
 						
-					}});
+					}}});
 				tick.add(cBox[i]);}
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
@@ -543,6 +546,7 @@ public class Main {
 				cBox[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
+						if(cBox[a].isEnabled()){
 						if(selectedYAxis.contains(cBox[a].getText())){selectedYAxis.remove(cBox[a].getText()); Num_Select_Y= Num_Select_Y-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
 						else{
 						if(Num_Select_Y>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
@@ -551,7 +555,7 @@ public class Main {
 						msgbox.append(cBox[a].getText());
 						msgbox.append("\n");
 			
-						Num_Select_Y++;}}
+						Num_Select_Y++;}}}
 						
 					}});
 				tick.add(cBox[i]);}
@@ -651,6 +655,7 @@ public class Main {
 				cBox[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
+						if(cBox[a].isEnabled()){
 						if(selectedOpts.contains(cBox[a].getText())){removelabel(cBox[a].getText());selectedOpts.remove(cBox[a].getText()); Num_Select_Opts= Num_Select_Opts-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
 						else{
 						if(Num_Select_Opts>=4){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
@@ -665,7 +670,7 @@ public class Main {
 							Num_Select_Opts++;}}
 						
 					}
-
+					}
 					});
 				tick.add(cBox[i]);}
 				popupAxis.add(tick);
