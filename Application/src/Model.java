@@ -63,7 +63,7 @@ public class Model {
 		String[] tokens = line.split(",");
 		for (int i = 0; i < variables.length; i++){
 			String country = tokens[1];
-			if (!countries.contain(country))
+			if (!countries.contains(country))
 				countries.add(country);
 			for (int j = 0; j < tokens.length; j++){
 				if (triple == null){
