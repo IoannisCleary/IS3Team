@@ -55,7 +55,7 @@ public class Main {
 	private ArrayList<String> selectedOpts=new ArrayList<String>();
 	private JFrame frmIsPrototype;
 	private JLabel yselect,op1,op2,op3,op4;
-	private String[] axisOpt=m.getVariables();
+	private String[] axisOpt;
 	private ArrayList<String> countryNames;
 	private ScatterPlot sc;
 	private JButton submit;
@@ -135,6 +135,11 @@ public class Main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		String[] tempOpt=m.getVariables();
+		axisOpt=new String[tempOpt.length-4];
+		for(int i=0;i<axisOpt.length;i++){
+			axisOpt[i]=tempOpt[i+4];
+		}
 		frmIsPrototype = new JFrame(); // Main frame
 		frmIsPrototype.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmIsPrototype.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
