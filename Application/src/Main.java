@@ -7,7 +7,7 @@ import javax.swing.JMenu;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.Panel;
+
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -510,7 +510,10 @@ public class Main {
 							msgbox.append("\n");
 							Num_Select_X++;}}
 						
-					}}});
+					}
+						if(selectedXAxis.contains(cBox[a].getText()))cBox[a].setSelected(true);
+						else{cBox[a].setSelected(false);}	
+					}});
 				tick.add(cBox[i]);}
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
@@ -556,7 +559,8 @@ public class Main {
 						msgbox.append("\n");
 			
 						Num_Select_Y++;}}}
-						
+						if(selectedYAxis.contains(cBox[a].getText()))cBox[a].setSelected(true);
+						else{cBox[a].setSelected(false);}
 					}});
 				tick.add(cBox[i]);}
 				popupAxis.add(tick);
@@ -670,6 +674,8 @@ public class Main {
 							Num_Select_Opts++;}}
 						
 					}
+						if(selectedOpts.contains(cBox[a].getText()))cBox[a].setSelected(true);
+						else{cBox[a].setSelected(false);}	
 					}
 					});
 				tick.add(cBox[i]);}
