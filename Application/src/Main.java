@@ -367,7 +367,7 @@ public class Main {
                      
                      System.out.println(matchedC.toString());
      
-                     sc = new ScatterPlot(xLabel,yLabel,"multi data graph" ,xVal, yVal,matchedC, 500, 320);
+                     sc = new ScatterPlot(xLabel,yLabel,"multi data graph" ,xVal, yVal,matchedC,scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
                      
                      msgbox.append("processed");
                      sc.setVisible(true);           
@@ -738,6 +738,7 @@ public class Main {
 		AdditionalSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
+							barchartPanel.removeAll();
                             if (!selectedC.isEmpty() && !selectedOpts.isEmpty()){
                             for (int i = 0; i<selectedOpts.size();i++){
                                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -749,8 +750,8 @@ public class Main {
                                         }
                                     barchartPanel.addChart(i, selectedOpts.get(i), dataset);
                                     }
+                                    barchartPanel.repaint();  
                                        
-                                        
                                }
                             }
                             else
