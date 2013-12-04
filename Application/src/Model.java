@@ -3,6 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -19,8 +20,9 @@ public class Model {
 	
 	private Triple data;
 	private String[] variables;
+        private String[] labels;
 	private static ArrayList<String>  countries;
-	
+	private HashMap<String,String> varlb = new HashMap<String,String>();
 	
 	/**
 	 * Parameterised constructor. Given a file name, it creates a Triple type data structure  
@@ -30,6 +32,8 @@ public class Model {
 		data = new Triple();
 		countries = new ArrayList<String>();
 		process(fileName);
+                for (int i = 0; i<getVariables().length; i++)
+                    varlb.put(getLabels()[i],getVariables()[i]);
 	}
 	
 
@@ -86,12 +90,17 @@ public class Model {
 		Scanner scn = openFile(file);
 		
 		boolean firstLine = false;
-
+                boolean secondLine = false;   
 		while (scn != null && scn.hasNextLine()){
 			String line = scn.nextLine();
 			if (!firstLine){
 				variables = line.split(",");				
 				firstLine = true;
+				continue;
+			}
+                        if (!secondLine){
+				labels = line.split(",");				
+				secondLine = true;
 				continue;
 			}
 			
@@ -114,12 +123,17 @@ public class Model {
             return countries;
             
         }
+        
+        public HashMap<String,String> getVarLab(){
+            return varlb;
+        }
 	
 	public String[] getVariables(){
             return variables;
         }
-	
-	
+	public String[] getLabels(){
+            return labels;
+        }
 	/**
 	 * It returns an array list of arrays of the form [country, xValue, yValue, xLabel, yLabel]
 	 * to be used in the charts generation.
