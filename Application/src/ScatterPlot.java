@@ -55,7 +55,7 @@ public class ScatterPlot extends ChartPanel {
     }
    
 
- private JFreeChart createChart(ArrayList<XYDataset> dataset, String title, String xVariable, String yVariable) {
+ private JFreeChart createChart(ArrayList<XYDataset> dataset, String title, final String xVariable, final String yVariable) {
 	 XYPlot plot = new XYPlot();
 	 ValueAxis domain = new NumberAxis(xVariable);
 	 ValueAxis range = new NumberAxis(yVariable);
@@ -81,8 +81,8 @@ public class ScatterPlot extends ChartPanel {
 	            String s = temp.getSeries(0).getDescription();
 	            
 	            sb.append("<html><p style='color:blue;'>"+s+"</p><br />");
-	            sb.append(String.format("X: %.2f <br />", x.doubleValue()));
-	            sb.append(String.format("Y: %.2f</html>", y.doubleValue()));
+	            sb.append(String.format("%s: %.2f <br />",xVariable, x.doubleValue()));
+	            sb.append(String.format("%s: %.2f</html>",yVariable, y.doubleValue()));
 	            return sb.toString();
 	         }
 	      };
