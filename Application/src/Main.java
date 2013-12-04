@@ -371,11 +371,11 @@ public class Main {
                      
                      msgbox.append("processed");
                      sc.setVisible(true);           
-                     sc.setSize(scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
+                     sc.setSize(scatterPanel.getWidth(),scatterPanel.getHeight());
                      sc.repaint();
                      scatterPanel.add(sc);
                      scatterPanel.repaint();
-                   
+                     scatterPanel.doLayout();
                     
             //         frmIsPrototype.repaint();
        }}
@@ -447,8 +447,8 @@ public class Main {
 				msgbox.append("\n");
 			//	msgbox.append(countryNames.toString());
 				ScrollPane popupCountry=new ScrollPane();
-				JOptionPane dialCounty= new JOptionPane();
-				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JOptionPane dialCountry= new JOptionPane();
+				dialCountry.setLayout(new BoxLayout(dialCountry, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
@@ -474,8 +474,8 @@ public class Main {
 				popupCountry.add(tick);
 				popupCountry.setBounds(100,100,400,400);
 				popupCountry.setVisible(true);
-			//	dialCounty.add(popupCountry);
-				dialCounty.setBounds(100,100,400,400);
+			//	dialCountry.add(popupCountry);
+				dialCountry.setBounds(100,100,400,400);
 				JOptionPane.showConfirmDialog(null, popupCountry,"Countries", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE);
 				
@@ -491,8 +491,8 @@ public class Main {
 				msgbox.append("X Selected : ");
 				msgbox.append("\n");
 				ScrollPane popupAxis=new ScrollPane();
-				JOptionPane dialCounty= new JOptionPane();
-				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JOptionPane dialCountry= new JOptionPane();
+				dialCountry.setLayout(new BoxLayout(dialCountry, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
@@ -523,8 +523,8 @@ public class Main {
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
 				popupAxis.setVisible(true);
-			//	dialCounty.add(popupCountry);
-				dialCounty.setBounds(100,100,400,400);
+			//	dialCountry.add(popupCountry);
+				dialCountry.setBounds(100,100,400,400);
 				JOptionPane.showConfirmDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE);
 				
@@ -540,8 +540,8 @@ public class Main {
 				msgbox.append("Y Selected : ");
 				msgbox.append("\n");
 				ScrollPane popupAxis=new ScrollPane();
-				JOptionPane dialCounty= new JOptionPane();
-				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JOptionPane dialCountry= new JOptionPane();
+				dialCountry.setLayout(new BoxLayout(dialCountry, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
@@ -571,7 +571,7 @@ public class Main {
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
 				popupAxis.setVisible(true);
-				dialCounty.setBounds(100,100,400,400);
+				dialCountry.setBounds(100,100,400,400);
 				JOptionPane.showConfirmDialog(null, popupAxis,"Y Axis", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE);
 				
@@ -650,8 +650,8 @@ public class Main {
 				msgbox.append("Additional Information Options Selected : ");
 				msgbox.append("\n");
 				ScrollPane popupAxis=new ScrollPane();
-				JOptionPane dialCounty= new JOptionPane();
-				dialCounty.setLayout(new BoxLayout(dialCounty, BoxLayout.Y_AXIS));
+				JOptionPane dialCountry= new JOptionPane();
+				dialCountry.setLayout(new BoxLayout(dialCountry, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
@@ -687,8 +687,8 @@ public class Main {
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
 				popupAxis.setVisible(true);
-			//	dialCounty.add(popupCountry);
-				dialCounty.setBounds(100,100,400,400);
+			//	dialCountry.add(popupCountry);
+				dialCountry.setBounds(100,100,400,400);
 				JOptionPane.showConfirmDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE);
 				
@@ -738,7 +738,7 @@ public class Main {
 		AdditionalSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-							barchartPanel.removeAll();
+							barchartPanel.removeAllCharts();
                             if (!selectedC.isEmpty() && !selectedOpts.isEmpty()){
                             for (int i = 0; i<selectedOpts.size();i++){
                                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
