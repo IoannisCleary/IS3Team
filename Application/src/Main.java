@@ -39,6 +39,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 
 import javax.swing.JFileChooser;
+
 import org.jfree.data.category.DefaultCategoryDataset;
 import javax.swing.border.EtchedBorder;
 
@@ -406,16 +407,19 @@ public class Main {
 				.addGroup(gl_LegendDA.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
 						.addGroup(gl_LegendDA.createSequentialGroup()
-							.addComponent(yAxisShow, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
-							.addGap(40)
-							.addComponent(selections, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_LegendDA.createSequentialGroup()
-							.addComponent(submit, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-							.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
+							.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+								.addGroup(gl_LegendDA.createSequentialGroup()
+									.addComponent(yAxisShow, GroupLayout.PREFERRED_SIZE, 0, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(selections, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)))
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
+							.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(MainClear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(submit, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
+							.addGap(31))))
 		);
 		gl_LegendDA.setVerticalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.LEADING)
@@ -427,13 +431,13 @@ public class Main {
 							.addGap(49)
 							.addComponent(yAxisShow, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_LegendDA.createSequentialGroup()
-							.addGap(12)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(selections, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_LegendDA.createParallelGroup(Alignment.BASELINE)
-						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-						.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))
-					.addGap(179))
+					.addGap(35)
+					.addComponent(submit, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addGap(44))
 		);
 		
 		JButton CountryButton = new JButton("Countries"); // Countries selection button, window with check boxes is created and shown
@@ -610,27 +614,24 @@ public class Main {
 				.addGroup(gl_DrawingArea.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 283, GroupLayout.PREFERRED_SIZE)
+						.addGroup(Alignment.TRAILING, gl_DrawingArea.createSequentialGroup()
+							.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 231, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
 							.addGap(495))))
 		);
 		gl_DrawingArea.setVerticalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_DrawingArea.createSequentialGroup()
-					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addGap(6)
-							.addComponent(lblDrawingArea)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
-						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addGap(44)
-							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)))
+					.addGap(6)
+					.addComponent(lblDrawingArea)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+						.addComponent(LegendDA, GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		DrawingArea.setLayout(gl_DrawingArea);
