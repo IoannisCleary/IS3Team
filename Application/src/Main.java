@@ -8,7 +8,6 @@ import javax.swing.JMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -31,16 +30,17 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import java.awt.ComponentOrientation;
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
-
 import javax.swing.JFileChooser;
 
 import org.jfree.data.category.DefaultCategoryDataset;
+
 import javax.swing.border.EtchedBorder;
 
 public class Main {
@@ -82,6 +82,10 @@ public class Main {
 		/*
 		* Code to choose the csv file
 		**/
+		String filepath = "mergedFile.csv";
+		File def = new File(filepath);
+		if(!def.exists()){
+			
 		
 		JFileChooser chooser = new JFileChooser(); 
        int ret=chooser.showOpenDialog(chooser);
@@ -89,7 +93,7 @@ public class Main {
     	   JOptionPane.showMessageDialog(null,"No file has been selected, system will exit");
        System.exit(0);}
        
-       String filepath=chooser.getSelectedFile().getAbsolutePath();
+       filepath=chooser.getSelectedFile().getAbsolutePath();
        String ending=filepath.substring(filepath.length()-4,filepath.length());
 //       System.out.println(ending);
        while(ending.compareTo(".csv")!=0){
@@ -99,7 +103,7 @@ public class Main {
     	   filepath=chooser.getSelectedFile().getAbsolutePath();
     	   ending=filepath.substring(filepath.length()-4,filepath.length());
        }
-       
+		}
       
          m = new Model(filepath); 
 		EventQueue.invokeLater(new Runnable() {
@@ -170,6 +174,12 @@ public class Main {
 			}
 			
 		});
+		
+		JMenuItem Open = new JMenuItem("Open File...");
+		Open.setHorizontalAlignment(SwingConstants.LEFT);
+		Open.setFont(new Font("SansSerif", Font.BOLD, 12));
+		Open.setBackground(SystemColor.menu);
+		mnFile.add(Open);
 		mnFile.add(mntmExit); // actual addition to the menu
 		
 		
