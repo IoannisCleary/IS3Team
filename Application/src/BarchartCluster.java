@@ -24,6 +24,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class BarchartCluster extends JPanel{
 
+
+	private static final long serialVersionUID = -3587677484628117210L;
 	Border padding;
 	DefaultCategoryDataset[] datasets;
 	String[] labels;

@@ -14,12 +14,18 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.util.ShapeUtilities;
 import org.jfree.chart.JFreeChart;
 
-
+/**
+ * Class for making scatter plots.
+ * @author Matthew Bown
+ *
+ */
 public class ScatterPlot extends ChartPanel {
 
 
 	/**
-	 * 
+	 * Class to create cluster of barcharts.
+	 * @author Matthew Bown
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

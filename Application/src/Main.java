@@ -367,7 +367,7 @@ public class Main {
                      
                      System.out.println(matchedC.toString());
      
-                     sc = new ScatterPlot(xLabel,yLabel,"multi data graph" ,xVal, yVal,matchedC,scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
+                     sc = new ScatterPlot(xLabel,yLabel,"" ,xVal, yVal,matchedC,scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
                      
                      msgbox.append("processed");
                      sc.setVisible(true);           

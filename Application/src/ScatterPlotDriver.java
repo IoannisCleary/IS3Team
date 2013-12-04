@@ -3,8 +3,13 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-
+/**
+ * Class to test scatter plot.
+ * @author Matthew Bown
+ *
+ */
 public class ScatterPlotDriver {
+
 	 public static void main(String[] args) {
 		 	ArrayList<Double> x = new ArrayList<Double>();
 		 	ArrayList<Double> y = new ArrayList<Double>();

@@ -1,11 +1,9 @@
-import java.awt.Shape;
-import java.awt.Stroke;
+
 import java.util.ArrayList;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.axis.NumberAxis;
-import org.jfree.chart.axis.ValueAxis;
+
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -14,10 +12,16 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.chart.JFreeChart;
+
+/**
+ * Class to test scatter plot.
+ * @author Matthew Bown
+ *
+ */
+
+
 public class ScatterPlotTest extends ChartPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -5144781252801692212L;
 
 	public ScatterPlotTest(String xVariable, String yVariable, String chartTitle, ArrayList<Double> x, ArrayList<Double> y, int xSize, int ySize) {
