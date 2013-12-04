@@ -129,13 +129,14 @@ public class Main {
 	public Main() {
 		 countryNames = m.getCountries(); // Get Countries from file
 		initialize();
+              
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String[] tempOpt=m.getVariables();
+		String[] tempOpt=m.getLabels();
 		axisOpt=new String[tempOpt.length-58];
 		for(int i=0;i<axisOpt.length;i++){
 			axisOpt[i]=tempOpt[i+4];
@@ -301,11 +302,10 @@ public class Main {
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-			//	System.out.println(selectedXAxis.isEmpty());
-			//	System.out.println(selectedYAxis.isEmpty());
+				System.out.println(selectedXAxis);
+				System.out.println(selectedYAxis);
 				if (!(selectedXAxis.isEmpty() && selectedYAxis.isEmpty()) && !selectedC.isEmpty()){
-				//	if(scatterPanel.getComponentCount()>0)
-				//	System.out.println("here");
+				
 					scatterPanel.removeAll();
                    
                      
@@ -315,7 +315,7 @@ public class Main {
                      if(!selectedXAxis.isEmpty() && !selectedYAxis.isEmpty()){
                     	  xLabel = selectedXAxis.get(0);
                           yLabel = selectedYAxis.get(0);
-                          dataArray = m.get2VarDataArray(xLabel, yLabel, m.getTriple());
+                          dataArray = m.get2VarDataArray(m.getVarLab().get(xLabel), m.getVarLab().get(yLabel), m.getTriple());
                      for (int j = 0; j < selectedC.size();j++ )
                        for (int i = 0; i< dataArray.size(); i++){
                     	   
@@ -330,7 +330,7 @@ public class Main {
                     	 Double cnt=1.0;
                          xLabel = "Countries";
                     	 yLabel = selectedXAxis.get(0);
-                    	 dataArray = m.get2VarDataArray(yLabel, "Factor1", m.getTriple());
+                    	 dataArray = m.get2VarDataArray(m.getVarLab().get(yLabel), "Factor1", m.getTriple());
                     	 for (int j = 0; j < selectedC.size();j++ )
                              for (int i = 0; i< dataArray.size(); i++){
                                  if (selectedC.get(j).equals(dataArray.get(i)[0])){
@@ -348,7 +348,7 @@ public class Main {
 
                           yLabel = selectedYAxis.get(0);
                           xLabel = "Countries";
-                    	 dataArray = m.get2VarDataArray("Factor1", yLabel, m.getTriple());
+                    	 dataArray = m.get2VarDataArray("Factor1", m.getVarLab().get(yLabel), m.getTriple());
                     	 for (int j = 0; j < selectedC.size();j++ )
                              for (int i = 0; i< dataArray.size(); i++){
                                  if (selectedC.get(j).equals(dataArray.get(i)[0])){
@@ -742,8 +742,8 @@ public class Main {
                             for (int i = 0; i<selectedOpts.size();i++){
                                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                                 for (int j = 0; j<selectedC.size();j++ ){
-                                    if (m.getTriple().getValue(selectedOpts.get(i), selectedC.get(j))!=null){
-                                        double d = Double.parseDouble(m.getTriple().getValue(selectedOpts.get(i), selectedC.get(j)));
+                                    if (m.getTriple().getValue(m.getVarLab().get(selectedOpts.get(i)), selectedC.get(j))!=null){
+                                        double d = Double.parseDouble(m.getTriple().getValue(m.getVarLab().get(selectedOpts.get(i)), selectedC.get(j)));
                                         dataset.setValue(d, selectedOpts.get(i), selectedC.get(j));
                                         
                                         }
@@ -952,4 +952,3 @@ public class Main {
 		
 	}
 }
-
