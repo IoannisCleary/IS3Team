@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -25,8 +28,9 @@ import org.jfree.data.category.DefaultCategoryDataset;
 public class BarchartCluster extends JPanel{
 
 
-	private static final long serialVersionUID = -3587677484628117210L;
+	private static final long serialVersionUID = 7503409692256751337L;
 	Border padding;
+	ChartPanel[] chartPanels;
 	DefaultCategoryDataset[] datasets;
 	String[] labels;
 	LinkedList<String> countries;
@@ -86,13 +90,46 @@ public class BarchartCluster extends JPanel{
 			
 			chartTheme.apply(chart);
 			ChartPanel chartPanel = new ChartPanel(chart);
+			chartPanel.addMouseListener(new MouseListener(){
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					JFrame popUp = new JFrame();
+					popUp.setSize(500, 500);
+					ChartPanel panel = (ChartPanel)arg0.getComponent();
+					JFreeChart chart = panel.getChart();
+					popUp.add(new ChartPanel(chart));
+					popUp.setVisible(true);
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 			datasets[index] = data;
 			labels[index] = label;
-			//chartPanel.setBorder(padding);
-			/*
-	        CategoryPlot plot = (CategoryPlot)chart.getPlot();
-	        CategoryAxis xAxis = (CategoryAxis)plot.getDomainAxis();
-	        xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45); */
 			CategoryPlot plot = (CategoryPlot)chartPanel.getChart().getPlot();
 			CategoryAxis xAxis = (CategoryAxis)plot.getDomainAxis();
 			xAxis.setCategoryLabelPositions(CategoryLabelPositions.UP_45);
@@ -195,6 +232,9 @@ public class BarchartCluster extends JPanel{
 		addChart(1, labels[1], dataset2);
 		addChart(2, labels[2], dataset3);
 		addChart(3, labels[3], dataset4);
+	}
+	
+	public void getChart(int index){
 		
 	}
 	

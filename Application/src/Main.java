@@ -44,7 +44,7 @@ import javax.swing.border.EtchedBorder;
 
 public class Main {
 	private static Model m ;
-	private int Max_Select=15;
+	private int Max_Select=30;
 	private int Num_Select_Country=0;
 	private int Num_Select_X=0;
 	private int Num_Select_Y=0;
@@ -447,6 +447,7 @@ public class Main {
 				msgbox.append("\n");
 			//	msgbox.append(countryNames.toString());
 				ScrollPane popupCountry=new ScrollPane();
+				popupCountry.setWheelScrollingEnabled(true);
 				JOptionPane dialCountry= new JOptionPane();
 				dialCountry.setLayout(new BoxLayout(dialCountry, BoxLayout.Y_AXIS));
 				JPanel tick=new JPanel();
@@ -462,7 +463,7 @@ public class Main {
 					public void mouseReleased(MouseEvent e) {
 						if(selectedC.contains(cBox[a].getText())){selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
 						else{
-						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than four countries");}
+						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than "+ Max_Select + " countries");}
 						else{selectedC.add(cBox[a].getText());
 							msgbox.append("\n");
 						msgbox.append(cBox[a].getText()+"  ");
