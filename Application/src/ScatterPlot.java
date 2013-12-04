@@ -22,11 +22,7 @@ import org.jfree.chart.JFreeChart;
 public class ScatterPlot extends ChartPanel {
 
 
-	/**
-	 * Class to create cluster of barcharts.
-	 * @author Matthew Bown
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 
@@ -73,11 +69,11 @@ public class ScatterPlot extends ChartPanel {
 	 plot.mapDatasetToDomainAxis(0, 0);
 	 plot.mapDatasetToRangeAxis(0, 0);
 	 
-
-	 for(int i = 0; i < dataset.size(); i++){
+	 int i;
+	 for(i = 0; i < dataset.size(); i++){
 		 XYItemRenderer renderer = new XYLineAndShapeRenderer(false, true);
 		 Shape circle = ShapeUtilities.createDiamond((float) 5.5);
-		 
+
 		 XYToolTipGenerator tt1 = new XYToolTipGenerator() {
 	         public String generateToolTip(XYDataset dataset, int series, int item) {
 	            StringBuffer sb = new StringBuffer();
@@ -100,9 +96,10 @@ public class ScatterPlot extends ChartPanel {
 		 renderer.setSeriesShape(0,circle);
 		 plot.setDataset(i, dataset.get(i));
 		 plot.setRenderer(i, renderer);
-
+		 
 		 plot.mapDatasetToDomainAxis(0, 0);
 		 plot.mapDatasetToRangeAxis(0, 0);
+
 		
 	 }
 	 
@@ -111,10 +108,14 @@ public class ScatterPlot extends ChartPanel {
 	 // Create the scatter data, renderer, and axis
 	
 	 // Create the chart with the plot and a legend
-	 JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-        
-           chart.setTextAntiAlias(true);
-           
+	 JFreeChart chart;
+	 if(i <= 30){
+		 chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+	 }
+	 else{
+		 chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, false);
+	 }
+	 	chart.setTextAntiAlias(true);
         return chart;
         
     }

@@ -47,7 +47,7 @@ import javax.swing.event.MenuKeyEvent;
 
 public class Main {
 	private static Model m ;
-	private int Max_Select=30;
+	//private int Max_Select=200;
 	private int Num_Select_Country=0;
 	private int Num_Select_X=0;
 	private int Num_Select_Y=0;
@@ -181,7 +181,6 @@ public class Main {
 		Open.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				System.out.println("sadasd");
 				String filepath;
 				JFileChooser chooser = new JFileChooser(); 
 			       int ret=chooser.showOpenDialog(chooser);
@@ -339,8 +338,6 @@ public class Main {
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				System.out.println(selectedXAxis);
-				System.out.println(selectedYAxis);
 				if (!(selectedXAxis.isEmpty() && selectedYAxis.isEmpty()) && !selectedC.isEmpty()){
 				
 					scatterPanel.removeAll();
@@ -402,7 +399,6 @@ public class Main {
                      
 				
                      
-                     System.out.println(matchedC.toString());
      
                      sc = new ScatterPlot(xLabel,yLabel,"" ,xVal, yVal,matchedC,scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
                      
@@ -503,11 +499,11 @@ public class Main {
 					public void mouseReleased(MouseEvent e) {
 						if(selectedC.contains(cBox[a].getText())){selectedC.remove(cBox[a].getText()); Num_Select_Country= Num_Select_Country-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
 						else{
-						if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than "+ Max_Select + " countries");}
-						else{selectedC.add(cBox[a].getText());
+						//if(Num_Select_Country>=Max_Select){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than "+ Max_Select + " countries");}
+						selectedC.add(cBox[a].getText());
 							msgbox.append("\n");
 						msgbox.append(cBox[a].getText()+"  ");
-						Num_Select_Country++;}}
+						Num_Select_Country++;}
 						if(selectedC.contains(cBox[a].getText()))cBox[a].setSelected(true);
 						else{cBox[a].setSelected(false);}
 					}});
