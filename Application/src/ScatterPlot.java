@@ -81,8 +81,9 @@ public class ScatterPlot extends ChartPanel {
 	            String s = temp.getSeries(0).getDescription();
 	            
 	            sb.append("<html><p style='color:blue;'>"+s+"</p><br />");
-	            sb.append(String.format("%s: %.2f <br />",xVariable, x.doubleValue()));
-	            sb.append(String.format("%s: %.2f</html>",yVariable, y.doubleValue()));
+	            if (xVariable != "Countries")
+	            sb.append(String.format("%s: %,.2f <br />",xVariable, x.doubleValue()));
+	            sb.append(String.format("%s: %,.2f</html>",yVariable, y.doubleValue()));
 	            return sb.toString();
 	         }
 	      };
