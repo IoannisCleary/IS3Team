@@ -42,6 +42,8 @@ import javax.swing.JFileChooser;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.MenuKeyListener;
+import javax.swing.event.MenuKeyEvent;
 
 public class Main {
 	private static Model m ;
@@ -176,6 +178,30 @@ public class Main {
 		});
 		
 		JMenuItem Open = new JMenuItem("Open File...");
+		Open.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				System.out.println("sadasd");
+				String filepath;
+				JFileChooser chooser = new JFileChooser(); 
+			       int ret=chooser.showOpenDialog(chooser);
+			       if (ret==1){
+			    	   JOptionPane.showMessageDialog(null,"No file has been selected, system will exit");
+			       System.exit(0);}
+			       
+			       filepath=chooser.getSelectedFile().getAbsolutePath();
+			       String ending=filepath.substring(filepath.length()-4,filepath.length());
+//			       System.out.println(ending);
+			       while(ending.compareTo(".csv")!=0){
+			    	   JOptionPane.showMessageDialog(null,"File is not valid, make sure it's a .csv file");
+			    	   ret=chooser.showOpenDialog(chooser); 
+			    	   if(ret==1){  JOptionPane.showMessageDialog(null,"No file has been selected, system will exit"); System.exit(0);}
+			    	   filepath=chooser.getSelectedFile().getAbsolutePath();
+			    	   ending=filepath.substring(filepath.length()-4,filepath.length());
+			       }
+			       m = new Model(filepath); 
+			}
+		});
 		Open.setHorizontalAlignment(SwingConstants.LEFT);
 		Open.setFont(new Font("SansSerif", Font.BOLD, 12));
 		Open.setBackground(SystemColor.menu);
