@@ -20,3 +20,12 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jdt.core 4 0 2013-12-04 20:14:41.746
+!MESSAGE Invalid ZIP archive: src/countryIcon.png [in Application]
+
+!ENTRY org.eclipse.jdt.core 4 0 2013-12-04 20:14:43.342
+!MESSAGE Invalid ZIP archive: src/countryIconSelected.png [in Application]
+
+!ENTRY org.eclipse.jdt.core 4 0 2013-12-04 20:14:44.024
+!MESSAGE Invalid ZIP archive: src/x axis.png [in Application]
