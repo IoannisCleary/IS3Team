@@ -183,7 +183,6 @@ public class Main {
 		});
 		
 		Open = new JMenuItem("Open File...");
-
 		
 		Open.addMouseListener(new MouseAdapter() {
 			@Override
@@ -192,10 +191,12 @@ public class Main {
 		         String filepath;
 		         JFileChooser chooser = new JFileChooser(); 
 		              int ret=chooser.showOpenDialog(chooser);
+		              boolean selected = true;
 		              if (ret==1){
-		                JOptionPane.showMessageDialog(null,"No file has been selected, system will exit");
-		              System.exit(0);}
-		              
+		                //JOptionPane.showMessageDialog(null,"No file has been selected");
+		               selected =false;
+		              }
+		              if(selected){
 		              filepath=chooser.getSelectedFile().getAbsolutePath();
 		              String ending=filepath.substring(filepath.length()-4,filepath.length());
 		 //             System.out.println(ending);
@@ -207,39 +208,13 @@ public class Main {
 		                ending=filepath.substring(filepath.length()-4,filepath.length());
 		              }
 		              m = new Model(filepath); 
+		              }
 			}});
-
-		Open.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-		//		System.out.println("sadasd");
-				String filepath;
-				JFileChooser chooser = new JFileChooser(); 
-			       int ret=chooser.showOpenDialog(chooser);
-			       if (ret==1){
-			    	   JOptionPane.showMessageDialog(null,"No file has been selected, system will exit");
-			       System.exit(0);}
-			       
-			       filepath=chooser.getSelectedFile().getAbsolutePath();
-			       String ending=filepath.substring(filepath.length()-4,filepath.length());
-//			       System.out.println(ending);
-			       while(ending.compareTo(".csv")!=0){
-			    	   JOptionPane.showMessageDialog(null,"File is not valid, make sure it's a .csv file");
-			    	   ret=chooser.showOpenDialog(chooser); 
-			    	   if(ret==1){  JOptionPane.showMessageDialog(null,"No file has been selected, system will exit"); System.exit(0);}
-			    	   filepath=chooser.getSelectedFile().getAbsolutePath();
-			    	   ending=filepath.substring(filepath.length()-4,filepath.length());
-			       }
-			       m = new Model(filepath); 
-
-			}
-		});
 		Open.setHorizontalAlignment(SwingConstants.LEFT);
 		Open.setFont(new Font("SansSerif", Font.BOLD, 13));
 		Open.setBackground(SystemColor.menu);
 		mnFile.add(Open);
 		mnFile.add(mntmExit); // actual addition to the menu
-		
 		
 		JMenu mnHelp = new JMenu("Help"); // Help option on the menu bar
 		mnHelp.setFont(new Font("SansSerif", Font.BOLD, 12));
