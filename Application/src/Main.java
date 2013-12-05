@@ -637,10 +637,10 @@ public class Main {
 				dialCountry.setBounds(100,100,400,400);
 			
 				Object[] options = {"Ok","Clear","Cancel"};
-				int n =JOptionPane.showOptionDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
+				int n =JOptionPane.showOptionDialog(null, popupAxis,"Y Axis", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
 				if(n==JOptionPane.NO_OPTION){
-					selectedXAxis.clear();
+					selectedYAxis.clear();
 					for(int i = 0; i < rBut.length;i++){
 						rBut[i].setSelected(false);
 					}
