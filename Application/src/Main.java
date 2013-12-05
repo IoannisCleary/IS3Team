@@ -83,6 +83,7 @@ public class Main {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		
 		/*
@@ -312,7 +313,7 @@ public class Main {
 		submit = new JButton("Generate");  // Submit button
 		submit.setForeground(Color.BLACK);
 		submit.setIcon((new ImageIcon(Main.class.getResource("/smallgen.png"))));
-		
+
 		submit.setFont(new Font("SansSerif", Font.BOLD, 14));
 		submit.addMouseListener(new MouseAdapter() {
 			@Override
@@ -631,6 +632,79 @@ public class Main {
 			YAxisbtn.setFont(new Font("SansSerif", Font.BOLD, 13));
 			
 			JButton swapaxis = new JButton("Swap Axis");
+			swapaxis.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					ArrayList<String> x= new ArrayList<String>(selectedXAxis);
+					selectedXAxis = new ArrayList<String>(selectedYAxis);
+					selectedYAxis = x;
+					if (!(selectedXAxis.isEmpty() && selectedYAxis.isEmpty()) && !selectedC.isEmpty()){					
+						scatterPanel.removeAll();
+	                     xVal = new ArrayList<Double>();
+	                     yVal = new ArrayList<Double>();
+	                     matchedC = new ArrayList<String>();
+	                     if(!selectedXAxis.isEmpty() && !selectedYAxis.isEmpty()){
+	                    	  xLabel = selectedXAxis.get(0);
+	                          yLabel = selectedYAxis.get(0);
+	                          dataArray = m.get2VarDataArray(m.getVarLab().get(xLabel), m.getVarLab().get(yLabel), m.getTriple());
+	                     for (int j = 0; j < selectedC.size();j++ )
+	                       for (int i = 0; i< dataArray.size(); i++){
+	                    	   if (dataArray.get(i)[1].equals(" ") || dataArray.get(i)[2].equals(" "))
+	                        	   continue;
+	                           if (selectedC.get(j).equals(dataArray.get(i)[0])){
+	                        	   matchedC.add(selectedC.get(j));
+	                               xVal.add(Double.parseDouble(dataArray.get(i)[1]));                          
+	                               yVal.add(Double.parseDouble(dataArray.get(i)[2]));
+	                           }
+	                       }
+	                     }
+	                     else  if(selectedYAxis.isEmpty()){
+	                    	 Double cnt=1.0;
+	                         xLabel = "Countries";
+	                    	 yLabel = selectedXAxis.get(0);
+	                    	 dataArray = m.get2VarDataArray(m.getVarLab().get(yLabel), "Factor1", m.getTriple());
+	                    	 for (int j = 0; j < selectedC.size();j++ )
+	                             for (int i = 0; i< dataArray.size(); i++){
+	                            	 if (dataArray.get(i)[1].equals(" ") || dataArray.get(i)[2].equals(" "))
+	                              	   continue;
+	                                 if (selectedC.get(j).equals(dataArray.get(i)[0])){
+	                                	 matchedC.add(selectedC.get(j));
+	                                	 xVal.add(cnt);
+	                                	 yVal.add(Double.parseDouble(dataArray.get(i)[1]));                                                            
+	                                     cnt++;
+	                                 }
+	                             }
+	                           }
+	                     else  if(selectedXAxis.isEmpty()){
+	                    	 Double cnt=1.0;
+
+	                          yLabel = selectedYAxis.get(0);
+	                          xLabel = "Countries";
+	                    	 dataArray = m.get2VarDataArray("Factor1", m.getVarLab().get(yLabel), m.getTriple());
+	                    	 for (int j = 0; j < selectedC.size();j++ )
+	                             for (int i = 0; i< dataArray.size(); i++){
+	                            	 if (dataArray.get(i)[1].equals(" ") || dataArray.get(i)[2].equals(" "))
+	                                	   continue;
+	                                 if (selectedC.get(j).equals(dataArray.get(i)[0])){
+	                                     matchedC.add(selectedC.get(j));
+	                                     xVal.add(cnt);
+	                                     yVal.add(Double.parseDouble(dataArray.get(i)[2]));                          
+	                                     cnt++;
+	                                 }
+	                             }
+	                           }
+	                     sc = new ScatterPlot(xLabel,yLabel,"" ,xVal, yVal,matchedC,scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
+	                     
+	                     msgbox.append("\n Axis Swapped \n");
+	                     sc.setVisible(true);           
+	                     sc.setSize(scatterPanel.getWidth(),scatterPanel.getHeight());
+	                     sc.repaint();
+	                     scatterPanel.add(sc);
+	                     scatterPanel.repaint();
+	                     scatterPanel.doLayout();
+	       }
+				}
+			});
 			swapaxis.setFont(new Font("SansSerif", Font.BOLD, 13));
 			GroupLayout gl_selections = new GroupLayout(selections);
 			gl_selections.setHorizontalGroup(
