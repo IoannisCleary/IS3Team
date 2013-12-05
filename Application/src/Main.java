@@ -577,8 +577,17 @@ public class Main {
 				popupAxis.setVisible(true);
 			//	dialCountry.add(popupCountry);
 				dialCountry.setBounds(100,100,400,400);
-				JOptionPane.showConfirmDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE);
+				
+
+				Object[] options = {"Ok","Clear","Cancel"};
+				int n =JOptionPane.showOptionDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
+				if(n==JOptionPane.NO_OPTION){
+					selectedXAxis.clear();
+					for(int i = 0; i < rBut.length;i++){
+						rBut[i].setSelected(false);
+					}
+				}	
 				
 			}
 		});
@@ -626,11 +635,21 @@ public class Main {
 				popupAxis.setBounds(100,100,400,400);
 				popupAxis.setVisible(true);
 				dialCountry.setBounds(100,100,400,400);
-				JOptionPane.showConfirmDialog(null, popupAxis,"Y Axis", JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE);
+			
+				Object[] options = {"Ok","Clear","Cancel"};
+				int n =JOptionPane.showOptionDialog(null, popupAxis,"X Axis", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
+				if(n==JOptionPane.NO_OPTION){
+					selectedXAxis.clear();
+					for(int i = 0; i < rBut.length;i++){
+						rBut[i].setSelected(false);
+					}
+				}	
 				
 			}
-		});
+		});;
+				
+	
 		
 			YAxisbtn.setFont(new Font("SansSerif", Font.BOLD, 13));
 			GroupLayout gl_selections = new GroupLayout(selections);
