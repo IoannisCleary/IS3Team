@@ -47,7 +47,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.ImageIcon;
 /**
  * Class for creating the main window and GUI.
- * @author Ioannis Cleary
+ * @author Ioannis Cleary and Luka and Georgios and all of us
  *
  */
 public class Main {
@@ -159,7 +159,7 @@ public class Main {
 		frmIsPrototype.setBackground(UIManager.getColor("Button.shadow"));
 		frmIsPrototype.getContentPane().setBackground(new Color(247, 247, 247));
 		frmIsPrototype.setTitle("IS3 Prototype");
-		frmIsPrototype.setBounds(100, 100,1290, 740);
+		frmIsPrototype.setBounds(100, 100,1337, 740);
 		
 		final JMenuBar menuBar = new JMenuBar(); // menu bar
 		menuBar.setBackground(UIManager.getColor("MenuBar.borderColor"));
@@ -293,10 +293,10 @@ public class Main {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(DrawingArea, GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
-						.addComponent(Addinfo, 0, 0, Short.MAX_VALUE))
+						.addComponent(Addinfo, 0, 0, Short.MAX_VALUE)
+						.addComponent(DrawingArea, GroupLayout.DEFAULT_SIZE, 1010, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
+					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -304,11 +304,11 @@ public class Main {
 				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(LegendAdd, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)
+						.addComponent(LegendAdd, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+							.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 410, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(Addinfo, GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))
+							.addComponent(Addinfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		
@@ -451,32 +451,30 @@ public class Main {
 		gl_LegendDA.setHorizontalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_LegendDA.createSequentialGroup()
-					.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
+					.addContainerGap()
+					.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_LegendDA.createSequentialGroup()
-							.addGap(0)
-							.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
-						.addGroup(gl_LegendDA.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
-								.addComponent(selections, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-								.addGroup(gl_LegendDA.createSequentialGroup()
-									.addComponent(submit, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+							.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
+								.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
+									.addComponent(submit, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 137, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addGap(4)))
-					.addContainerGap())
+									.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblLegendDrawng, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE))
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
+							.addComponent(selections, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl_LegendDA.setVerticalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_LegendDA.createSequentialGroup()
 					.addComponent(lblLegendDrawng)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(5)
 					.addComponent(selections, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-					.addGap(11)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_LegendDA.createParallelGroup(Alignment.BASELINE)
-						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-						.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+						.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		
@@ -684,24 +682,24 @@ public class Main {
 				.addGroup(gl_DrawingArea.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addComponent(scatterPanel, GroupLayout.PREFERRED_SIZE, 634, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(LegendDA, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_DrawingArea.createSequentialGroup()
+							.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 332, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(gl_DrawingArea.createSequentialGroup()
-							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+							.addComponent(lblDrawingArea, GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
 							.addGap(495))))
 		);
 		gl_DrawingArea.setVerticalGroup(
 			gl_DrawingArea.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_DrawingArea.createSequentialGroup()
+				.addGroup(gl_DrawingArea.createSequentialGroup()
 					.addGap(6)
 					.addComponent(lblDrawingArea)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_DrawingArea.createParallelGroup(Alignment.LEADING)
-						.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 370, Short.MAX_VALUE)
-						.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+						.addComponent(scatterPanel, GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+						.addComponent(LegendDA, GroupLayout.PREFERRED_SIZE, 370, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		DrawingArea.setLayout(gl_DrawingArea);
@@ -812,13 +810,13 @@ public class Main {
 			gl_AddOptPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_AddOptPanel.createSequentialGroup()
 					.addGap(20)
-					.addComponent(AddSel, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+					.addComponent(AddSel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(19))
-				.addGroup(Alignment.LEADING, gl_AddOptPanel.createSequentialGroup()
+				.addGroup(gl_AddOptPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 106, Short.MAX_VALUE)
-					.addGap(18)
-					.addComponent(optionsBtn)
+					.addComponent(optionsBtn, GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(AdditionalSubmit)
 					.addContainerGap())
 		);
 		gl_AddOptPanel.setVerticalGroup(
@@ -826,11 +824,11 @@ public class Main {
 				.addGroup(gl_AddOptPanel.createSequentialGroup()
 					.addGap(10)
 					.addComponent(AddSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
-					.addGroup(gl_AddOptPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(optionsBtn, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_AddOptPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(optionsBtn, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+					.addGap(30))
 		);
 		AddOptPanel.setLayout(gl_AddOptPanel);
 		
@@ -850,15 +848,15 @@ public class Main {
 		JScrollPane scrollPane = new JScrollPane(); // scroll pane to make it scrollable
 		GroupLayout gl_LegendAdd = new GroupLayout(LegendAdd);
 		gl_LegendAdd.setHorizontalGroup(
-			gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_LegendAdd.createSequentialGroup()
+			gl_LegendAdd.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_LegendAdd.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
-						.addComponent(AddList, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 252, Short.MAX_VALUE)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-						.addComponent(AddOptPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-						.addComponent(lblLegendAdditional, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-						.addComponent(lblMessages, Alignment.LEADING))
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+						.addComponent(AddList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+						.addComponent(lblLegendAdditional, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+						.addComponent(lblMessages, Alignment.LEADING)
+						.addComponent(AddOptPanel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 268, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_LegendAdd.setVerticalGroup(
@@ -866,15 +864,15 @@ public class Main {
 				.addGroup(gl_LegendAdd.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblLegendAdditional)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
-					.addGap(11)
+					.addGap(5)
+					.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(AddList, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblMessages)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-					.addGap(22))
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		scrollPane.setViewportView(msgbox);
 // creating message box
@@ -917,14 +915,16 @@ public class Main {
 				.addGroup(gl_AddList.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_AddList.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_AddList.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_AddList.createSequentialGroup()
+								.addComponent(btnClear, GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+								.addGap(9))
+							.addGroup(gl_AddList.createSequentialGroup()
+								.addComponent(ListTitleAdd, GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+								.addContainerGap()))
 						.addGroup(Alignment.TRAILING, gl_AddList.createSequentialGroup()
-							.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
-						.addGroup(gl_AddList.createSequentialGroup()
-							.addComponent(btnClear, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-							.addGap(9))
-						.addGroup(gl_AddList.createSequentialGroup()
-							.addComponent(ListTitleAdd, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+							.addGap(4)
+							.addComponent(ListPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addContainerGap())))
 		);
 		gl_AddList.setVerticalGroup(
@@ -971,8 +971,10 @@ public class Main {
 						.addComponent(opt_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_ListPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(op1, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-						.addComponent(op3, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+						.addComponent(op1, GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_ListPanel.createSequentialGroup()
+							.addComponent(op3, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+							.addGap(2))
 						.addComponent(op2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
 						.addComponent(op4, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
@@ -984,7 +986,7 @@ public class Main {
 					.addGroup(gl_ListPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(opt_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(op1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
 					.addGroup(gl_ListPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(opt_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(op2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
@@ -1015,7 +1017,7 @@ public class Main {
 				.addGroup(gl_Addinfo.createSequentialGroup()
 					.addGap(17)
 					.addGroup(gl_Addinfo.createParallelGroup(Alignment.LEADING)
-						.addComponent(barchartPanel, GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
+						.addComponent(barchartPanel, GroupLayout.DEFAULT_SIZE, 947, Short.MAX_VALUE)
 						.addComponent(lblAdditionalInformation))
 					.addContainerGap())
 		);
@@ -1025,8 +1027,8 @@ public class Main {
 					.addGap(6)
 					.addComponent(lblAdditionalInformation, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(barchartPanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(20, Short.MAX_VALUE))
+					.addComponent(barchartPanel, GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
 		
