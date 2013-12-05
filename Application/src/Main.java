@@ -17,8 +17,10 @@ import java.awt.Color;
 import java.awt.ScrollPane;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -42,7 +44,6 @@ import javax.swing.JFileChooser;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.border.EtchedBorder;
-
 import javax.swing.ImageIcon;
 /**
  * Class for creating the main window and GUI.
@@ -53,8 +54,6 @@ public class Main {
 	private static Model m ;
 	private JMenuItem Open;
 	private int Num_Select_Country=0;
-	private int Num_Select_X=0;
-	private int Num_Select_Y=0;
 	private int Num_Select_Opts=0;
 	private ArrayList<String> selectedC=new ArrayList<String>();
 	private ArrayList<String> selectedYAxis=new ArrayList<String>();
@@ -439,8 +438,6 @@ public class Main {
 				op2.setText("no selection");
 				op3.setText("no selection");
 				op4.setText("no selection");
-				Num_Select_X=0;
-				Num_Select_Y=0;
 				Num_Select_Opts=0;
 				scatterPanel.removeAll();
 				scatterPanel.repaint();
@@ -553,30 +550,28 @@ public class Main {
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
-				final JCheckBox cBox[] = new JCheckBox[axisOpt.length];
-				for(int i=0;i<cBox.length;i++){
-				cBox[i]=new JCheckBox(axisOpt[i]);
-				if(selectedXAxis.contains(axisOpt[i])){cBox[i].setSelected(true);}
-				if((!selectedYAxis.isEmpty()&& selectedYAxis.contains(cBox[i].getText())) || (!selectedOpts.isEmpty()&& selectedOpts.contains(cBox[i].getText()))){cBox[i].setEnabled(false);}
+			    final JRadioButton rBut[] = new JRadioButton[axisOpt.length];
+			    final ButtonGroup xRadio = new ButtonGroup();
+			    
+				for(int i=0;i<rBut.length;i++){
+				rBut[i]=new JRadioButton(axisOpt[i]);
+				xRadio.add(rBut[i]);
+				if(selectedXAxis.contains(axisOpt[i])){rBut[i].setSelected(true);}
+				if((!selectedYAxis.isEmpty()&& selectedYAxis.contains(rBut[i].getText())) || (!selectedOpts.isEmpty()&& selectedOpts.contains(rBut[i].getText()))){rBut[i].setEnabled(false);}
 				final int a=i;
-				cBox[i].addMouseListener(new MouseAdapter() {
+				rBut[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
-						if(cBox[a].isEnabled()){
-						if(selectedXAxis.contains(cBox[a].getText())){selectedXAxis.remove(cBox[a].getText()); Num_Select_X= Num_Select_X-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
-						else{
-						if(Num_Select_X>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
-						else{selectedXAxis.add(cBox[a].getText());
+						if(rBut[a].isEnabled()){
+							selectedXAxis.add(rBut[a].getText());
 							msgbox.append("\n");
-							msgbox.append(cBox[a].getText());
+							msgbox.append(rBut[a].getText());
 							msgbox.append("\n");
-							Num_Select_X++;}}
+							}
 						
-					}
-						if(selectedXAxis.contains(cBox[a].getText()))cBox[a].setSelected(true);
-						else{cBox[a].setSelected(false);}	
-					}});
-				tick.add(cBox[i]);}
+				}});
+				tick.add(rBut[i]);
+				}
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
 				popupAxis.setVisible(true);
@@ -603,29 +598,30 @@ public class Main {
 				JPanel tick=new JPanel();
 				tick.setBounds(61, 11, 81, 140);
 			    tick.setLayout(new BoxLayout(tick, BoxLayout.Y_AXIS));
-				final JCheckBox cBox[] = new JCheckBox[axisOpt.length];
-				for(int i=0;i<cBox.length;i++){
-				cBox[i]=new JCheckBox(axisOpt[i]);
-				if(selectedYAxis.contains(axisOpt[i])){cBox[i].setSelected(true);}
-				if((!selectedOpts.isEmpty()&& selectedOpts.contains(cBox[i].getText())) || (!selectedXAxis.isEmpty()&& selectedXAxis.contains(cBox[i].getText()))){cBox[i].setEnabled(false);}
+			    
+				final JRadioButton rBut[] = new JRadioButton[axisOpt.length];
+				final ButtonGroup Yradio = new ButtonGroup();
+				for(int i=0;i<rBut.length;i++){
+				rBut[i]=new JRadioButton(axisOpt[i]);
+				Yradio.add(rBut[i]);
+				if(selectedYAxis.contains(axisOpt[i])){rBut[i].setSelected(true);}
+				if((!selectedOpts.isEmpty()&& selectedOpts.contains(rBut[i].getText())) || (!selectedXAxis.isEmpty()&& selectedXAxis.contains(rBut[i].getText()))){rBut[i].setEnabled(false);}
 				final int a=i;
-				cBox[i].addMouseListener(new MouseAdapter() {
+				rBut[i].addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseReleased(MouseEvent e) {
-						if(cBox[a].isEnabled()){
-						if(selectedYAxis.contains(cBox[a].getText())){selectedYAxis.remove(cBox[a].getText()); Num_Select_Y= Num_Select_Y-1;msgbox.append("\n"+"Removed : "+cBox[a].getText()+"\n");}
-						else{
-						if(Num_Select_Y>=1){cBox[a].setSelected(false);msgbox.append("\n");msgbox.append("Cannot select more than one topic per Axis");}
-						else{selectedYAxis.add(cBox[a].getText());
+						if(rBut[a].isEnabled()){
+				
+						
+						selectedYAxis.add(rBut[a].getText());
 						msgbox.append("\n");
-						msgbox.append(cBox[a].getText());
+						msgbox.append(rBut[a].getText());
 						msgbox.append("\n");
 			
-						Num_Select_Y++;}}}
-						if(selectedYAxis.contains(cBox[a].getText()))cBox[a].setSelected(true);
-						else{cBox[a].setSelected(false);}
+						}
+						
 					}});
-				tick.add(cBox[i]);}
+				tick.add(rBut[i]);}
 				popupAxis.add(tick);
 				popupAxis.setBounds(100,100,400,400);
 				popupAxis.setVisible(true);
