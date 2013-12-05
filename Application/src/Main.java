@@ -160,7 +160,7 @@ public class Main {
 		frmIsPrototype.setBackground(UIManager.getColor("Button.shadow"));
 		frmIsPrototype.getContentPane().setBackground(new Color(247, 247, 247));
 		frmIsPrototype.setTitle("IS3 Prototype");
-		frmIsPrototype.setBounds(100, 100,1280, 740);
+		frmIsPrototype.setBounds(100, 100,1290, 740);
 		
 		final JMenuBar menuBar = new JMenuBar(); // menu bar
 		menuBar.setBackground(UIManager.getColor("MenuBar.borderColor"));
@@ -294,18 +294,18 @@ public class Main {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(DrawingArea, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(DrawingArea, GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
 						.addComponent(Addinfo, 0, 0, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
-					.addGap(13))
+					.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(LegendAdd, GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(LegendAdd, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(DrawingArea, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -686,6 +686,7 @@ public class Main {
 		AddOptPanel.setBackground(new Color(245, 245, 245));
 		
 		Label AddSel = new Label("Select : ");  // Select label
+		AddSel.setAlignment(Label.CENTER);
 		AddSel.setForeground(Color.BLACK);
 		AddSel.setFont(new Font("SansSerif", Font.BOLD, 12));
 		
@@ -746,41 +747,6 @@ public class Main {
 		optionsBtn.setHorizontalAlignment(SwingConstants.TRAILING);
 		optionsBtn.setVerticalAlignment(SwingConstants.TOP);
 		optionsBtn.setFont(new Font("SansSerif", Font.BOLD, 12));
-		GroupLayout gl_AddOptPanel = new GroupLayout(AddOptPanel);
-		gl_AddOptPanel.setHorizontalGroup(
-			gl_AddOptPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_AddOptPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(AddSel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(optionsBtn)
-					.addContainerGap(80, Short.MAX_VALUE))
-		);
-		gl_AddOptPanel.setVerticalGroup(
-			gl_AddOptPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_AddOptPanel.createSequentialGroup()
-					.addGap(5)
-					.addGroup(gl_AddOptPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(optionsBtn)
-						.addComponent(AddSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		AddOptPanel.setLayout(gl_AddOptPanel);
-		
-		JPanel AddList = new JPanel();  // Panel in Legend : Additional Information where labels/selections are displayed
-		AddList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		AddList.setBackground(new Color(245, 245, 245));
-		
-		JLabel lblLegendAdditional = new JLabel("Panel : Additional Information"); // Legend title
-		lblLegendAdditional.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblLegendAdditional.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		
-		
-		JLabel lblMessages = new JLabel("Messages:"); // Message box title
-		lblMessages.setFont(new Font("SansSerif", Font.BOLD, 13));
-		
-		JScrollPane scrollPane = new JScrollPane(); // scroll pane to make it scrollable
 		
 		JButton AdditionalSubmit = new JButton("Generate");
 		AdditionalSubmit.setIcon((new ImageIcon(Main.class.getResource("/tinygen.png"))));
@@ -816,18 +782,58 @@ public class Main {
 		});
 		AdditionalSubmit.setForeground(Color.BLACK);
 		AdditionalSubmit.setFont(new Font("SansSerif", Font.BOLD, 13));
+		GroupLayout gl_AddOptPanel = new GroupLayout(AddOptPanel);
+		gl_AddOptPanel.setHorizontalGroup(
+			gl_AddOptPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_AddOptPanel.createSequentialGroup()
+					.addGap(20)
+					.addComponent(AddSel, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+					.addGap(19))
+				.addGroup(Alignment.LEADING, gl_AddOptPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 106, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(optionsBtn)
+					.addContainerGap())
+		);
+		gl_AddOptPanel.setVerticalGroup(
+			gl_AddOptPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_AddOptPanel.createSequentialGroup()
+					.addGap(10)
+					.addComponent(AddSel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(4)
+					.addGroup(gl_AddOptPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(AdditionalSubmit, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addComponent(optionsBtn, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		AddOptPanel.setLayout(gl_AddOptPanel);
+		
+		JPanel AddList = new JPanel();  // Panel in Legend : Additional Information where labels/selections are displayed
+		AddList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		AddList.setBackground(new Color(245, 245, 245));
+		
+		JLabel lblLegendAdditional = new JLabel("Panel : Additional Information"); // Legend title
+		lblLegendAdditional.setFont(new Font("SansSerif", Font.BOLD, 13));
+		lblLegendAdditional.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		
+		
+		JLabel lblMessages = new JLabel("Messages:"); // Message box title
+		lblMessages.setFont(new Font("SansSerif", Font.BOLD, 13));
+		
+		JScrollPane scrollPane = new JScrollPane(); // scroll pane to make it scrollable
 		GroupLayout gl_LegendAdd = new GroupLayout(LegendAdd);
 		gl_LegendAdd.setHorizontalGroup(
 			gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_LegendAdd.createSequentialGroup()
+				.addGroup(gl_LegendAdd.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.LEADING)
-						.addComponent(AddList, GroupLayout.PREFERRED_SIZE, 249, Short.MAX_VALUE)
-						.addComponent(AddOptPanel, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-						.addComponent(lblLegendAdditional, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-						.addComponent(lblMessages)
-						.addComponent(AdditionalSubmit, Alignment.TRAILING))
+					.addGroup(gl_LegendAdd.createParallelGroup(Alignment.TRAILING)
+						.addComponent(AddList, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 252, Short.MAX_VALUE)
+						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+						.addComponent(AddOptPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+						.addComponent(lblLegendAdditional, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+						.addComponent(lblMessages, Alignment.LEADING))
 					.addContainerGap())
 		);
 		gl_LegendAdd.setVerticalGroup(
@@ -836,15 +842,13 @@ public class Main {
 					.addContainerGap()
 					.addComponent(lblLegendAdditional)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(AdditionalSubmit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(AddOptPanel, GroupLayout.PREFERRED_SIZE, 78, Short.MAX_VALUE)
 					.addGap(11)
-					.addComponent(AddList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addComponent(AddList, GroupLayout.PREFERRED_SIZE, 267, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblMessages)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 					.addGap(22))
 		);
 		scrollPane.setViewportView(msgbox);
@@ -857,6 +861,7 @@ public class Main {
 		msgbox.setEditable(false);
 		
 		JLabel ListTitleAdd = new JLabel("List of Selected Options :"); // List label
+		ListTitleAdd.setHorizontalAlignment(SwingConstants.CENTER);
 		ListTitleAdd.setFont(new Font("SansSerif", Font.BOLD, 12));
 		ListTitleAdd.setVerticalAlignment(SwingConstants.BOTTOM);
 		
@@ -887,21 +892,26 @@ public class Main {
 				.addGroup(gl_AddList.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_AddList.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnClear, Alignment.TRAILING)
-						.addComponent(ListTitleAdd, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-						.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_AddList.createSequentialGroup()
+							.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_AddList.createSequentialGroup()
+							.addComponent(btnClear, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+							.addGap(9))
+						.addGroup(gl_AddList.createSequentialGroup()
+							.addComponent(ListTitleAdd, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+							.addContainerGap())))
 		);
 		gl_AddList.setVerticalGroup(
 			gl_AddList.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_AddList.createSequentialGroup()
-					.addGap(5)
+					.addContainerGap()
 					.addComponent(ListTitleAdd)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnClear)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(ListPanel, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		
 		JLabel opt_1 = new JLabel("1."); // first selection
@@ -929,18 +939,17 @@ public class Main {
 			gl_ListPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_ListPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_ListPanel.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(opt_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(opt_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_ListPanel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(opt_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(opt_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addGroup(gl_ListPanel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(opt_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(opt_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(opt_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(opt_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_ListPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(op1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-						.addComponent(op3, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-						.addComponent(op4, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-						.addComponent(op2, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_ListPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(op1, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+						.addComponent(op3, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+						.addComponent(op2, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
+						.addComponent(op4, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_ListPanel.setVerticalGroup(
@@ -959,7 +968,7 @@ public class Main {
 						.addComponent(opt_3, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(op3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_ListPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_ListPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(opt_4, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(op4, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addGap(22))
