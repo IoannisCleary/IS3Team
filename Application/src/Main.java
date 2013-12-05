@@ -523,8 +523,16 @@ public class Main {
 				popupCountry.setVisible(true);
 			//	dialCountry.add(popupCountry);
 				dialCountry.setBounds(100,100,400,400);
-				JOptionPane.showConfirmDialog(null, popupCountry,"Countries", JOptionPane.OK_CANCEL_OPTION,
-                        JOptionPane.PLAIN_MESSAGE);
+				Object[] options = {"Ok","Select All","Clear","Cancel"};
+				int n = JOptionPane.showOptionDialog(null, popupCountry,"Countries", JOptionPane.YES_NO_CANCEL_OPTION,
+                        	JOptionPane.PLAIN_MESSAGE,null,options,options[3]);
+                                if (n == JOptionPane.NO_OPTION){
+                                    selectedC = (ArrayList<String>) countryNames.clone();
+                                    msgbox.append("All countries Selected");
+                                }
+                                else if (n == JOptionPane.CANCEL_OPTION){
+                                    selectedC.clear();
+                                }
 				
 			}
 			
