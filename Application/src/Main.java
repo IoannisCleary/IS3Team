@@ -838,10 +838,14 @@ public class Main {
 							
                             if (!selectedC.isEmpty() && !selectedOpts.isEmpty()){
                             
-                            List<String> LimitedSelectedC =  selectedC.subList(0, 29);
-                            if (selectedC.size() >30)
+                            
+                            List<String> LimitedSelectedC = new ArrayList<String>();
+                            if (selectedC.size() >30){
+                            	LimitedSelectedC = selectedC.subList(0, 29);
                             	msgbox.append("\n More than 30 countries \n");
-                                msgbox.append("\n First 30 countries selected\n");
+                                msgbox.append("\n First 30 countries selected\n");}
+                            else
+                            	LimitedSelectedC = selectedC.subList(0, selectedC.size()-1);
                             for (int i = 0; i<selectedOpts.size();i++){
                                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
                                 for (int j = 0; j< LimitedSelectedC.size();j++ ){
