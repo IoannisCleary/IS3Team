@@ -563,6 +563,8 @@ public class Main {
 					@Override
 					public void mouseReleased(MouseEvent e) {
 						if(rBut[a].isEnabled()){
+							
+							selectedXAxis.clear();
 							selectedXAxis.add(rBut[a].getText());
 							msgbox.append("\n");
 							msgbox.append(rBut[a].getText());
@@ -621,7 +623,7 @@ public class Main {
 					public void mouseReleased(MouseEvent e) {
 						if(rBut[a].isEnabled()){
 				
-						
+						selectedYAxis.clear();
 						selectedYAxis.add(rBut[a].getText());
 						msgbox.append("\n");
 						msgbox.append(rBut[a].getText());
