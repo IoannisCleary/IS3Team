@@ -34,6 +34,7 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.ComponentOrientation;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
@@ -332,9 +333,10 @@ public class Main {
                           dataArray = m.get2VarDataArray(m.getVarLab().get(xLabel), m.getVarLab().get(yLabel), m.getTriple());
                      for (int j = 0; j < selectedC.size();j++ )
                        for (int i = 0; i< dataArray.size(); i++){
-                    	   
+                    	   if (dataArray.get(i)[1].equals(" ") || dataArray.get(i)[2].equals(" "))
+                        	   continue;
                            if (selectedC.get(j).equals(dataArray.get(i)[0])){
-                               matchedC.add(selectedC.get(j));
+                        	   matchedC.add(selectedC.get(j));
                                xVal.add(Double.parseDouble(dataArray.get(i)[1]));                          
                                yVal.add(Double.parseDouble(dataArray.get(i)[2]));
                            }
@@ -347,6 +349,8 @@ public class Main {
                     	 dataArray = m.get2VarDataArray(m.getVarLab().get(yLabel), "Factor1", m.getTriple());
                     	 for (int j = 0; j < selectedC.size();j++ )
                              for (int i = 0; i< dataArray.size(); i++){
+                            	 if (dataArray.get(i)[1].equals(" ") || dataArray.get(i)[2].equals(" "))
+                              	   continue;
                                  if (selectedC.get(j).equals(dataArray.get(i)[0])){
                                 	 matchedC.add(selectedC.get(j));
                                 	 xVal.add(cnt);
@@ -365,6 +369,8 @@ public class Main {
                     	 dataArray = m.get2VarDataArray("Factor1", m.getVarLab().get(yLabel), m.getTriple());
                     	 for (int j = 0; j < selectedC.size();j++ )
                              for (int i = 0; i< dataArray.size(); i++){
+                            	 if (dataArray.get(i)[1].equals(" ") || dataArray.get(i)[2].equals(" "))
+                                	   continue;
                                  if (selectedC.get(j).equals(dataArray.get(i)[0])){
                                      matchedC.add(selectedC.get(j));
                                      xVal.add(cnt);
@@ -383,7 +389,7 @@ public class Main {
      
                      sc = new ScatterPlot(xLabel,yLabel,"" ,xVal, yVal,matchedC,scatterPanel.getWidth()-20,scatterPanel.getHeight()-25);
                      
-                     msgbox.append("processed");
+                     msgbox.append("\n processed \n");
                      sc.setVisible(true);           
                      sc.setSize(scatterPanel.getWidth(),scatterPanel.getHeight());
                      sc.repaint();
@@ -424,30 +430,26 @@ public class Main {
 		MainClear.setFont(new Font("SansSerif", Font.BOLD, 14));
 		GroupLayout gl_LegendDA = new GroupLayout(LegendDA);
 		gl_LegendDA.setHorizontalGroup(
-			gl_LegendDA.createParallelGroup(Alignment.LEADING)
+			gl_LegendDA.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_LegendDA.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
+						.addComponent(selections, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblLegendDrawng, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
 						.addGroup(gl_LegendDA.createSequentialGroup()
-							.addGroup(gl_LegendDA.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
-									.addComponent(submit, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblLegendDrawng, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE))
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_LegendDA.createSequentialGroup()
-							.addComponent(selections, GroupLayout.PREFERRED_SIZE, 305, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+							.addComponent(submit, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		gl_LegendDA.setVerticalGroup(
 			gl_LegendDA.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_LegendDA.createSequentialGroup()
 					.addComponent(lblLegendDrawng)
 					.addGap(5)
-					.addComponent(selections, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_LegendDA.createParallelGroup(Alignment.BASELINE)
+					.addComponent(selections, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_LegendDA.createParallelGroup(Alignment.TRAILING)
 						.addComponent(MainClear, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 						.addComponent(submit, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
@@ -627,27 +629,33 @@ public class Main {
 	
 		
 			YAxisbtn.setFont(new Font("SansSerif", Font.BOLD, 13));
+			
+			JButton swapaxis = new JButton("Swap Axis");
+			swapaxis.setFont(new Font("SansSerif", Font.BOLD, 13));
 			GroupLayout gl_selections = new GroupLayout(selections);
 			gl_selections.setHorizontalGroup(
 				gl_selections.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_selections.createSequentialGroup()
+					.addGroup(Alignment.TRAILING, gl_selections.createSequentialGroup()
 						.addContainerGap()
-						.addGroup(gl_selections.createParallelGroup(Alignment.LEADING)
-							.addComponent(CountryButton, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-							.addComponent(xAxisButton, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-							.addComponent(YAxisbtn, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE))
+						.addGroup(gl_selections.createParallelGroup(Alignment.TRAILING)
+							.addComponent(swapaxis, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+							.addComponent(CountryButton, GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+							.addComponent(xAxisButton, GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+							.addComponent(YAxisbtn, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
 						.addContainerGap())
 			);
 			gl_selections.setVerticalGroup(
 				gl_selections.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_selections.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(CountryButton, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(6, Short.MAX_VALUE)
+						.addComponent(CountryButton, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(xAxisButton)
+						.addComponent(xAxisButton, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(YAxisbtn, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(YAxisbtn, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(swapaxis, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap())
 			);
 			selections.setLayout(gl_selections);
 			LegendDA.setLayout(gl_LegendDA);
@@ -753,13 +761,19 @@ public class Main {
 			public void mouseReleased(MouseEvent e) {
 							if(barchartPanel.getComponentCount()>0){
 							barchartPanel.removeAllCharts();}
+							
                             if (!selectedC.isEmpty() && !selectedOpts.isEmpty()){
+                            
+                            List<String> LimitedSelectedC =  selectedC.subList(0, 29);
+                            if (selectedC.size() >30)
+                            	msgbox.append("\n More than 30 countries \n");
+                                msgbox.append("\n First 30 countries selected\n");
                             for (int i = 0; i<selectedOpts.size();i++){
                                 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                                for (int j = 0; j<selectedC.size();j++ ){
-                                    if (m.getTriple().getValue(m.getVarLab().get(selectedOpts.get(i)), selectedC.get(j))!=null){
-                                        double d = Double.parseDouble(m.getTriple().getValue(m.getVarLab().get(selectedOpts.get(i)), selectedC.get(j)));
-                                        dataset.setValue(d, selectedOpts.get(i), selectedC.get(j));
+                                for (int j = 0; j< LimitedSelectedC.size();j++ ){
+                                    if (m.getTriple().getValue(m.getVarLab().get(selectedOpts.get(i)), LimitedSelectedC.get(j))!=null){
+                                        double d = Double.parseDouble(m.getTriple().getValue(m.getVarLab().get(selectedOpts.get(i)), LimitedSelectedC.get(j)));
+                                        dataset.setValue(d, selectedOpts.get(i), LimitedSelectedC.get(j));
                                         
                                         }
                                     barchartPanel.addChart(i, selectedOpts.get(i), dataset);
@@ -1017,8 +1031,5 @@ public class Main {
 			}
 		});
 			}
-		
-		
-
 }
 	
